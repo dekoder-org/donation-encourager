@@ -11,7 +11,6 @@ export default function BoxLead({ onClick, isExpanded }) {
     <div className="donation-encourager__lead experimental" onClick={onClick}>
       <h2 className="donation-encourager__headline">
         <Counter value={totalContents}></Counter>
-        {/*type === "experimental" && ` = ${icon} ?`*/}
       </h2>
       <p className="donation-encourager__lead-text">
         <small>

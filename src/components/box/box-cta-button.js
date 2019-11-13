@@ -16,7 +16,6 @@ export default function BoxCtaButton({ onClick }) {
       href={onClick ? "#" : targetUrl}
       target="_blank"
       rel="norel noreferrer"
-      // tabIndex={isExpanded ? 0 : -1}
       onClick={onClick}
     >
       {buttonString}

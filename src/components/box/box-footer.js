@@ -10,11 +10,7 @@ export default function BoxFooter() {
     <p className="donation-encourager__meta">
       <small>
         {footerStr}{" "}
-        <button
-          className="donation-encourager__reset-btn"
-          onClick={reset}
-          // tabIndex={isExpanded ? 0 : -1}
-        >
+        <button className="donation-encourager__reset-btn" onClick={reset}>
           {strings.resetBtn}
         </button>
       </small>

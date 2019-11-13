@@ -9,7 +9,12 @@ export function useStrOrStateFunc(input) {
   const { readingTimeString, readContentsString } = storage;
   const totalVal = useContext(TotalVal);
   const moneyString = getMoneyString(totalVal, locale);
-  return strOrFunc(input, [readingTimeString, readContentsString, moneyString, storage]);
+  return strOrFunc(input, [
+    readingTimeString,
+    readContentsString,
+    moneyString,
+    storage
+  ]);
 }
 
 export function strOrFunc(input, argumentArr = []) {

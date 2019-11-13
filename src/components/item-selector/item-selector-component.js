@@ -3,11 +3,7 @@ import { Draggable, DropTarget } from "./drag-drop";
 import "./item-selector.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function ItemSelector({
-  items = [],
-  selectedItems,
-  setSelectedItems
-}) {
+const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
   const dragListItems = items;
   // allow each item only once:
   // const dragListItems = items.filter(s => !selectedItems.map(si => si.icon).includes(s.icon))
@@ -77,7 +73,9 @@ export default function ItemSelector({
       </DropTarget>
     </div>
   );
-}
+};
+
+export default ItemSelector;
 
 function renderIcon(icon) {
   return typeof icon === "object" ? <FontAwesomeIcon icon={icon} /> : icon;

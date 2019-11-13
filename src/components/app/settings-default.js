@@ -40,7 +40,7 @@ const ITEMS_EMOJI2 = [
   // { value: 9, icon: "🍱" },
   // { value: 15, icon: "💐" },
   // { value: 25, icon: "🥇" },
-  { value: 15, icon: "🎫" },
+  { value: 15, icon: "🎫" }
   // { value: 50, icon: "🏆" },
   // { value: 75, icon: "💎" },
   // { value: 100, icon: "💰" }
@@ -105,9 +105,16 @@ const CONTENT_TYPES_DEFAULT = {
 };
 
 const STRINGS_DEFAULT = {
-  lead: totalContents => `${totalContents === 1 ? 'Inhalt' : 'Inhalte'} bisher gelesen`,
+  lead: totalContents =>
+    `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amount, storage) =>
-    `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${storage.totalContents === 1 ? (storage.readContents.gnose === 1 ? 'ist sie' : 'ist er') : 'sind sie'} dir wert? Vielleicht <strong>${amount} €</strong>?`,
+    `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${
+      storage.totalContents === 1
+        ? storage.readContents.gnose === 1
+          ? "ist sie"
+          : "ist er"
+        : "sind sie"
+    } dir wert? Vielleicht <strong>${amount} €</strong>?`,
   ctaBtn: (timeStr, contentsString, amount) => `Mit ${amount} € danken`,
   blurRemover: "Einfach weiterlesen",
   footer: timeStr =>
@@ -118,13 +125,14 @@ const STRINGS_DEFAULT = {
     "Gerade für uns als gemeinnütziges Projekt ist das Engagement unserer Leserinnen und Leser besonders wertvoll und wir freuen uns, dass du uns unterstützt – vielen Dank! Wir setzen nun deinen Zähler zurück ...",
   feedbackBtn: "Ok",
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`
-}
+};
 
 export const SETTINGS_DEFAULT = {
   targetSelector: ".entry-content",
   contentTypes: CONTENT_TYPES_DEFAULT,
   twingleWidgetUrl: "",
-  ctaTargetUrl: amount => `https://www.dekoder.org/de/spenden?tw_amount=${amount}`,
+  ctaTargetUrl: amount =>
+    `https://www.dekoder.org/de/spenden?tw_amount=${amount}`,
   intrusivenessLevels: INTRUSIVENESS_LEVELS_DEFAULT,
   wrapperClass: "donation-encourager__wrapper",
   storageKey: "donation-encourager-tracker",
