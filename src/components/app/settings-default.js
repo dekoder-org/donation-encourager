@@ -107,7 +107,7 @@ const CONTENT_TYPES_DEFAULT = {
 const STRINGS_DEFAULT = {
   lead: totalContents => `${totalContents === 1 ? 'Inhalt' : 'Inhalte'} bisher gelesen`,
   body: (timeStr, contentsStr, amount, storage) =>
-    `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${storage.totalContents === 1 && storage.readContents.article === 1 ? 'ist er' : 'sind sie'} dir wert? Vielleicht <strong>${amount} €</strong>?`,
+    `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${storage.totalContents === 1 ? (storage.readContents.gnose === 1 ? 'ist sie' : 'ist er') : 'sind sie'} dir wert? Vielleicht <strong>${amount} €</strong>?`,
   ctaBtn: (timeStr, contentsString, amount) => `Mit ${amount} € danken`,
   blurRemover: "Einfach weiterlesen",
   footer: timeStr =>
