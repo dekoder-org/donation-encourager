@@ -1,0 +1,6 @@
+@import "~mobile-drag-drop/default.css";
+
+.donation-encourager__draggable {
+  transform: translate(0, 0); // chrome fix
+  cursor: grab;
+}

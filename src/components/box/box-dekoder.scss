@@ -1,0 +1,10 @@
+.donation-encourager__button {
+    border-radius: 0 !important;
+    padding: 8px 12px;
+    font-family: "Roboto Condensed",Verdana,Tahoma,sans-serif;
+
+    @media screen and (min-width: 1024px) {
+        font-size: 17px;
+        line-height: 27px;
+    }
+}

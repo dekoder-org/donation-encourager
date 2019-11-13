@@ -1,0 +1,138 @@
+@import "../app/constants.scss";
+
+.donation-encourager {
+  color: $color--black-1;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  padding: 1em 2em;
+  box-shadow: 0 1px 15px $color--black-3;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding: 1em;
+  }
+}
+
+.donation-encourager__collapse-me {
+  display: block;
+  max-height: 100vh;
+  overflow-y: hidden;
+  transition: max-height $speed $ease, opacity $speed $ease;
+
+  &[hidden] {
+    display: block;
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.donation-encourager__lead {
+  // display: flex;
+  // align-items: flex-end;
+  // flex-direction: row;
+  cursor: pointer;
+  /*&.experimental {
+    cursor: pointer;
+  }*/
+}
+
+.donation-encourager__headline {
+  color: $color--primary;
+  font-size: 500%;
+  line-height: 100%;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.donation-encourager__collapser {
+  // Reset button default style:
+  display: inline;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  -webkit-appearance: none;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  background-color: transparent;
+}
+
+.donation-encourager__lead-text {
+  color: $color--primary;
+  text-align: center;
+  // margin-left: 0.4em;
+  // margin-bottom: 0.3em;
+}
+
+.donation-encourager__meta {
+  color: $color--black-2;
+  text-align: center;
+}
+
+.donation-encourager__reset-btn {
+  // Reset button default style:
+  display: inline;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+  -webkit-appearance: none;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  background: transparent;
+}
+
+.donation-encourager__cta {
+  margin-top: 2em;
+  // text-align: center;
+  display: flex; 
+  justify-content: center;
+}
+
+.donation-encourager__button {
+  display: inline-block;
+  box-shadow: 0 1px 4px $color--black-2;
+  border-radius: 10px;
+  padding: .5em 1em;
+  text-decoration: none;
+  color: $color--white;
+  transition: box-shadow $ease $speed-fast;
+  transition: $ease $speed-fast;
+  margin: 0 5px;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 2px 8px $color--black-2;
+    text-decoration: none;
+  }
+
+  &.inactive {
+    background-color: $color--black-2;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding: .5em;
+  }
+}
+
+.donation-encourager__cta-button {
+  background-color: $color--primary;
+}
+
+.donation-encourager__blur-remover {
+  background-color: white;
+  color: $color--primary;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.donation-encourager__credit {
+  color: $color--black-2;
+  text-align: right;
+  // font-style: italic;
+}

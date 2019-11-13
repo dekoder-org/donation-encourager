@@ -1,0 +1,59 @@
+{
+  "name": "donation-encourager",
+  "version": "1.0.0",
+  "description": "Make your readers donate with fun",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --progress --hot --inline",
+    "format": "prettier --write \"src/**/*.js\"",
+    "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
+  },
+  "author": "dekoder.org / Palasthotel",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-react-jsx": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.6.0",
+    "eslint-plugin-react": "^7.16.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.13.0",
+    "prettier": "^1.19.1",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
+    "mobile-drag-drop": "^2.3.0-rc.2",
+    "preact": "^10.0.5",
+    "react-intersection-observer": "^8.25.1",
+    "react-odometerjs": "^2.1.1",
+    "react-portal": "^4.2.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-react-jsx"
+      ]
+    ]
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1% in DE",
+    "ie 11",
+    "not dead"
+  ]
+}
