@@ -64,7 +64,7 @@ const ITEMS_DEFAULT = itemPresets.emoji2;
 export const INTRUSIVENESS_LEVELS_DEFAULT = [
   {
     // level 1
-    contentThreshold: 1,
+    contentThreshold: 0,
     boxSettings: [{ position: "bottom", expanded: true }],
     itemSelectorSettings: {
       items: ITEMS_DEFAULT,
@@ -108,13 +108,15 @@ const STRINGS_DEFAULT = {
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amount, storage) =>
-    `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${
-      storage.totalContents === 1
-        ? storage.readContents.gnose === 1
-          ? "ist sie"
-          : "ist er"
-        : "sind sie"
-    } dir wert? Vielleicht <strong>${amount} €</strong>?`,
+    storage.totalContents
+      ? `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${
+          storage.totalContents === 1
+            ? storage.readContents.gnose === 1
+              ? "ist sie"
+              : "ist er"
+            : "sind sie"
+        } dir wert? Vielleicht <strong>${amount} €</strong>?`
+      : "",
   ctaBtn: (timeStr, contentsString, amount) => `Mit ${amount} € danken`,
   blurRemover: "Einfach weiterlesen",
   footer: timeStr =>
