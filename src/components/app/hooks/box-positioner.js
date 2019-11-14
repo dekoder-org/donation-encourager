@@ -20,7 +20,7 @@ function useSelector(targetSelector, updateTrigger) {
 
 function useBoxWrappers(targetElements, intrusivenessProps, settings) {
   const boxesWithWrappers = useMemo(() => {
-    const { boxesEnabled, wrapperClass } = settings;
+    const { boxesEnabled, wrapperClass, excludeSelector } = settings;
     const { boxSettings, itemSelectorSettings } = intrusivenessProps;
     if (!boxesEnabled) return [];
     return targetElements.reduce((acc, targetElement) => {
@@ -33,7 +33,11 @@ function useBoxWrappers(targetElements, intrusivenessProps, settings) {
             parentEl: targetElement,
             wrapperEl
           };
-          const posNum = insertBoxWrapper(boxProps, wrapperClass);
+          const posNum = insertBoxWrapper(
+            boxProps,
+            wrapperClass,
+            excludeSelector
+          );
           if (!posNum) return null;
           return { ...boxProps, posNum };
         })
@@ -56,12 +60,19 @@ function newWrapper(wrapperClass) {
   return result;
 }
 
-function insertBoxWrapper(box, wrapperClass) {
-  const siblings = getFilteredChildArray(box.parentEl, wrapperClass);
+function insertBoxWrapper(box, wrapperClass, excludeSelector) {
+  const siblings = getFilteredChildArray(
+    box.parentEl,
+    wrapperClass,
+    excludeSelector
+  );
   const posNum = positionNumber(box.position, siblings.length);
   if (isNaN(posNum) || posNum > siblings.length) return;
   // if refrenceNode === null the element will be attached to the end
-  const referenceNode = siblings[posNum];
+  const referenceNode =
+    posNum === siblings.length
+      ? siblings[posNum - 1].nextSibling // bottom pos
+      : siblings[posNum];
   box.parentEl.insertBefore(box.wrapperEl, referenceNode);
   return posNum;
 }
@@ -74,15 +85,18 @@ function positionNumber(positionString, siblingsCount) {
       return 0;
     case "middle":
       return siblingsCount >= MIN_BLOCKS_FOR_MIDDLE_POS_AND_BLUR
-        ? Math.round(siblingsCount / 2)
+        ? Math.floor(siblingsCount / 2)
         : siblingsCount + 1; // => won't be rendered
     default:
       return parseInt(positionString);
   }
 }
 
-export function getFilteredChildArray(parentEl, filterClass) {
-  return Array.from(parentEl.children).filter(el =>
-    filterClass ? !el.classList.contains(filterClass) : el
-  );
+export function getFilteredChildArray(parentEl, filterClass, excludeSelector) {
+  const excludeEls = excludeSelector
+    ? Array.from(parentEl.querySelectorAll(excludeSelector))
+    : [];
+  return Array.from(parentEl.children)
+    .filter(el => (filterClass ? !el.classList.contains(filterClass) : el))
+    .filter(el => !excludeEls.includes(el));
 }

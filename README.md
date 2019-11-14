@@ -67,6 +67,7 @@ The `settings` object contains the following fields:
 field | default value | description
 --- | --- | ---
 targetSelector | `".entry-content"` | CSS-selector that indicates where to place the donation encourager boxes (usually the article body).
+excludeSelector | `"hr, h6, aside"` | Don't take those elements into account for the box positioner.
 contentTypes | `CONTENT_TYPES_DEFAULT` | Defines the content types to track and how to spell them in the box body text. See content types section below.
 twingleWidgetUrl | `""` | If you use Twingle, indicate yur Twingle widget URL to render the donation widget directly in the donation encourager box.
 ctaTargetUrl | `function(amount) {return "https://www.dekoder.org/de/spenden?tw_amount=" + amount;}` | Alternatively: Indicate a custom URL of your donation site. The user then gets redirected there when he pushes the Donate-button. `ctaTargetUrl` can be a string or also a function with the selected total amount as an argument.
