@@ -1,6 +1,6 @@
 import React from "react";
+import Odometer from "./odometer-ssr-safe";
 import { useInView } from "react-intersection-observer";
-import Odometer from "react-odometerjs";
 import "./odometer-theme-minimal.css";
 
 const Counter = ({ value }) => {
