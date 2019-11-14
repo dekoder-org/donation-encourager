@@ -1,6 +1,7 @@
 node_modules
 /*.log
 .cache/
+/dist
 
 /mysql_db.nix
 /logs
