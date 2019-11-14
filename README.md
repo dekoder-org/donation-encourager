@@ -142,8 +142,8 @@ Defaults:
 
 ```js
 const ITEMS_DEFAULT = [
-  { value: 1.5, icon: "🍭" },
-  { value: 3.5, icon: "🍺️" },
+  { value: 2, icon: "🍭" },
+  { value: 4, icon: "🍺️" },
   { value: 6, icon: "🌹" },
   { value: 15, icon: "🎫" },
 ];
