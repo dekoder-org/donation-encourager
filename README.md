@@ -12,7 +12,7 @@ Check out our dekoder-[test-page](https://www.dekoder.org/de/article/greta-thunb
 
 ## Download
 
-Find the latest build [here](https://donation-encourager.netlify.com/donation-encourager.js).
+Find the latest build [here](https://unpkg.com/donation-encourager).
 
 ## Quick Start
 
