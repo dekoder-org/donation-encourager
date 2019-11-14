@@ -71,9 +71,10 @@ function insertBoxWrapper(box, wrapperClass, excludeSelector) {
   // if refrenceNode === null the element will be attached to the end
   const referenceNode =
     posNum === siblings.length
-      ? siblings[posNum - 1].nextSibling // bottom pos
+      ? siblings[posNum - 1].nextElementSibling // bottom pos
       : siblings[posNum];
-  box.parentEl.insertBefore(box.wrapperEl, referenceNode);
+  const safeReferenceNode = floatChecker(referenceNode, siblings, posNum);
+  box.parentEl.insertBefore(box.wrapperEl, safeReferenceNode);
   return posNum;
 }
 
@@ -99,4 +100,14 @@ export function getFilteredChildArray(parentEl, filterClass, excludeSelector) {
   return Array.from(parentEl.children)
     .filter(el => (filterClass ? !el.classList.contains(filterClass) : el))
     .filter(el => !excludeEls.includes(el));
+}
+
+// check that previous element has no float
+function floatChecker(referenceNode, siblings, posNum) {
+  const prevEl = referenceNode.previousElementSibling;
+  if (!prevEl) return referenceNode;
+  // if prevEl has float, try next sibling
+  if (prevEl.style.float === "left" || prevEl.style.float === "right") {
+    return siblings[posNum + 1];
+  } else return referenceNode;
 }
