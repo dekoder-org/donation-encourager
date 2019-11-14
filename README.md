@@ -4,7 +4,7 @@ Remind your readers with a smile about donating and provide them an easy way to 
 
 The tool was developed by [dekoder.org](https://www.dekoder.org/) and [Palasthotel](https://palasthotel.de/).
 
-![Donation Encourager Example Image](https://www.dekoder.org/sites/default/files/donation-encourager-example1.png)
+![Donation Encourager Example Image](https://www.dekoder.org/sites/default/files/donation-encourager.png)
 
 ## Example
 
@@ -38,10 +38,10 @@ The `init` action passes a `settings` object into the app. You have to specify a
 
 ## Actions
 
-You can controll the app with actions, which are triggered by the above defined `donEnc()` function.
+You can control the app with actions, which are triggered by the above defined `donEnc()` function.
 
 ```js
-donInc(actionType, actionData);
+donEnc(actionType, actionData);
 ```
 
 (Implementation: site-actions.js)

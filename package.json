@@ -1,7 +1,7 @@
 {
   "name": "donation-encourager",
-  "version": "1.0.0",
-  "description": "Make your readers donate with fun",
+  "version": "1.0.1",
+  "description": "Remind your readers with a smile about donating",
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
@@ -9,6 +9,14 @@
     "format": "prettier --write \"src/**/*.js\"",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dekoder-org/donation-encourager"
+  },
+  "keywords": [
+    "donation",
+    "funding"
+  ],
   "author": "dekoder.org / Palasthotel",
   "license": "MIT",
   "devDependencies": {
