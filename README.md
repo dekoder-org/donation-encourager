@@ -4,7 +4,7 @@ Remind your readers with a smile about donating and provide them an easy way to 
 
 The tool was developed by [dekoder.org](https://www.dekoder.org/) and [Palasthotel](https://palasthotel.de/).
 
-![Donation Encourager Example Image](https://www.dekoder.org/sites/default/files/donation-encourager.png)
+![Donation Encourager Example Image](https://www.dekoder.org/sites/default/files/donation-encourager-preview.png)
 
 ## Example
 
