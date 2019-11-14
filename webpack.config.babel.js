@@ -1,5 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from "webpack";
 
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
  
@@ -45,6 +46,9 @@ const defaultConfig = {
             title: 'Custom template',
             inject: false,
             template: path.join(__dirname, 'src/index.html')
+        }),
+        new webpack.optimize.LimitChunkCountPlugin({
+          maxChunks: 1,
         }),
     ],
     stats: {
