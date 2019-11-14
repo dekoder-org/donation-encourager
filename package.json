@@ -2,6 +2,8 @@
   "name": "donation-encourager",
   "version": "1.0.1",
   "description": "Remind your readers with a smile about donating",
+  "main": "src/index.js",
+  "unpkg": "dist/donation-encourager.js",
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
@@ -11,14 +13,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dekoder-org/donation-encourager"
+    "url": "https://github.com/dekoder-org/donation-encourager.git"
   },
   "keywords": [
     "donation",
     "funding"
   ],
-  "author": "dekoder.org / Palasthotel",
+  "author": "Daniel Marcus <daniel.marcus@dekoder.org> (https://www.dekoder.org/)",
+  "homepage": "https://github.com/dekoder-org/donation-encourager",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dekoder-org/donation-encourager/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-transform-react-jsx": "^7.7.0",
