@@ -23,7 +23,7 @@ export const Draggable = ({ children, dragData, onDragStart, onDragEnd }) => {
       {children}
     </div>
   );
-}
+};
 
 export const DropTarget = ({ children, onDrop, onDropLeft, onDropRight }) => {
   const handleDrop = e => {

@@ -11,7 +11,8 @@ export default function useMobileDragDropPolyfill(DRAGGABLE_CLASS) {
       polyfill({
         // limit polyfill to dragabble class items
         dragStartConditionOverride: ev => {
-          if (ev.target.parentNode.classList.contains(DRAGGABLE_CLASS)) return true;
+          if (ev.target.parentNode.classList.contains(DRAGGABLE_CLASS))
+            return true;
           else return false;
         }
       });
