@@ -3,14 +3,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
  
-export default {
+const defaultConfig = {
     entry: path.join(__dirname, 'src/index.js'),
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'donation-encourager.js',
-        // library: 'donationEncourager',
-        // libraryTarget: 'window',
-        // libraryExport: 'default'
     },
     resolve: {
         "alias": {
@@ -63,3 +60,5 @@ export default {
     },
     devtool: 'source-map'
 };
+
+export default defaultConfig;
