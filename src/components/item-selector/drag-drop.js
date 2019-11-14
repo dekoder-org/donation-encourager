@@ -1,42 +1,29 @@
 import React from "react";
 import "./drag-drop.scss";
-// polyfill to enable html5 native drag&drop on touch devices
-import { polyfill } from "mobile-drag-drop";
+import useMobileDragDropPolyfill from "./mobile-drag-drop-polyfill";
 
 const DRAGGABLE_CLASS = "donation-encourager__draggable";
 
-polyfill({
-  // limit polyfill to dragabble class items
-  dragStartConditionOverride: ev => {
-    if (ev.target.parentNode.classList.contains(DRAGGABLE_CLASS)) {
-      console.log("YES!");
-      return true;
-    } else return false;
-  }
-});
-
-if (typeof window !== "undefined") {
-  // workaround for iOS Safari (see https://github.com/timruffles/mobile-drag-drop/issues/77)
-  window.addEventListener("touchmove", function() {}, { passive: false });
+export const Draggable = ({ children, dragData, onDragStart, onDragEnd }) => {
+  useMobileDragDropPolyfill(DRAGGABLE_CLASS);
+  return (
+    <div
+      className={DRAGGABLE_CLASS}
+      draggable
+      onDragStart={e => {
+        if (typeof onDragStart === "function") onDragStart(e);
+        e.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+        e.currentTarget.style.cursor = "grabbing";
+      }}
+      onDragEnd={e => {
+        e.currentTarget.style.cursor = "";
+        if (typeof onDragEnd === "function") onDragEnd(e);
+      }}
+    >
+      {children}
+    </div>
+  );
 }
-
-export const Draggable = ({ children, dragData, onDragStart, onDragEnd }) => (
-  <div
-    className={DRAGGABLE_CLASS}
-    draggable
-    onDragStart={e => {
-      if (typeof onDragStart === "function") onDragStart(e);
-      e.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-      e.currentTarget.style.cursor = "grabbing";
-    }}
-    onDragEnd={e => {
-      e.currentTarget.style.cursor = "";
-      if (typeof onDragEnd === "function") onDragEnd(e);
-    }}
-  >
-    {children}
-  </div>
-);
 
 export const DropTarget = ({ children, onDrop, onDropLeft, onDropRight }) => {
   const handleDrop = e => {
