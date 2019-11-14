@@ -9,7 +9,7 @@ export const CONTENT_TYPE_DEFAULT = "default";
 
 const ITEMS_EMOJI1 = [
   // { value: 1.5, icon: "🥨" },
-  { value: 2.5, icon: "☕️" },
+  { value: 3, icon: "☕️" },
   // { value: 3.5, icon: "🍺️" },
   { value: 5, icon: "🍕" },
   // { value: 5, icon: "🌹" },
@@ -18,7 +18,7 @@ const ITEMS_EMOJI1 = [
   // { value: 8, icon: "🍾" },
   // { value: 9, icon: "🎟" },
   // { value: 9, icon: "🍱" },
-  { value: 12.5, icon: "💐" },
+  { value: 12, icon: "💐" },
   // { value: 25, icon: "🥇" },
   // { value: 35, icon: "🎫" },
   // { value: 50, icon: "🏆" },
@@ -28,9 +28,9 @@ const ITEMS_EMOJI1 = [
 
 const ITEMS_EMOJI2 = [
   // { value: 1.5, icon: "🥨" },
-  { value: 1.5, icon: "🍭" },
+  { value: 2, icon: "🍭" },
   // { value: 2.5, icon: "☕️" },
-  { value: 3.5, icon: "🍺️" },
+  { value: 4, icon: "🍺️" },
   // { value: 5, icon: "🍕" },
   { value: 6, icon: "🌹" },
   // { value: 6, icon: "🍔" },
@@ -47,8 +47,8 @@ const ITEMS_EMOJI2 = [
 ];
 
 const ITEMS_BLACK = [
-  { value: 2.5, icon: faCoffee },
-  { value: 3, icon: faIceCream },
+  { value: 2, icon: faIceCream },
+  { value: 3, icon: faCoffee },
   { value: 5, icon: faPizzaSlice },
   { value: 15, icon: faGem }
 ];
