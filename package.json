@@ -1,6 +1,6 @@
 {
   "name": "donation-encourager",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Remind your readers with a smile about donating",
   "main": "src/index.js",
   "unpkg": "dist/donation-encourager.js",
@@ -26,6 +26,10 @@
   "bugs": {
     "url": "https://github.com/dekoder-org/donation-encourager/issues"
   },
+  "files": [
+    "dist/*",
+    "src/**/*"
+  ],
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-transform-react-jsx": "^7.7.0",
