@@ -10,7 +10,7 @@ export default function useTwingle(totalVal, isFeedbackShown) {
         e.preventDefault();
         setWidgetExpanded(true);
       }
-    : "";
+    : null;
   const twingleWidget = twingleWidgetUrl && widgetExpanded && (
     <TwingleWidget
       amount={totalVal}
