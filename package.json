@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "prepare": "npm run build",
+    "prepublish": "npm run build",
     "start": "webpack-dev-server --progress --hot --inline",
     "format": "prettier --write \"src/**/*.js\"",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
@@ -21,6 +21,9 @@
     "funding"
   ],
   "author": "Daniel Marcus <daniel.marcus@dekoder.org> (https://www.dekoder.org/)",
+  "contributors": [
+    "Kim Meyer <kim.meyer@palasthotel.de> (https://palasthotel.de/)"
+  ],
   "homepage": "https://github.com/dekoder-org/donation-encourager",
   "license": "MIT",
   "bugs": {
