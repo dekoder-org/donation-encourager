@@ -6,38 +6,36 @@
 
   .donation-encourager__item {
     box-sizing: border-box;
-    text-align: center;
-    font-size: 3rem;
-    width: $item-size;
+    font-size: $item-font-size;
+    height: $item-size;
     line-height: $item-size;
     text-align: center;
-    opacity: 1; // 0.7;
-    // border: 1px solid black;
-    // cursor: pointer;
     transition: .1s ease;
+    width: $item-size;
 
-    &.selected {
-      opacity: 1 !important;
-      font-size: 3.5em;
-    }
+    &.selected,
     &:hover {
-      font-size: 3.5em;
-      opacity: 1 !important;
+      font-size: $item-font-size--hover;
+
+      @media screen and (max-width: $breakpoint-mobile) {
+        font-size: $item-font-size-mobile--hover;
+      }
     }
 
     @media screen and (max-width: $breakpoint-mobile) {
-      font-size: 3rem;
-      width: $item-size-mobile;
+      font-size: $item-font-size-mobile;
+      height: $item-size-mobile;
       line-height: $item-size-mobile;
+      width: $item-size-mobile;
     }
   }
 
   .donation-encourager__drag-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     min-height: $item-size;
-    // filter: grayscale(0.8);
     @media screen and (max-width: $breakpoint-mobile) {
       min-height: $item-size-mobile;
     }
@@ -64,7 +62,6 @@
       background-color: rgba(18, 159, 201, 0.1)
     }
     .donation-encourager__drop-target {
-      // flex: 1;
       .donation-encourager__draggable {
         display: flex;
         justify-content: center;
@@ -73,7 +70,8 @@
     .donation-encourager__item {
       position: relative;
       cursor: pointer;
-      &:hover:after { // remove indicator
+      // remove indicator
+      &:hover::after {
         content: "❌";
         display: block;
         position: absolute;

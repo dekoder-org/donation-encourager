@@ -16,5 +16,10 @@ $color--primary: hsl(200, 81%, 52%);
 
 $breakpoint-mobile: 850px;
 
-$item-size: 80px;
-$item-size-mobile: 70px;
+$item-size: 5rem;
+$item-size-mobile: 4rem;
+
+$item-font-size: 3rem;
+$item-font-size--hover: 3.5rem;
+$item-font-size-mobile: 2.5rem;
+$item-font-size-mobile--hover: 3rem;
