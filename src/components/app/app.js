@@ -35,7 +35,7 @@ function App({ currentContent }) {
             <Box {...{ boxProps, blurProps, isFeedbackShown }} />
           </Portal>
         ))}
-      {isFeedbackShown && <DonationFeedback destroy={hideFeedback} />}
+      {isFeedbackShown && <DonationFeedback hideFeedback={hideFeedback} />}
     </>
   );
 }

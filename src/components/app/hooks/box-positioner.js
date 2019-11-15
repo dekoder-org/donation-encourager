@@ -14,6 +14,7 @@ export default function useBoxPositioner(intrusivenessProps, updateTrigger) {
 
 function useSelector(targetSelector, updateTrigger) {
   return useMemo(() => {
+    [].push(updateTrigger);
     return Array.from(document.querySelectorAll(targetSelector));
   }, [targetSelector, updateTrigger]);
 }
@@ -50,7 +51,7 @@ function useBoxWrappers(targetElements, intrusivenessProps, settings) {
   }, [targetElements, intrusivenessProps, settings]);
   useEffect(() => {
     return () => boxesWithWrappers.forEach(b => b.wrapperEl.remove());
-  }, [targetElements, intrusivenessProps, settings]);
+  }, [boxesWithWrappers]);
   return boxesWithWrappers;
 }
 
@@ -67,7 +68,7 @@ function insertBoxWrapper(box, wrapperClass, excludeSelector) {
     excludeSelector
   );
   const posNum = positionNumber(box.position, siblings.length);
-  if (isNaN(posNum) || posNum > siblings.length) return;
+  if (!siblings.length || isNaN(posNum) || posNum > siblings.length) return;
   // if refrenceNode === null the element will be attached to the end
   const referenceNode =
     posNum === siblings.length

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const STORAGE_DEFAULT = {
   readingTime: 0, // in seconds
@@ -12,10 +12,12 @@ export default function useStorage({ storageKey, contentTypes, locale }) {
   );
   useStateToStorageSync(stateData, storageKey);
   useStorageToStateSync(setStateData, storageKey);
+  const stateSetterObj = useMemo(() => stateSetters(setStateData), []);
+  const stateGetterObj = stateGetters(stateData, contentTypes, locale);
   return {
     ...stateData,
-    ...stateGetters(stateData, contentTypes, locale),
-    ...stateSetters(setStateData)
+    ...stateSetterObj,
+    ...stateGetterObj
   };
 }
 
@@ -36,7 +38,7 @@ function useStorageToStateSync(setStateData, storageKey) {
     };
     window.addEventListener("storage", storageListener);
     return () => window.removeEventListener("storage", storageListener);
-  }, [storageKey]);
+  }, [storageKey, setStateData]);
 }
 
 function stateSetters(setStateData) {

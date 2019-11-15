@@ -1,10 +1,9 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useReducer, useEffect } from "react";
 import { Settings } from "../contexts";
 
 export default function useDomObserver() {
   const { domObserverEnabled, targetSelector } = useContext(Settings);
-  const [updateTrigger, setUpdateTrigger] = useState(0);
-  const update = () => setUpdateTrigger(c => c + 1);
+  const [updateTrigger, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() => {
     if (!domObserverEnabled) return;
     const observer = new MutationObserver(mutationHandler);
@@ -27,14 +26,13 @@ export default function useDomObserver() {
           );
         }, false);
       if (shallUpdate) {
-        update();
+        forceUpdate();
         // console.log(shallUpdate);
       }
     }
     return () => observer.disconnect();
   }, [domObserverEnabled, targetSelector]);
-  /*useEffect(() => {
-    if (updateTrigger > 0)
+  /* useEffect(() => {
       console.log("Relevant DOM mutations detected. Updating ...");
   }, [updateTrigger]);*/
   return updateTrigger;

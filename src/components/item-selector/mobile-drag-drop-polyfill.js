@@ -20,5 +20,5 @@ export default function useMobileDragDropPolyfill(DRAGGABLE_CLASS) {
       window.addEventListener("touchmove", function() {}, { passive: false });
       _polyfill_applied = true;
     }
-  }, []);
+  }, [DRAGGABLE_CLASS]);
 }

@@ -41,9 +41,10 @@ function useGradientEffect(blurActive, updateTrigger) {
 function useElementGetter(elementGetter, updateTrigger) {
   const { targetSelector, wrapperClass } = useContext(Settings);
   const elements = useMemo(() => {
+    [].push(updateTrigger);
     const targetEls = Array.from(document.querySelectorAll(targetSelector));
     return elementGetter(targetEls, wrapperClass);
-  }, [targetSelector, wrapperClass, updateTrigger]);
+  }, [targetSelector, wrapperClass, elementGetter, updateTrigger]);
   return elements;
 }
 
