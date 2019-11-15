@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useMemo } from "react";
 import { Settings } from "../contexts";
 import { getFilteredChildArray } from "./box-positioner";
 import "./blur.scss";
@@ -11,10 +11,10 @@ const GRADIENT_CLASS_ACTIVE = "gradient-active";
 // gives gradient to last content block before 1st donation encourager box
 // + blur for all following content blocks
 export default function useBlur({ blurEnabled }, updateTrigger) {
-  const { boxesEnabled, targetSelector, wrapperClass } = useContext(Settings);
+  const { boxesEnabled } = useContext(Settings);
   const [blurActive, removeBlur] = useBlurState(blurEnabled, boxesEnabled);
-  useBlurEffect(blurActive, targetSelector, wrapperClass, updateTrigger);
-  useGradientEffect(blurActive, targetSelector, wrapperClass, updateTrigger);
+  useBlurEffect(blurActive, updateTrigger);
+  useGradientEffect(blurActive, updateTrigger);
   return [blurActive, removeBlur];
 }
 
@@ -26,46 +26,39 @@ function useBlurState(blurEnabled, boxesEnabled) {
   return [blurActive, removeBlur];
 }
 
-function useBlurEffect(
-  blurActive,
-  targetSelector,
-  wrapperClass,
-  updateTrigger
-) {
-  useEffect(() => {
-    const blurEls = getBlurElements(targetSelector, wrapperClass);
-    blurEls.forEach(el => el.classList.add(BLUR_CLASS));
-    if (blurActive) {
-      blurEls.forEach(el => el.classList.add(BLUR_CLASS_ACTIVE));
-    }
-    return () => {
-      blurEls.forEach(el => el.classList.remove(BLUR_CLASS));
-      blurEls.forEach(el => el.classList.remove(BLUR_CLASS_ACTIVE));
-    };
-  }, [blurActive, targetSelector, wrapperClass, updateTrigger]);
+function useBlurEffect(blurActive, updateTrigger) {
+  const blurEls = useElementGetter(getBlurElements, updateTrigger);
+  useClassToggle(blurEls, true, BLUR_CLASS);
+  useClassToggle(blurEls, blurActive, BLUR_CLASS_ACTIVE);
 }
 
-function useGradientEffect(
-  blurActive,
-  targetSelector,
-  wrapperClass,
-  updateTrigger
-) {
-  useEffect(() => {
-    const gradientEls = getGradientElements(targetSelector, wrapperClass);
-    gradientEls.forEach(el => el.classList.add(GRADIENT_CLASS));
-    if (blurActive) {
-      gradientEls.forEach(el => el.classList.add(GRADIENT_CLASS_ACTIVE));
-    }
-    return () => {
-      gradientEls.forEach(el => el.classList.remove(GRADIENT_CLASS));
-      gradientEls.forEach(el => el.classList.remove(GRADIENT_CLASS_ACTIVE));
-    };
-  }, [blurActive, targetSelector, wrapperClass, updateTrigger]);
+function useGradientEffect(blurActive, updateTrigger) {
+  const gradientEls = useElementGetter(getGradientElements, updateTrigger);
+  useClassToggle(gradientEls, true, GRADIENT_CLASS);
+  useClassToggle(gradientEls, blurActive, GRADIENT_CLASS_ACTIVE);
 }
 
-function getBlurElements(targetSelector, wrapperClass) {
-  const targetElements = Array.from(document.querySelectorAll(targetSelector));
+function useElementGetter(elementGetter, updateTrigger) {
+  const { targetSelector, wrapperClass } = useContext(Settings);
+  const elements = useMemo(() => {
+    const targetEls = Array.from(document.querySelectorAll(targetSelector));
+    return elementGetter(targetEls, wrapperClass);
+  }, [targetSelector, wrapperClass, updateTrigger]);
+  return elements;
+}
+
+function useClassToggle(elements, active, className) {
+  useEffect(() => {
+    if (active) {
+      elements.forEach(el => el.classList.add(className));
+    }
+    return () => {
+      elements.forEach(el => el.classList.remove(className));
+    };
+  }, [elements, active, className]);
+}
+
+function getBlurElements(targetElements, wrapperClass) {
   return targetElements.reduce((acc, targetElement) => {
     const allChildren = getFilteredChildArray(targetElement);
     const firstBox = allChildren.find(c => c.classList.contains(wrapperClass));
@@ -77,8 +70,7 @@ function getBlurElements(targetSelector, wrapperClass) {
   }, []);
 }
 
-function getGradientElements(targetSelector, wrapperClass) {
-  const targetElements = Array.from(document.querySelectorAll(targetSelector));
+function getGradientElements(targetElements, wrapperClass) {
   return targetElements.reduce((acc, targetElement) => {
     const allChildren = getFilteredChildArray(targetElement);
     const firstBox = allChildren.find(c => c.classList.contains(wrapperClass));
