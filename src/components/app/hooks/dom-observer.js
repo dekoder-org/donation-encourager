@@ -8,8 +8,8 @@ export default function useDomObserver() {
     if (!domObserverEnabled) return;
     const observer = new MutationObserver(mutationHandler);
     observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["class"],
+      // attributes: true,
+      // attributeFilter: ["class"],
       childList: true,
       subtree: true
     });

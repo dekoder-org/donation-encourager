@@ -5,18 +5,10 @@ import { Settings } from "../contexts";
 export const MIN_BLOCKS_FOR_MIDDLE_POS_AND_BLUR = 4;
 
 // creates wrapper elements for the boxes according to intrusiveness settings and inserts them at the predefined positions into targetted article bodies
-export default function useBoxPositioner(intrusivenessProps, updateTrigger) {
+export default function useBoxPositioner(intrusivenessProps, targets) {
   const settings = useContext(Settings);
-  const targetElements = useSelector(settings.targetSelector, updateTrigger);
-  const boxes = useBoxWrappers(targetElements, intrusivenessProps, settings);
+  const boxes = useBoxWrappers(targets, intrusivenessProps, settings);
   return boxes;
-}
-
-function useSelector(targetSelector, updateTrigger) {
-  return useMemo(() => {
-    [].push(updateTrigger);
-    return Array.from(document.querySelectorAll(targetSelector));
-  }, [targetSelector, updateTrigger]);
 }
 
 function useBoxWrappers(targetElements, intrusivenessProps, settings) {

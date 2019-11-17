@@ -10,14 +10,20 @@ const GRADIENT_CLASS_ACTIVE = "gradient-active";
 
 // gives gradient to last content block before 1st donation encourager box
 // + blur for all following content blocks
-export default function useBlur({ blurEnabled }, updateTrigger) {
-  const { boxesEnabled } = useContext(Settings);
+export default function useBlur({ blurEnabled }, targets) {
+  const { boxesEnabled, wrapperClass } = useContext(Settings);
   const [blurActive, removeBlur] = useBlurState(blurEnabled, boxesEnabled);
-  useBlurEffect(blurActive, updateTrigger);
-  useGradientEffect(blurActive, updateTrigger);
+
+  const blurEls = useChildReducer(targets, wrapperClass, blurElGetter);
+  useClass(blurEls, true, BLUR_CLASS);
+  useClass(blurEls, blurActive, BLUR_CLASS_ACTIVE);
+
+  const gradientEls = useChildReducer(targets, wrapperClass, gradientElGetter);
+  useClass(gradientEls, true, GRADIENT_CLASS);
+  useClass(gradientEls, blurActive, GRADIENT_CLASS_ACTIVE);
+
   return [blurActive, removeBlur];
 }
-
 function useBlurState(blurEnabled, boxesEnabled) {
   const isInitiallyActive = blurEnabled && boxesEnabled;
   const [blurActive, setBlurActive] = useState(isInitiallyActive);
@@ -26,29 +32,20 @@ function useBlurState(blurEnabled, boxesEnabled) {
   return [blurActive, removeBlur];
 }
 
-function useBlurEffect(blurActive, updateTrigger) {
-  const blurEls = useElementGetter(getBlurElements, updateTrigger);
-  useClassToggle(blurEls, true, BLUR_CLASS);
-  useClassToggle(blurEls, blurActive, BLUR_CLASS_ACTIVE);
+function blurElGetter(acc, allChildren, firstBoxIndex, wrapperClass) {
+  const childrenAfterFirstBox = allChildren
+    .slice(firstBoxIndex)
+    .filter(el => !el.classList.contains(wrapperClass));
+  return [...acc, ...childrenAfterFirstBox];
 }
 
-function useGradientEffect(blurActive, updateTrigger) {
-  const gradientEls = useElementGetter(getGradientElements, updateTrigger);
-  useClassToggle(gradientEls, true, GRADIENT_CLASS);
-  useClassToggle(gradientEls, blurActive, GRADIENT_CLASS_ACTIVE);
+function gradientElGetter(acc, allChildren, firstBoxIndex) {
+  const isFirstBoxLast = firstBoxIndex === allChildren.length - 1;
+  const lastBefore = allChildren[firstBoxIndex - 1];
+  return lastBefore && !isFirstBoxLast ? [...acc, lastBefore] : acc;
 }
 
-function useElementGetter(elementGetter, updateTrigger) {
-  const { targetSelector, wrapperClass } = useContext(Settings);
-  const elements = useMemo(() => {
-    [].push(updateTrigger);
-    const targetEls = Array.from(document.querySelectorAll(targetSelector));
-    return elementGetter(targetEls, wrapperClass);
-  }, [targetSelector, wrapperClass, elementGetter, updateTrigger]);
-  return elements;
-}
-
-function useClassToggle(elements, active, className) {
+function useClass(elements, active, className) {
   useEffect(() => {
     if (active) {
       elements.forEach(el => el.classList.add(className));
@@ -59,25 +56,15 @@ function useClassToggle(elements, active, className) {
   }, [elements, active, className]);
 }
 
-function getBlurElements(targetElements, wrapperClass) {
-  return targetElements.reduce((acc, targetElement) => {
-    const allChildren = getFilteredChildArray(targetElement);
-    const firstBox = allChildren.find(c => c.classList.contains(wrapperClass));
-    const firstBoxIndex = allChildren.indexOf(firstBox);
-    const childrenAfterFirstBox = allChildren
-      .slice(firstBoxIndex)
-      .filter(el => !el.classList.contains(wrapperClass));
-    return [...acc, ...childrenAfterFirstBox];
-  }, []);
-}
-
-function getGradientElements(targetElements, wrapperClass) {
-  return targetElements.reduce((acc, targetElement) => {
-    const allChildren = getFilteredChildArray(targetElement);
-    const firstBox = allChildren.find(c => c.classList.contains(wrapperClass));
-    const firstBoxIndex = allChildren.indexOf(firstBox);
-    const isFirstBoxLast = firstBoxIndex === allChildren.length - 1;
-    const lastBefore = allChildren[firstBoxIndex - 1];
-    return lastBefore && !isFirstBoxLast ? [...acc, lastBefore] : acc;
-  }, []);
+function useChildReducer(targetElements, wrapperClass, reducer) {
+  return useMemo(() => {
+    return targetElements.reduce((acc, targetElement) => {
+      const allChildren = getFilteredChildArray(targetElement);
+      const firstBox = allChildren.find(c =>
+        c.classList.contains(wrapperClass)
+      );
+      const firstBoxIndex = allChildren.indexOf(firstBox);
+      return reducer(acc, allChildren, firstBoxIndex, wrapperClass);
+    }, []);
+  }, [targetElements, wrapperClass, reducer]);
 }
