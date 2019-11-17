@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, useMemo } from "react";
 import { Settings } from "../contexts";
-import { getFilteredChildArray } from "./box-positioner";
+import { getChildArray } from "./box-positioner";
 import "./blur.scss";
 
 const BLUR_CLASS = "donation-encourager__blur-content";
@@ -55,7 +55,7 @@ function gradientElGetter(acc, allChildren, firstBoxIndex) {
 function useChildReducer(targetElements, wrapperClass, reducer) {
   return useMemo(() => {
     return targetElements.reduce((acc, targetElement) => {
-      const allChildren = getFilteredChildArray(targetElement);
+      const allChildren = getChildArray(targetElement);
       const firstBox = allChildren.find(c =>
         c.classList.contains(wrapperClass)
       );

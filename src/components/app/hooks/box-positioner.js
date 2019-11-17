@@ -7,40 +7,28 @@ export const MIN_BLOCKS_FOR_MIDDLE_POS_AND_BLUR = 4;
 // creates wrapper elements for the boxes according to intrusiveness settings and inserts them at the predefined positions into targetted article bodies
 export default function useBoxPositioner(intrusivenessProps, targets) {
   const settings = useContext(Settings);
-  const boxes = useBoxWrappers(targets, intrusivenessProps, settings);
-  return boxes;
+  const { boxSettings, itemSelectorSettings } = intrusivenessProps;
+  const boxes = useBoxWrappers(targets, boxSettings, settings);
+  const boxesWithItemSelectorSettings = useMemo(
+    () => boxes.map(b => ({ ...b, itemSelectorSettings })),
+    [boxes, itemSelectorSettings]
+  );
+  return boxesWithItemSelectorSettings;
 }
 
-function useBoxWrappers(targetElements, intrusivenessProps, settings) {
+function useBoxWrappers(targetElements, boxSettings, settings) {
   const boxesWithWrappers = useMemo(() => {
     const { boxesEnabled, wrapperClass, excludeSelector } = settings;
-    const { boxSettings, itemSelectorSettings } = intrusivenessProps;
     if (!boxesEnabled) return [];
-    return targetElements.reduce((acc, targetElement) => {
+    return targetElements.reduce((acc, targetEl) => {
       const boxesWithinTargetEl = (boxSettings || [])
-        .map(b => {
-          const wrapperEl = newWrapper(wrapperClass);
-          const boxProps = {
-            ...itemSelectorSettings,
-            ...b,
-            parentEl: targetElement,
-            wrapperEl
-          };
-          const posNum = insertBoxWrapper(
-            boxProps,
-            wrapperClass,
-            excludeSelector
-          );
-          if (!posNum) return null;
-          return { ...boxProps, posNum };
-        })
-        .filter(b => b)
-        .map((b, i) => {
-          return { ...b, isFirst: i === 0 };
-        });
+        .map(b => ({ ...b, targetEl, wrapperEl: newWrapper(wrapperClass) }))
+        .map(b => addBoxWrapper(b, wrapperClass, excludeSelector))
+        .filter(b => b.posNum)
+        .map((b, i) => ({ ...b, isFirst: i === 0 }));
       return [...acc, ...boxesWithinTargetEl];
     }, []);
-  }, [targetElements, intrusivenessProps, settings]);
+  }, [targetElements, boxSettings, settings]);
   useEffect(() => {
     return () => boxesWithWrappers.forEach(b => b.wrapperEl.remove());
   }, [boxesWithWrappers]);
@@ -53,21 +41,18 @@ function newWrapper(wrapperClass) {
   return result;
 }
 
-function insertBoxWrapper(box, wrapperClass, excludeSelector) {
-  const siblings = getFilteredChildArray(
-    box.parentEl,
-    wrapperClass,
-    excludeSelector
-  );
-  const posNum = positionNumber(box.position, siblings.length);
-  if (!siblings.length || isNaN(posNum) || posNum > siblings.length) return;
-  // if refrenceNode === null the element will be attached to the end
+function addBoxWrapper(box, wrapperClass, excludeSelector) {
+  const { targetEl, wrapperEl, position } = box;
+  const siblings = getChildArray(targetEl, wrapperClass, excludeSelector);
+  const posNum = positionNumber(position, siblings.length);
+  if (!siblings.length || isNaN(posNum) || posNum > siblings.length) return box;
   const referenceNode =
     posNum === siblings.length
       ? siblings[posNum - 1].nextElementSibling // bottom pos
       : floatChecker(siblings, posNum);
-  box.parentEl.insertBefore(box.wrapperEl, referenceNode);
-  return posNum;
+  // if refrenceNode === null the element will be attached to the end
+  targetEl.insertBefore(wrapperEl, referenceNode);
+  return { ...box, posNum };
 }
 
 function positionNumber(positionString, siblingsCount) {
@@ -85,7 +70,7 @@ function positionNumber(positionString, siblingsCount) {
   }
 }
 
-export function getFilteredChildArray(parentEl, filterClass, excludeSelector) {
+export function getChildArray(parentEl, filterClass, excludeSelector) {
   const excludeEls = excludeSelector
     ? Array.from(parentEl.querySelectorAll(excludeSelector))
     : [];
