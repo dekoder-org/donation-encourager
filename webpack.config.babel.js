@@ -2,8 +2,10 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from "webpack";
 
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
  
+const __dirname = path.resolve();
+
 const defaultConfig = {
     entry: path.join(__dirname, 'src/index.js'),
     output: {
