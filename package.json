@@ -1,8 +1,8 @@
 {
   "name": "donation-encourager",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Remind your readers with a smile about donating",
-  "main": "dist/index.js",
+  "main": "dist/index.esm.js",
   "unpkg": "dist/donation-encourager.js",
   "scripts": {
     "dev": "webpack --mode development",
@@ -10,8 +10,7 @@
     "start": "webpack-dev-server --progress --hot --inline",
     "format": "prettier --write \"src/**/*.js\"",
     "transpile": "babel src -d dist --copy-files",
-    "prepublish": "npm run build && npm run transpile",
-    "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
+    "prepublish": "npm run build && npm run transpile"
   },
   "repository": {
     "type": "git",
@@ -60,6 +59,10 @@
     "react-intersection-observer": "^8.25.1",
     "react-odometerjs": "^2.1.1",
     "react-portal": "^4.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.1",
+    "react-dom": ">=16.8.1"
   },
   "babel": {
     "presets": [

@@ -14,5 +14,3 @@ function init() {
   _rootNode = _rootNode || document.createElement("div");
   render(<AppController />, _rootNode);
 }
-
-export default { init };

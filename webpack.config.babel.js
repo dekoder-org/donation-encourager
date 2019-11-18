@@ -5,8 +5,22 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const __dirname = path.resolve();
 
-const defaultConfig = {
+const sharedSettings = {
   entry: path.join(__dirname, "src/index.js"),
+  stats: {
+    all: false,
+    modules: true,
+    maxModules: 0,
+    errors: true,
+    warnings: true,
+    colors: true,
+    timings: true
+  },
+  devtool: "source-map"
+}
+
+const defaultConfig = {
+  ...sharedSettings,
   output: {
     path: path.join(__dirname, "dist"),
     filename: "donation-encourager.js"
@@ -22,25 +36,14 @@ const defaultConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader"
-          }
-        ]
+        use: ["babel-loader"]
       },
       {
-        test: /\.scss$/,
+        test: /\.(sc|c)ss$/,
         use: [
-          "style-loader", // creates style nodes from JS strings
-          "css-loader", // translates CSS into CommonJS
-          "sass-loader" // compiles Sass to CSS, using Node Sass by default
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          "style-loader", // creates style nodes from JS strings
-          "css-loader" // translates CSS into CommonJS
+          "style-loader",
+          "css-loader",
+          "sass-loader"
         ]
       }
     ]
@@ -56,18 +59,6 @@ const defaultConfig = {
       maxChunks: 1
     })
   ],
-  stats: {
-    // copied from `'minimal'`
-    all: false,
-    modules: true,
-    maxModules: 0,
-    errors: true,
-    warnings: true,
-    // our additional options
-    colors: true,
-    timings: true
-  },
-  devtool: "source-map"
 };
 
-export default defaultConfig;
+export default [defaultConfig];

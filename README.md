@@ -191,4 +191,38 @@ const STRINGS_DEFAULT = {
 
 Add your own CSS file with according classes to overwrite the default stylings.
 
+## Use with React (experimental)
 
+To use the donation encourager in your React project, you can also install it as an npm module:
+
+```sh
+npm install donation-encourager
+```
+
+And then:
+
+```js
+import DonationEncourager, { donEnc } from "donation-encourager";
+```
+
+In your app's render function you could initialize the donation encourager like this:
+
+```jsx
+useEffect(() => {
+  donEnc('init', {
+    targetSelector: '.my-article-body'
+  });
+  donEnc('pageview');
+}, []);
+
+return  (
+  <App>
+    <div className="my-article-body">
+      ...
+    </div>
+    <DonationEncourager />
+  </App>
+);
+```
+
+Make sure you use a Sass Loader (like [sass-loader](https://github.com/webpack-contrib/sass-loader) for Webpack) in your project.
