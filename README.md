@@ -21,11 +21,11 @@ Find the latest build [here](https://unpkg.com/donation-encourager).
   <script>
     window.donEncLayer = window.donEncLayer || [];
     function donEnc() {donEncLayer.push(arguments)};
-    donEnc('init', {
-      targetSelector: '.ph-article-text',
-      ctaTargetUrl: function(amount) {return 'https://www.dekoder.org/de/spenden?tw_amount=' + amount},
+    donEnc("init", {
+      targetSelector: ".ph-article-text",
+      ctaTargetUrl: function(amount) {return "https://www.dekoder.org/de/spenden?tw_amount=" + amount},
     });
-    donEnc('pageview');
+    donEnc("pageview");
   </script>
 ```
 
@@ -209,10 +209,10 @@ In your app's render function you could initialize the donation encourager like 
 
 ```jsx
 useEffect(() => {
-  donEnc('init', {
-    targetSelector: '.my-article-body'
+  donEnc("init", {
+    targetSelector: ".my-article-body"
   });
-  donEnc('pageview');
+  donEnc("pageview");
 }, []);
 
 return (
