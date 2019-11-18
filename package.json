@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --progress --hot --inline",
     "format": "prettier --write \"src/**/*.js\"",
     "transpile": "babel src -d dist --copy-files",
-    "prepublish": "npm run build && npm run transpile"
+    "prepare": "npm run build && npm run transpile"
   },
   "repository": {
     "type": "git",
