@@ -17,7 +17,7 @@ Find the latest build [here](https://unpkg.com/donation-encourager).
 ## Quick Start
 
 ```html
-  <script src="donation-encourager.js"></script>
+  <script src="donation-encourager.js" defer></script>
   <script>
     window.donEncLayer = window.donEncLayer || [];
     function donEnc() {donEncLayer.push(arguments)};
