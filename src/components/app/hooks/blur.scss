@@ -12,17 +12,16 @@
 .donation-encourager__gradient-content {
   position: relative;
   &:after {
-    display: block;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 30%, white 100%);
     content: "";
-    // background-color: red;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    display: block;
+    left: calc(-50vw + 50%);
     height: 100%;
     opacity: 0;
+    position: absolute;
+    top: 0;
     transition: opacity $speed $ease;
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 30%, white 100%);
+    width: 100vw;
   }
   &.gradient-active {
     &:after {
