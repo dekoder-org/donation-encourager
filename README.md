@@ -215,7 +215,7 @@ useEffect(() => {
   donEnc('pageview');
 }, []);
 
-return  (
+return (
   <App>
     <div className="my-article-body">
       ...
