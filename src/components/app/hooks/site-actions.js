@@ -8,32 +8,32 @@ import {
   itemPresets
 } from "../settings-default";
 
-export default function useActions(setSettings, storage) {
+export default function useActions(setSettings, { reset, setReadContents }) {
   const [currentContent, setCurrentContent] = useState({});
   const sendPageView = contentType => {
     setCurrentContent({ ts: ts(), type: contentType || CONTENT_TYPE_DEFAULT });
   };
 
   useEffect(() => {
-    const funcs = { setSettings, sendPageView, storage };
+    const funcs = { setSettings, sendPageView, reset, setReadContents };
     const actionHandler = a => handleAction(a, funcs);
     handleExistingActions(actionHandler);
     startActionListener(actionHandler);
     return () => {};
-  }, []);
+  }, [setSettings, reset, setReadContents]);
 
   return currentContent;
 }
 
 function handleAction(action, funcs) {
-  const { setSettings, sendPageView, storage } = funcs;
+  const { setSettings, sendPageView, reset, setReadContents } = funcs;
   if (!action) return;
   const [actionTypeRaw, actionData] = Array.from(action);
   const actionType = (actionTypeRaw || "").toLowerCase();
   if (actionType === "init") {
     setSettings(mergeInNewSettings(actionData, SETTINGS_DEFAULT));
   } else if (actionType === "reset") {
-    storage.reset();
+    reset();
   } else if (actionType === "pageview") {
     sendPageView(actionData);
   } else if (actionType === "donation") {
@@ -49,7 +49,7 @@ function handleAction(action, funcs) {
   } else if (actionType === "updatesettings") {
     setSettings(s => mergeInNewSettings(actionData, s));
   } else if (actionType === "setreadcontents") {
-    storage.setReadContents(actionData);
+    setReadContents(actionData);
   } else if (actionType === "setitempreset") {
     setSettings(s => {
       const presetItems = itemPresets[actionData];

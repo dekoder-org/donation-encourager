@@ -1,15 +1,16 @@
 {
   "name": "donation-encourager",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Remind your readers with a smile about donating",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "unpkg": "dist/donation-encourager.js",
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "prepublish": "npm run build",
     "start": "webpack-dev-server --progress --hot --inline",
     "format": "prettier --write \"src/**/*.js\"",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublish": "npm run build && npm run transpile",
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "repository": {
@@ -30,6 +31,7 @@
     "url": "https://github.com/dekoder-org/donation-encourager/issues"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
     "@babel/plugin-transform-react-jsx": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
@@ -38,6 +40,7 @@
     "css-loader": "^3.2.0",
     "eslint": "^6.6.0",
     "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.13.0",
     "prettier": "^1.19.1",

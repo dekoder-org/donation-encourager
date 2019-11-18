@@ -1,16 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useCallback, useEffect } from "react";
 import { Portal } from "react-portal";
-import { Settings } from "../app/contexts";
+import { Settings, Storage } from "../app/contexts";
 import BackgroundSunglasses from "./background-sunglasses";
 import "./donation-feedback.scss";
 import "../box/box.scss";
 
-const FEEDBACK_DESTROY_DELAY = 15; // in seconds
+const FEEDBACK_DESTROY_DELAY = 15000; // in ms
 
-export default function DonationFeedback({ destroy }) {
+export default function DonationFeedback({ hideFeedback }) {
   const { strings } = useContext(Settings);
+  const { reset } = useContext(Storage);
+  const destroy = useCallback(() => {
+    hideFeedback();
+    reset();
+  }, [hideFeedback, reset]);
   // in case the user forgets to click: destroy & reset after a while automatically
-  useCallbackDelay(destroy, FEEDBACK_DESTROY_DELAY * 1000);
+  useCallbackDelay(destroy, FEEDBACK_DESTROY_DELAY);
   return (
     <Portal node={document.body}>
       <BackgroundSunglasses onClick={destroy}>
@@ -38,5 +43,5 @@ export default function DonationFeedback({ destroy }) {
 function useCallbackDelay(callback, delay) {
   useEffect(() => {
     setTimeout(callback, delay);
-  }, []);
+  }, [callback, delay]);
 }

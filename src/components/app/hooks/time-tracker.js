@@ -20,13 +20,11 @@ export default function useTimeTracker() {
 
 function usePageFocus(enabled) {
   const [pageFocussed, setPageFocussed] = useState(true);
-
-  const userLeft = () => setPageFocussed(false);
-  const userReturned = () => setPageFocussed(true);
-  const onVisibChange = () => (document.hidden ? userLeft() : userReturned());
-
   useEffect(() => {
     if (!enabled) return;
+    const userLeft = () => setPageFocussed(false);
+    const userReturned = () => setPageFocussed(true);
+    const onVisibChange = () => (document.hidden ? userLeft() : userReturned());
     const pageFocusEvents = [
       [document, "visibilitychange", onVisibChange],
       [window, "blur", userLeft],
@@ -42,15 +40,13 @@ function usePageFocus(enabled) {
 function useIdleTimer(active) {
   const [isIdle, setIsIdle] = useState(false);
   const [idleCount, setIdleCount] = useState(IDLE_THRESHOLD);
-
-  const wakeUp = throttle(() => {
-    // console.log("wake up / reset idle counter!");
-    setIsIdle(false);
-    setIdleCount(IDLE_THRESHOLD);
-  }, _THROTTLE_DELAY * 1000);
-
   useEffect(() => {
     if (!active) return;
+    const wakeUp = throttle(() => {
+      // console.log("wake up / reset idle counter!");
+      setIsIdle(false);
+      setIdleCount(IDLE_THRESHOLD);
+    }, _THROTTLE_DELAY * 1000);
     const wakeUpEvents = [
       [document, "mousemove", wakeUp],
       [document, "keyup", wakeUp],

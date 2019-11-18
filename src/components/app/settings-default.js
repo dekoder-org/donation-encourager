@@ -125,7 +125,7 @@ const STRINGS_DEFAULT = {
   feedbackTitle: "Vielen Dank für deine Spende",
   feedbackBody:
     "Gerade für uns als gemeinnütziges Projekt ist das Engagement unserer Leserinnen und Leser besonders wertvoll und wir freuen uns, dass du uns unterstützt – vielen Dank! Wir setzen nun deinen Zähler zurück ...",
-  feedbackBtn: "Ok",
+  feedbackBtn: "OK",
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`
 };
 

@@ -9,8 +9,8 @@ import useSiteActions from "./hooks/site-actions";
 import useContentTracker from "./hooks/content-tracker";
 import useTimeTracker from "./hooks/time-tracker";
 import useDonationListener from "./hooks/donation-listener";
-import useDomObserver from "./hooks/dom-observer";
 import useIntrusiveness from "./hooks/intrusiveness";
+import useTargets from "./hooks/targets";
 import useBoxPositioner from "./hooks/box-positioner";
 import useBlur from "./hooks/blur";
 
@@ -22,9 +22,9 @@ function App({ currentContent }) {
   useTimeTracker();
   const [isFeedbackShown, hideFeedback] = useDonationListener();
   const intrusivenessProps = useIntrusiveness();
-  const updateTrigger = useDomObserver();
-  const boxes = useBoxPositioner(intrusivenessProps, updateTrigger);
-  const blurProps = useBlur(intrusivenessProps, updateTrigger);
+  const targets = useTargets();
+  const boxes = useBoxPositioner(intrusivenessProps, targets);
+  const blurProps = useBlur(intrusivenessProps, targets);
   const [blurActive] = blurProps;
   return (
     <>
@@ -35,7 +35,7 @@ function App({ currentContent }) {
             <Box {...{ boxProps, blurProps, isFeedbackShown }} />
           </Portal>
         ))}
-      {isFeedbackShown && <DonationFeedback destroy={hideFeedback} />}
+      {isFeedbackShown && <DonationFeedback hideFeedback={hideFeedback} />}
     </>
   );
 }
