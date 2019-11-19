@@ -40,7 +40,7 @@ const ITEMS_EMOJI2 = [
   // { value: 9, icon: "🍱" },
   // { value: 15, icon: "💐" },
   // { value: 25, icon: "🥇" },
-  { value: 15, icon: "🎫" }
+  { value: 16, icon: "🎫" }
   // { value: 50, icon: "🏆" },
   // { value: 75, icon: "💎" },
   // { value: 100, icon: "💰" }
@@ -107,7 +107,7 @@ const CONTENT_TYPES_DEFAULT = {
 const STRINGS_DEFAULT = {
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
-  body: (timeStr, contentsStr, amount, storage) =>
+  body: (timeStr, contentsStr, amountStr, storage) =>
     storage.totalContents
       ? `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${
           storage.totalContents === 1
@@ -115,9 +115,9 @@ const STRINGS_DEFAULT = {
               ? "ist sie"
               : "ist er"
             : "sind sie"
-        } dir wert? Vielleicht <strong>${amount} €</strong>?`
+        } dir wert? Vielleicht <strong>${amountStr} €</strong>?`
       : "",
-  ctaBtn: (timeStr, contentsString, amount) => `Mit ${amount} € danken`,
+  ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} € danken`,
   blurRemover: "Einfach weiterlesen",
   footer: timeStr =>
     `* Lesezeit insgesamt auf dekoder: ${timeStr}. Diese Daten werden nur in deinem Browser gespeichert und nicht auf unsere Server übertragen!`,
@@ -134,8 +134,8 @@ export const SETTINGS_DEFAULT = {
   excludeSelector: "hr, h6, aside",
   contentTypes: CONTENT_TYPES_DEFAULT,
   twingleWidgetUrl: "",
-  ctaTargetUrl: amount =>
-    `https://www.dekoder.org/de/spenden?tw_amount=${amount}`,
+  ctaTargetUrl: amountVal =>
+    `https://www.dekoder.org/de/spenden?tw_amount=${amountVal}`,
   intrusivenessLevels: INTRUSIVENESS_LEVELS_DEFAULT,
   wrapperClass: "donation-encourager__wrapper",
   storageKey: "donation-encourager-tracker",
@@ -144,7 +144,8 @@ export const SETTINGS_DEFAULT = {
   boxesEnabled: true,
   domObserverEnabled: false,
   locale: "de-DE",
-  strings: STRINGS_DEFAULT
+  strings: STRINGS_DEFAULT,
+  discount: undefined // amountVal => amountVal / 2,
 };
 
 export const SETTINGS_DISABLE_ALL = {

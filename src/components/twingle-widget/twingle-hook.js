@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { Settings } from "../app/contexts";
 import TwingleWidget from "./twingle-widget";
 
-export default function useTwingle(totalVal, isFeedbackShown) {
+export default function useTwingle(amount, isFeedbackShown) {
   const { twingleWidgetUrl } = useContext(Settings);
   const [widgetExpanded, setWidgetExpanded] = useState(false);
   const onCtaBtnClick = twingleWidgetUrl
@@ -13,7 +13,7 @@ export default function useTwingle(totalVal, isFeedbackShown) {
     : null;
   const twingleWidget = twingleWidgetUrl && widgetExpanded && (
     <TwingleWidget
-      amount={totalVal}
+      amount={amount.val}
       exit={() => setWidgetExpanded(false)}
       twingleWidgetUrl={twingleWidgetUrl}
     />

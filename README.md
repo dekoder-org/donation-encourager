@@ -79,7 +79,8 @@ donationListenerEnabled | `true` | Enables or disables the donation listener whi
 boxesEnabled | `true` | Allow donation encourager boxes to be placed within your articles' text body (identified by the `targetSelector` above). The placement and the amount of the boxes depends from the `intrusivenessLevels` (see Intrusiveness section below).
 domObserverEnabled | `false` | Experimental feature: Enable if you want to engage a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) that watches for added DOM-nodes with the given `targetSelector`. When such a relevant DOM change was observed boxes will updated according to the changes. This might be useful if contents are loaded dynamically on your page. 
 locale | `"de-DE"` | Defines, among others, how numbers are [represented](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString). E.g., use `"de-DE"` for German and `"en-EN"` for English style. 
-strings | `STRINGS_DEFAULT` | See strings section below. 
+strings | `STRINGS_DEFAULT` | See strings section below.
+discount | `undefined` | Optional: Provide a discount function, e.g. `function(amountVal) { return amountVal / 2 }`
 
 ## Content Types
 
@@ -164,7 +165,7 @@ The texts for the donation encourager boxes can be defined as static strings or,
 const STRINGS_DEFAULT = {
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
-  body: (timeStr, contentsStr, amount, storage) =>
+  body: (timeStr, contentsStr, amountStr, storage) =>
     storage.totalContents
       ? `Du hast bislang <strong>${contentsStr}</strong> auf dekoder gelesen.* Was ${
           storage.totalContents === 1
@@ -172,9 +173,9 @@ const STRINGS_DEFAULT = {
               ? "ist sie"
               : "ist er"
             : "sind sie"
-        } dir wert? Vielleicht <strong>${amount} €</strong>?`
+        } dir wert? Vielleicht <strong>${amountStr} €</strong>?`
       : "",
-  ctaBtn: (timeStr, contentsString, amount) => `Mit ${amount} € danken`,
+  ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} € danken`,
   blurRemover: "Einfach weiterlesen",
   footer: timeStr =>
     `* Lesezeit insgesamt auf dekoder: ${timeStr}. Diese Daten werden nur in deinem Browser gespeichert und nicht auf unsere Server übertragen!`,

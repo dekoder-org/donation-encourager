@@ -137,3 +137,17 @@
   text-align: right;
   // font-style: italic;
 }
+
+.donation-encourager__strike-out {
+  position: relative;
+  padding: 0 .2rem;
+  &::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    border-bottom: 2px solid red;
+    transform: skewY(-40deg);
+  }
+}

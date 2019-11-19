@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useTwingle from "../twingle-widget";
 import useItemSelector from "../item-selector";
-import { TotalVal } from "./contexts";
+import { Amount } from "./contexts";
 import BoxLead from "./box-lead";
 import BoxBody from "./box-body";
 import BoxCtaButton from "./box-cta-button";
@@ -13,11 +13,11 @@ import BlurRemover from "./blur-remover";
 
 const Box = ({ boxProps, blurProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded);
-  const [itemSelector, totalVal] = useItemSelector(boxProps);
-  const [twingleWidget, onCtaBtnClick] = useTwingle(totalVal, isFeedbackShown);
+  const [itemSelector, amount] = useItemSelector(boxProps);
+  const [twingleWidget, onCtaBtnClick] = useTwingle(amount, isFeedbackShown);
   const [blurActive, removeBlur] = blurProps;
   return (
-    <TotalVal.Provider value={totalVal}>
+    <Amount.Provider value={amount}>
       <aside className="donation-encourager">
         {twingleWidget || (
           <>
@@ -45,7 +45,7 @@ const Box = ({ boxProps, blurProps, isFeedbackShown }) => {
           </>
         )}
       </aside>
-    </TotalVal.Provider>
+    </Amount.Provider>
   );
 };
 
