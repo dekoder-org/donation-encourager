@@ -7,9 +7,8 @@ const STRIKEOUT_CLASS = "donation-encourager__strike-out";
 export default function useItemSelector({ items, preselectedItems }) {
   const [selectedItems, setSelectedItems] = useState(preselectedItems);
   const undiscountedVal = sumUp(selectedItems);
-  const { discount, locale } = useContext(Settings);
-  const discountedVal = useDiscount(discount, undiscountedVal, selectedItems);
-  const amount = useAmountObject(undiscountedVal, discountedVal, locale);
+  const discountedVal = useDiscount(undiscountedVal, selectedItems);
+  const amount = useAmountObject(undiscountedVal, discountedVal);
   const itemSelector = (
     <ItemSelector
       items={items}
@@ -24,13 +23,16 @@ function sumUp(items) {
   return items.reduce((acc, curr) => acc + curr.value, 0);
 }
 
-function useDiscount(discount, undiscountedVal, selectedItems) {
+function useDiscount(undiscountedVal, selectedItems) {
+  const { discount } = useContext(Settings);
   return typeof discount === "function"
     ? discount(undiscountedVal, selectedItems)
     : undiscountedVal;
 }
 
-function useAmountObject(undiscountedVal, discountedVal, locale) {
+function useAmountObject(undiscountedVal, discountedVal) {
+  const { locale, strings } = useContext(Settings);
+  const { currency } = strings;
   const undiscountedRounded = Math.round(undiscountedVal);
   const discountedRounded = Math.round(discountedVal);
   return useMemo(
@@ -38,12 +40,15 @@ function useAmountObject(undiscountedVal, discountedVal, locale) {
       val: discountedRounded,
       str:
         undiscountedRounded !== discountedRounded
-          ? `<span class="${STRIKEOUT_CLASS}">${moneyStr(
-              undiscountedRounded
-            )}</span> ${moneyStr(discountedRounded)}`
-          : moneyStr(undiscountedRounded, locale)
+          ? `<span class="${STRIKEOUT_CLASS}">
+                <span class="${STRIKEOUT_CLASS}-stroke"></span>
+                <span class="${STRIKEOUT_CLASS}-text">
+                  ${moneyStr(undiscountedRounded)} ${currency}
+                </span>
+              </span> ${moneyStr(discountedRounded)} ${currency}`
+          : `${moneyStr(undiscountedRounded, locale)} ${currency}`
     }),
-    [undiscountedRounded, discountedRounded, locale]
+    [undiscountedRounded, discountedRounded, locale, currency]
   );
 }
 

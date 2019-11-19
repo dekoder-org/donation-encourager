@@ -163,6 +163,7 @@ The texts for the donation encourager boxes can be defined as static strings or,
 
 ```js
 const STRINGS_DEFAULT = {
+  currency: "€",
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amountStr, storage) =>
@@ -173,9 +174,9 @@ const STRINGS_DEFAULT = {
               ? "ist sie"
               : "ist er"
             : "sind sie"
-        } dir wert? Vielleicht <strong>${amountStr} €</strong>?`
+        } dir wert? Vielleicht <strong>${amountStr}</strong>?`
       : "",
-  ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} € danken`,
+  ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} danken`,
   blurRemover: "Einfach weiterlesen",
   footer: timeStr =>
     `* Lesezeit insgesamt auf dekoder: ${timeStr}. Diese Daten werden nur in deinem Browser gespeichert und nicht auf unsere Server übertragen!`,

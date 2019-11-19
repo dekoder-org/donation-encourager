@@ -140,14 +140,18 @@
 
 .donation-encourager__strike-out {
   position: relative;
-  padding: 0 .2rem;
-  &::after {
+  margin: 0 .3rem;
+  .donation-encourager__strike-out-text {
+    opacity: 0.8;
+  }
+  .donation-encourager__strike-out-stroke {
     content: '';
-    width: 100%;
+    width: calc(100%);
     position: absolute;
-    right: 0;
+    left: -.1rem;
     top: 50%;
     border-bottom: 2px solid red;
-    transform: skewY(-40deg);
+    transform: skewY(-25deg);
+    z-index: 2;
   }
 }
