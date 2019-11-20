@@ -1,31 +1,33 @@
 @import "../constants.scss";
 
-.donation-encourager__blur-content {
-  transition: filter $speed $ease;
-  &.blur-active {
-    filter: blur(4px);
-    opacity: .3;
-    pointer-events: none;
+@media screen {
+  .donation-encourager__blur-content {
+    transition: filter $speed $ease;
+    &.blur-active {
+      filter: blur(4px);
+      opacity: .3;
+      pointer-events: none;
+    }
   }
-}
 
-.donation-encourager__gradient-content {
-  position: relative;
-  &:after {
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 30%, white 100%);
-    content: "";
-    display: block;
-    left: calc(-50vw + 50%);
-    height: 100%;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    transition: opacity $speed $ease;
-    width: 100vw;
-  }
-  &.gradient-active {
+  .donation-encourager__gradient-content {
+    position: relative;
     &:after {
-      opacity: 1;
+      background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 30%, white 100%);
+      content: "";
+      display: block;
+      left: calc(-50vw + 50%);
+      height: 100%;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: opacity $speed $ease;
+      width: 100vw;
+    }
+    &.gradient-active {
+      &:after {
+        opacity: 1;
+      }
     }
   }
 }
