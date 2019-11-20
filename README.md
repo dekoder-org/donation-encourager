@@ -44,7 +44,7 @@ You can control the app with actions, which are triggered by the above defined `
 donEnc(actionType, actionData);
 ```
 
-(Implementation: site-actions.js)
+(Implementation: [site-actions.js](https://github.com/dekoder-org/donation-encourager/blob/master/src/components/app/hooks/site-actions.js))
 
 actionType | actionData | description
 --- | ---- | ---
@@ -62,7 +62,7 @@ actionType | actionData | description
 
 The `settings` object has the following properties: 
 
-(Implementation: settings-default.js)
+(Implementation: [settings-default.js](https://github.com/dekoder-org/donation-encourager/blob/master/src/components/app/settings-default.js))
 
 property | default value | description
 --- | --- | ---
