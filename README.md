@@ -48,23 +48,23 @@ donEnc(actionType, actionData);
 
 actionType | actionData | description
 --- | ---- | ---
-'init' | `settings` | Initialize the app with your custom `settings`. See more on the `settings` options in the Settings section below.
-'pageview' | `contentType` (optional) | Send a pageview. You can optionally pass a `contentType`, if you want to track different content types. Make sure you specify all your content types in the settings (see details below).
-'reset' | – | Resets all tracker data to zero (reading time and read contents).
-'donation' | – | Triggers the donation feedback message, after which the tracker will be reset.
-'disable' | – | Disable content and time tracking, the donation listener (which listens to `"donationFinished"` messages from your Twingle widget and triggers the donation feedback, see above) and remove all donation encourager boxes.
-'enable' | – | Enable content and time tracking, donation listener, and donation encourager boxes.
-'updateSettings' | `settings` | Update one or more fields of the current `settings` object.
-'setReadContents' | `{ [contentType]: [INT] }` | Makes testing of different `intrusivenessLevles` (see Settings section below) easier ;-)  
-'setItemPresets' | presetName | Try `"emoji1"`, `"emoji2"` or `"black"`.
+`"init"` | `settings` | Initialize the app with your custom `settings`. See more on the `settings` options in the Settings section below.
+`"pageview"` | `contentType` (optional) | Send a pageview. You can optionally pass a `contentType`, if you want to track different content types. Make sure you specify all your content types in the settings (see details below).
+`"reset"` | – | Resets all tracker data to zero (reading time and read contents).
+`"donation"` | – | Triggers the donation feedback message, after which the tracker will be reset.
+`"disable"` | – | Disable content and time tracking, the donation listener (which listens to `"donationFinished"` messages from your Twingle widget and triggers the donation feedback, see above) and remove all donation encourager boxes.
+`"enable"` | – | Enable content and time tracking, donation listener, and donation encourager boxes.
+`"updateSettings"` | `settings` | Update one or more property of the current `settings` object.
+`"setReadContents"` | `{ [contentType]: [INT] }` | Makes testing of different `intrusivenessLevles` (see Settings section below) easier ;-)  
+`"setItemPresets"` | presetName | Try `"emoji1"` or `"emoji2"`.
 
 ## Settings
 
-The `settings` object contains the following fields: 
+The `settings` object has the following properties: 
 
 (Implementation: settings-default.js)
 
-field | default value | description
+property | default value | description
 --- | --- | ---
 targetSelector | `".entry-content"` | CSS-selector that indicates where to place the donation encourager boxes (usually the articles text body).
 excludeSelector | `"hr, h6, aside"` | Don't take those elements into account for the box positioner.
@@ -130,16 +130,16 @@ const INTRUSIVENESS_LEVELS_DEFAULT = [
     ],
     itemSelectorSettings: {
       items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[3]]
+      preselectedItems: [ITEMS_DEFAULT[2]]
     },
     blurEnabled: true
   }
 ];
 ```
 
-Each level is defined by an object with three fields: 
+Each level is defined by an object with the following three properties: 
 
-field | example | description 
+property | example | description 
 --- | --- | ---
 contentThreshold | `5` | Defines the threshold of read contents for this level settings to become active.
 boxSettings | `[{ position: "bottom", expanded: true }]` | An array of box objects. Each box object must indicate the boxes position within the article's body text (it can one of `"top"`, `"middle"`, or `"bottom"` or a number indicating the exact block number; `0` means the first block) and whether the box should be initially expanded or not.
@@ -154,7 +154,7 @@ const ITEMS_DEFAULT = [
   { value: 2, icon: "🍭" },
   { value: 4, icon: "🍺️" },
   { value: 6, icon: "🌹" },
-  { value: 15, icon: "🎫" },
+  { value: 16, icon: "🎫" },
 ];
 ```
 ## Strings

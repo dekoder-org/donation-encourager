@@ -92,7 +92,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
     ],
     itemSelectorSettings: {
       items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[3]]
+      preselectedItems: [ITEMS_DEFAULT[2]]
     },
     blurEnabled: true
   }
@@ -146,7 +146,7 @@ export const SETTINGS_DEFAULT = {
   domObserverEnabled: false,
   locale: "de-DE",
   strings: STRINGS_DEFAULT,
-  discount: undefined // amountVal => amountVal / 2,
+  discount: undefined
 };
 
 export const SETTINGS_DISABLE_ALL = {
