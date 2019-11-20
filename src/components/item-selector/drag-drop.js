@@ -27,6 +27,7 @@ export const Draggable = ({ children, dragData, onDragStart, onDragEnd }) => {
 
 export const DropTarget = ({ children, onDrop, onDropLeft, onDropRight }) => {
   const handleDrop = e => {
+    e.preventDefault();
     e.stopPropagation();
     const data = JSON.parse(e.dataTransfer.getData("text/plain"));
     const side = getDropSide(e);
