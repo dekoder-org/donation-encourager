@@ -165,6 +165,8 @@ The texts for the donation encourager boxes can be defined as static strings or,
 const STRINGS_DEFAULT = {
   currency: amount => `${amount} €`,
   and: "und",
+  hours: { singular: "Stunde", plural: "Stunden" },
+  minutes: { singular: "Minute", plural: "Minuten" },
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amountStr, storage) =>
