@@ -6,14 +6,14 @@ const STORAGE_DEFAULT = {
 };
 
 // provides localStorage synced state w/ custom getters & setters
-export default function useStorage({ storageKey, contentTypes, locale }) {
+export default function useStorage({ storageKey, contentTypes, strings }) {
   const [stateData, setStateData] = useState(
     storageData(storageKey) || STORAGE_DEFAULT
   );
   useStateToStorageSync(stateData, storageKey);
   useStorageToStateSync(setStateData, storageKey);
   const stateSetterObj = useMemo(() => stateSetters(setStateData), []);
-  const stateGetterObj = stateGetters(stateData, contentTypes, locale);
+  const stateGetterObj = stateGetters(stateData, contentTypes, strings);
   return {
     ...stateData,
     ...stateSetterObj,
@@ -81,7 +81,7 @@ function stateSetters(setStateData) {
   };
 }
 
-function stateGetters(stateData, contentTypes, locale) {
+function stateGetters(stateData, contentTypes, strings) {
   return {
     get totalContents() {
       return Object.values(stateData.readContents || {}).reduce(
@@ -90,10 +90,10 @@ function stateGetters(stateData, contentTypes, locale) {
       );
     },
     get readContentsString() {
-      return getContentList(contentTypes, stateData.readContents, locale);
+      return getContentList(contentTypes, stateData.readContents, strings);
     },
     get readingTimeString() {
-      return getTimeString(stateData.readingTime, locale);
+      return getTimeString(stateData.readingTime, strings);
     }
   };
 }
@@ -106,7 +106,7 @@ function storageData(storageKey) {
   return JSON.parse(window.localStorage.getItem(storageKey));
 }
 
-function getContentList(contentTypes, readContents = {}) {
+function getContentList(contentTypes, readContents = {}, strings) {
   return Object.keys(contentTypes)
     .filter(type => Object.prototype.hasOwnProperty.call(readContents, type))
     .filter(type => readContents[type])
@@ -115,37 +115,44 @@ function getContentList(contentTypes, readContents = {}) {
       const isLast = i === arr.length - 1;
       const name = contentTypes[type];
       return `${val} ${val === 1 ? name.singular : name.plural}${
-        !isLast ? " und " : ""
+        !isLast ? ` ${strings.and} ` : ""
       }`;
     })
     .join("");
 }
 
-function getTimeString(totalSeconds, locale) {
-  const lang = locale.split("-")[0];
+function getTimeString(totalSeconds, strings) {
   // const seconds = totalSeconds % 60;
   const minutes = Math.floor((totalSeconds / 60) % 60);
   const hours = Math.floor(totalSeconds / 3600);
-  return `${hoursStr(hours, lang)}
-    ${hours && minutes ? " und " : ""}
-    ${minutesStr(minutes, !!hours, lang)}`;
+  return `${hoursStr(hours, strings)}
+    ${hours && minutes ? ` ${strings.and} ` : ""}
+    ${minutesStr(minutes, !!hours, strings)}`;
 
   // ${minutes && seconds ? " und " : ""}
   // ${secondsStr(seconds, lang)}
 
-  function hoursStr(hours) {
-    return hours ? (hours === 1 ? "1 Stunde" : `${hours} Stunden`) : "";
+  function hoursStr(hours, strings) {
+    return hours
+      ? hours === 1
+        ? `1 ${strings.hours.singular}`
+        : `${hours} ${strings.hours.plural}`
+      : "";
   }
-  function minutesStr(minutes, hasHours) {
+  function minutesStr(minutes, hasHours, strings) {
     return minutes
       ? minutes === 1
-        ? "1 Minute"
-        : `${minutes} Minuten`
+        ? `1 ${strings.minutes.singular}`
+        : `${minutes} ${strings.minutes.plural}`
       : hasHours
       ? ""
-      : "0 Minuten";
+      : `0 ${strings.minutes.singular}`;
   }
-  /* function secondsStr(seconds) {
-    return seconds ? (seconds === 1 ? "1 Sekunde" : `${seconds} Sekunden`) : "";
+  /* function secondsStr(seconds, strings) {
+    return seconds
+      ? (seconds === 1
+        ? `1 ${strings.seconds.singular}`
+        : `${seconds} ${strings.seconds.plural}`}
+      : "";
   }*/
 }

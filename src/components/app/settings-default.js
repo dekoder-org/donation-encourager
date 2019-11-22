@@ -107,6 +107,8 @@ const CONTENT_TYPES_DEFAULT = {
 const STRINGS_DEFAULT = {
   currency: amount => `${amount} €`,
   and: "und",
+  hours: { singular: "Stunde", plural: "Stunden" },
+  minutes: { singular: "Minute", plural: "Minuten" },
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amountStr, storage) =>
