@@ -105,7 +105,8 @@ const CONTENT_TYPES_DEFAULT = {
 };
 
 const STRINGS_DEFAULT = {
-  currency: "€",
+  currency: amount => `${amount} €`,
+  and: "und",
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amountStr, storage) =>
@@ -127,6 +128,7 @@ const STRINGS_DEFAULT = {
   feedbackBody:
     "Gerade für uns als gemeinnütziges Projekt ist das Engagement unserer Leserinnen und Leser besonders wertvoll und wir freuen uns, dass du uns unterstützt – vielen Dank! Wir setzen nun deinen Zähler zurück ...",
   feedbackBtn: "OK",
+  backBtn: "Zurück",
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`
 };
 

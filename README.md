@@ -164,6 +164,7 @@ The texts for the donation encourager boxes can be defined as static strings or,
 ```js
 const STRINGS_DEFAULT = {
   currency: "€",
+  and: "und",
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amountStr, storage) =>
@@ -185,6 +186,7 @@ const STRINGS_DEFAULT = {
   feedbackBody:
     "Gerade für uns als gemeinnütziges Projekt ist das Engagement unserer Leserinnen und Leser besonders wertvoll und wir freuen uns, dass du uns unterstützt – vielen Dank! Wir setzen nun deinen Zähler zurück ...",
   feedbackBtn: "OK",
+  backBtn: "Zurück",
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`
 };
 ```

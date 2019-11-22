@@ -43,17 +43,20 @@ function useAmountObject(undiscountedVal, discountedVal) {
           ? `<span class="${STRIKEOUT_CLASS}">
                 <span class="${STRIKEOUT_CLASS}-stroke"></span>
                 <span class="${STRIKEOUT_CLASS}-text">
-                  ${moneyStr(undiscountedRounded)} ${currency}
+                  ${moneyStr(undiscountedRounded, locale, currency)}
                 </span>
-              </span> ${moneyStr(discountedRounded)} ${currency}`
-          : `${moneyStr(undiscountedRounded, locale)} ${currency}`
+              </span> ${moneyStr(discountedRounded, locale, currency)}`
+          : `${moneyStr(undiscountedRounded, locale, currency)}`
     }),
     [undiscountedRounded, discountedRounded, locale, currency]
   );
 }
 
-export function moneyStr(amount, locale) {
-  return amount.toLocaleString(locale, {
+export function moneyStr(amount, locale, currency) {
+  const numberStr = amount.toLocaleString(locale, {
     minimumFractionDigits: amount % 1 ? 2 : 0
   });
+  return typeof currency === "function"
+    ? currency(numberStr)
+    : `${numberStr} ${currency}`;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function TwingleWidget({ amount, exit, twingleWidgetUrl }) {
+export default function TwingleWidget({ amount, exit, widgetUrl, backStr }) {
   const widgetId = "_rl60hvpcu"; // random string
   useTwingleResizeListener();
   return (
@@ -8,14 +8,14 @@ export default function TwingleWidget({ amount, exit, twingleWidgetUrl }) {
       <p className="donation-encourager__meta">
         <small>
           <button className="donation-encourager__reset-btn" onClick={exit}>
-            Zurück
+            {backStr}
           </button>
         </small>
       </p>
       <iframe
         scrolling="no"
         id={`twingleframe-${widgetId}`}
-        src={`${twingleWidgetUrl}/${widgetId}?tw_amount=${amount}`}
+        src={`${widgetUrl}/${widgetId}?tw_amount=${amount}`}
         style={{
           width: "100%",
           border: "none",
