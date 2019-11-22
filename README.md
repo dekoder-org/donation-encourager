@@ -163,7 +163,7 @@ The texts for the donation encourager boxes can be defined as static strings or,
 
 ```js
 const STRINGS_DEFAULT = {
-  currency: "€",
+  currency: amount => `${amount} €`,
   and: "und",
   lead: totalContents =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
