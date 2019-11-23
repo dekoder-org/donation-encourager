@@ -16,9 +16,11 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [itemSelector, amount] = useItemSelector(boxProps);
   const [twingleWidget, onCtaBtnClick] = useTwingle(amount, isFeedbackShown);
   const [contentLockActive, unlockContent] = contentLockProps;
+  const stateClasses = contentLockActive ? " content-lock-active" : "";
   return (
     <Amount.Provider value={amount}>
-      <aside className="donation-encourager">
+      <aside className={`donation-encourager${stateClasses}`}
+      >
         {twingleWidget || (
           <>
             <BoxLead

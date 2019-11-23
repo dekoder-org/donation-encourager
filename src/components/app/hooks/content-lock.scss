@@ -3,33 +3,11 @@
 @media screen {
   .donation-encourager__lock-content {
     transition: filter $speed $ease;
-    &.lock-active {
+    &.content-lock-active {
       filter: blur(4px);
       opacity: .3;
       pointer-events: none;
       backface-visibility: hidden;
-    }
-  }
-
-  .donation-encourager__gradient-content {
-    position: relative;
-    &:after {
-      background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 30%, white 100%);
-      content: "";
-      display: block;
-      left: calc(-50vw + 50%);
-      height: 100%;
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      transition: opacity $speed $ease;
-      width: 100vw;
-      pointer-events: none;
-    }
-    &.gradient-active {
-      &:after {
-        opacity: 1;
-      }
     }
   }
 }

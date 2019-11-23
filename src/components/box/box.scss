@@ -18,6 +18,29 @@
   @media print {
     display: none !important;
   }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absoulte;
+    left: calc(-50vw + 50%);
+    top: -$content-lock--gradient-height;
+    height: $content-lock--gradient-height;
+    background-image: linear-gradient(
+      to bottom, 
+      rgba(255, 255, 255, 0), 
+      rgba(255,255,255,0) 20%, 
+      white 100%
+    );
+    opacity: 0;
+    position: absolute;
+    transition: opacity $speed $ease;
+    width: 100vw;
+    pointer-events: none;
+  }
+  &.content-lock-active::before {
+    opacity: 1;
+  }
 }
 
 .donation-encourager__collapse-me {
