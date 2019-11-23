@@ -12,7 +12,7 @@ import useDonationListener from "./hooks/donation-listener";
 import useIntrusiveness from "./hooks/intrusiveness";
 import useTargets from "./hooks/targets";
 import useBoxPositioner from "./hooks/box-positioner";
-import useBlur from "./hooks/blur";
+import useContentLock from "./hooks/content-lock";
 
 import Box from "../box";
 import DonationFeedback from "../donation-feedback";
@@ -24,15 +24,15 @@ function App({ currentContent }) {
   const intrusivenessProps = useIntrusiveness();
   const targets = useTargets();
   const boxes = useBoxPositioner(intrusivenessProps, targets);
-  const blurProps = useBlur(intrusivenessProps, targets);
-  const [blurActive] = blurProps;
+  const contentLockProps = useContentLock(intrusivenessProps, targets);
+  const [contentLockActive] = contentLockProps;
   return (
     <>
       {boxes
-        .filter(boxProps => (blurActive ? boxProps.isFirst : true))
+        .filter(boxProps => (contentLockActive ? boxProps.isFirst : true))
         .map((boxProps, i) => (
           <Portal node={boxProps.wrapperEl} key={i}>
-            <Box {...{ boxProps, blurProps, isFeedbackShown }} />
+            <Box {...{ boxProps, contentLockProps, isFeedbackShown }} />
           </Portal>
         ))}
       {isFeedbackShown && <DonationFeedback hideFeedback={hideFeedback} />}

@@ -9,13 +9,13 @@ import BoxFooter from "./box-footer";
 import BoxCredit from "./box-credit";
 import "./box.scss";
 import "./box-dekoder.scss";
-import BlurRemover from "./blur-remover";
+import UnlockButton from "./unlock-button";
 
-const Box = ({ boxProps, blurProps, isFeedbackShown }) => {
+const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded);
   const [itemSelector, amount] = useItemSelector(boxProps);
   const [twingleWidget, onCtaBtnClick] = useTwingle(amount, isFeedbackShown);
-  const [blurActive, removeBlur] = blurProps;
+  const [contentLockActive, unlockContent] = contentLockProps;
   return (
     <Amount.Provider value={amount}>
       <aside className="donation-encourager">
@@ -30,10 +30,10 @@ const Box = ({ boxProps, blurProps, isFeedbackShown }) => {
               {itemSelector}
               <p className="donation-encourager__cta">
                 <BoxCtaButton onClick={onCtaBtnClick} />
-                {blurActive && (
-                  <BlurRemover
+                {contentLockActive && (
+                  <UnlockButton
                     onClick={() => {
-                      removeBlur();
+                      unlockContent();
                       setIsExpanded(false);
                     }}
                   />

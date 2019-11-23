@@ -1,12 +1,13 @@
 @import "../constants.scss";
 
 @media screen {
-  .donation-encourager__blur-content {
+  .donation-encourager__lock-content {
     transition: filter $speed $ease;
-    &.blur-active {
+    &.lock-active {
       filter: blur(4px);
       opacity: .3;
       pointer-events: none;
+      backface-visibility: hidden;
     }
   }
 

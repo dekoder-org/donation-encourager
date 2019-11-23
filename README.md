@@ -132,18 +132,19 @@ const INTRUSIVENESS_LEVELS_DEFAULT = [
       items: ITEMS_DEFAULT,
       preselectedItems: [ITEMS_DEFAULT[2]]
     },
-    blurEnabled: true
+    contentLockEnabled: true
   }
 ];
 ```
 
-Each level is defined by an object with the following three properties: 
+Each level is defined by an object with the following properties: 
 
 property | example | description 
 --- | --- | ---
 contentThreshold | `5` | Defines the threshold of read contents for this level settings to become active.
 boxSettings | `[{ position: "bottom", expanded: true }]` | An array of box objects. Each box object must indicate the boxes position within the article's body text (it can one of `"top"`, `"middle"`, or `"bottom"` or a number indicating the exact block number; `0` means the first block) and whether the box should be initially expanded or not.
 itemSelectorSettings | `{ items: ITEMS_DEFAULT, preselectedItems: [ITEMS_DEFAULT[1]] }` | Provide an array of item objects for the ItemSelector (see section below) and an array of one or more preselected items.
+contentLockEnabled | `true`| If enabled, all content blocks after the first donation encourager box will get locked. The user has to click the unlock button first to continue reading.
 
 ## ItemSelector items
 
@@ -180,7 +181,7 @@ const STRINGS_DEFAULT = {
         } dir wert? Vielleicht <strong>${amountStr}</strong>?`
       : "",
   ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} danken`,
-  blurRemover: "Einfach weiterlesen",
+  unlockBtn: "Einfach weiterlesen",
   footer: timeStr =>
     `* Lesezeit insgesamt auf dekoder: ${timeStr}. Diese Daten werden nur in deinem Browser gespeichert und nicht auf unsere Server übertragen!`,
   resetBtn: "Zähler zurücksetzen",

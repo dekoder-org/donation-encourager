@@ -94,7 +94,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
       items: ITEMS_DEFAULT,
       preselectedItems: [ITEMS_DEFAULT[2]]
     },
-    blurEnabled: true
+    contentLockEnabled: true
   }
 ];
 
@@ -122,7 +122,7 @@ const STRINGS_DEFAULT = {
         } dir wert? Vielleicht <strong>${amountStr}</strong>?`
       : "",
   ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} danken`,
-  blurRemover: "Einfach weiterlesen",
+  unlockBtn: "Einfach weiterlesen",
   footer: timeStr =>
     `* Lesezeit insgesamt auf dekoder: ${timeStr}. Diese Daten werden nur in deinem Browser gespeichert und nicht auf unsere Server übertragen!`,
   resetBtn: "Zähler zurücksetzen",

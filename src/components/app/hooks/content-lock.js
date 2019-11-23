@@ -1,33 +1,31 @@
 import { useContext, useState, useEffect, useMemo } from "react";
 import { Settings } from "../contexts";
 import { getChildArray } from "./box-positioner";
-import "./blur.scss";
+import "./content-lock.scss";
 
-const BLUR_CLASS = "donation-encourager__blur-content";
-const BLUR_CLASS_ACTIVE = "blur-active";
+const BLUR_CLASS = "donation-encourager__lock-content";
+const BLUR_CLASS_ACTIVE = "lock-active";
 const GRADIENT_CLASS = "donation-encourager__gradient-content";
 const GRADIENT_CLASS_ACTIVE = "gradient-active";
 
 // gives gradient to last content block before 1st donation encourager box
 // + blur for all following content blocks
-export default function useBlur({ blurEnabled }, targets) {
+export default function useContentLock({ contentLockEnabled }, targets) {
   const { boxesEnabled, wrapperClass } = useContext(Settings);
-  const [blurActive, removeBlur] = useBlurState(blurEnabled, boxesEnabled);
+  const isInitiallyActive = contentLockEnabled && boxesEnabled;
+  const [contentLockActive, setContentLockActive] = useState(isInitiallyActive);
+  useEffect(() => setContentLockActive(isInitiallyActive), [isInitiallyActive]);
+  const unlockContent = () => setContentLockActive(false);
+
   const blurEls = useChildReducer(targets, wrapperClass, blurElGetter);
   useClass(blurEls, true, BLUR_CLASS);
-  useClass(blurEls, blurActive, BLUR_CLASS_ACTIVE);
+  useClass(blurEls, contentLockActive, BLUR_CLASS_ACTIVE);
+
   const gradientEls = useChildReducer(targets, wrapperClass, gradientElGetter);
   useClass(gradientEls, true, GRADIENT_CLASS);
-  useClass(gradientEls, blurActive, GRADIENT_CLASS_ACTIVE);
-  return [blurActive, removeBlur];
-}
+  useClass(gradientEls, contentLockActive, GRADIENT_CLASS_ACTIVE);
 
-function useBlurState(blurEnabled, boxesEnabled) {
-  const isInitiallyActive = blurEnabled && boxesEnabled;
-  const [blurActive, setBlurActive] = useState(isInitiallyActive);
-  useEffect(() => setBlurActive(isInitiallyActive), [isInitiallyActive]);
-  const removeBlur = () => setBlurActive(false);
-  return [blurActive, removeBlur];
+  return [contentLockActive, unlockContent];
 }
 
 function useClass(elements, active, className) {

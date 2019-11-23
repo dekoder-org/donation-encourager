@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { Settings } from "../app/contexts";
 
-const BlurRemover = ({ onClick }) => {
+const UnlockButton = ({ onClick }) => {
   const { strings } = useContext(Settings);
   return (
     <a
-      className="donation-encourager__button donation-encourager__blur-remover"
+      className="donation-encourager__button donation-encourager__unlock-button"
       onClick={onClick}
     >
-      {strings.blurRemover}
+      {strings.unlockBtn}
     </a>
   );
 };
 
-export default BlurRemover;
+export default UnlockButton;
