@@ -150,7 +150,8 @@ export const SETTINGS_DEFAULT = {
   domObserverEnabled: false,
   locale: "de-DE",
   strings: STRINGS_DEFAULT,
-  discount: undefined
+  discount: undefined,
+  hooks: {}
 };
 
 export const SETTINGS_DISABLE_ALL = {
@@ -184,6 +185,10 @@ export function mergeInNewSettings(
     strings: {
       ...oldSettings.strings,
       ...(newSettings.strings || {})
+    },
+    hooks: {
+      ...oldSettings.hooks,
+      ...(newSettings.hooks || {})
     }
   };
 }
