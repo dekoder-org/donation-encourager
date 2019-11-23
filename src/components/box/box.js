@@ -19,7 +19,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const stateClasses = contentLockActive ? " content-lock-active" : "";
   return (
     <Amount.Provider value={amount}>
-      <span className={`donation-encourager__gradient${stateClasses}`} />
+      <div className={`donation-encourager__gradient${stateClasses}`} />
       <aside className={`donation-encourager${stateClasses}`}>
         {twingleWidget || (
           <>

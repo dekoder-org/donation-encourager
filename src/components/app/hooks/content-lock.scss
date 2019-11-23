@@ -12,6 +12,7 @@
   }
 
   .donation-encourager__gradient {
+    display: block;
     position: relative;
     &::before {
       content: "";
