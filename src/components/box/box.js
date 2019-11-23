@@ -7,9 +7,9 @@ import BoxBody from "./box-body";
 import BoxCtaButton from "./box-cta-button";
 import BoxFooter from "./box-footer";
 import BoxCredit from "./box-credit";
+import UnlockButton from "./unlock-button";
 import "./box.scss";
 import "./box-dekoder.scss";
-import UnlockButton from "./unlock-button";
 
 const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded);
@@ -19,8 +19,8 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const stateClasses = contentLockActive ? " content-lock-active" : "";
   return (
     <Amount.Provider value={amount}>
-      <aside className={`donation-encourager${stateClasses}`}
-      >
+      <span className={`donation-encourager__gradient${stateClasses}`} />
+      <aside className={`donation-encourager${stateClasses}`}>
         {twingleWidget || (
           <>
             <BoxLead
