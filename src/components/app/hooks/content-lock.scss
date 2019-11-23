@@ -24,6 +24,7 @@
       top: 0;
       transition: opacity $speed $ease;
       width: 100vw;
+      pointer-events: none;
     }
     &.gradient-active {
       &:after {
