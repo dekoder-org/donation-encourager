@@ -151,7 +151,12 @@ export const SETTINGS_DEFAULT = {
   locale: "de-DE",
   strings: STRINGS_DEFAULT,
   discount: undefined,
-  hooks: {}
+  hooks: {
+    onResetBtnClick: undefined,
+    onCtaBtnClick: undefined,
+    onUnlockBtnClick: undefined,
+    onBackBtnClick: undefined
+  }
 };
 
 export const SETTINGS_DISABLE_ALL = {

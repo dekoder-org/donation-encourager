@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Storage } from "../app/contexts";
+import { Storage, Settings } from "../app/contexts";
 import { Amount } from "./contexts";
 
 // if input is a string, just return the string. if it is a function, pass some state variables into it ...
@@ -17,4 +17,14 @@ export function useStrOrStateFunc(input) {
 
 export function strOrFunc(input, argumentArr = []) {
   return typeof input === "function" ? input(...argumentArr) : input;
+}
+
+export function useHookedFunc(hookName, defaultFunc, extraArgs) {
+  const { hooks } = useContext(Settings);
+  return typeof hooks[hookName] === "function"
+    ? ev => {
+        const customHookReturn = hooks[hookName](defaultFunc, extraArgs);
+        if (customHookReturn !== false) defaultFunc(ev);
+      }
+    : defaultFunc;
 }

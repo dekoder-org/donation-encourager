@@ -81,7 +81,7 @@ domObserverEnabled | `false` | Experimental feature: Enable if you want to engag
 locale | `"de-DE"` | Defines, among others, how numbers are [represented](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString). E.g., use `"de-DE"` for German and `"en-EN"` for English style. 
 strings | `STRINGS_DEFAULT` | See strings section below.
 discount | `undefined` | Optional: Provide a discount function, e.g. `function(amountVal) { return amountVal / 2 }`
-hooks | `{}` | Coming soon ...
+hooks | `{ onResetBtnClick: undefined, onCtaBtnClick: undefined, onUnlockBtnClick: undefined, onBackBtnClick: undefined }` | Define hook functions to add some extra behavior. If a hook function returns `false` the default behavior will be prevented.
 
 ## Content Types
 

@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
+import { useHookedFunc } from "../box/helpers";
 
 export default function TwingleWidget({ amount, exit, widgetUrl, backStr }) {
   const widgetId = "_rl60hvpcu"; // random string
   useTwingleResizeListener();
+  const onBackBtnClick = useHookedFunc("onBackBtnClick", exit);
   return (
     <div className="donation-encourager__twingle-wrapper">
       <p className="donation-encourager__meta">
         <small>
-          <button className="donation-encourager__reset-btn" onClick={exit}>
+          <button
+            className="donation-encourager__reset-btn"
+            onClick={onBackBtnClick}
+          >
             {backStr}
           </button>
         </small>
