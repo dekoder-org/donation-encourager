@@ -35,8 +35,8 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
                 {contentLockActive && (
                   <UnlockButton
                     onClick={() => {
-                      unlockContent();
                       setIsExpanded(false);
+                      unlockContent();
                     }}
                   />
                 )}
