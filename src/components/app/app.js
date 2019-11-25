@@ -30,8 +30,8 @@ function App({ currentContent }) {
     <>
       {boxes
         .filter(boxProps => (contentLockActive ? boxProps.isFirst : true))
-        .map((boxProps, i) => (
-          <Portal node={boxProps.wrapperEl} key={i}>
+        .map(boxProps => (
+          <Portal node={boxProps.wrapperEl} key={boxProps.key}>
             <Box {...{ boxProps, contentLockProps, isFeedbackShown }} />
           </Portal>
         ))}
