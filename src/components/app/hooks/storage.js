@@ -77,7 +77,13 @@ function stateSetters(setStateData) {
           }
         };
       });
-    }
+    },
+    setMemberValidation: value => {
+      setStateData(currentState => ({
+        ...currentState,
+        memberValidation: value
+      }));
+    },
   };
 }
 

@@ -8,25 +8,28 @@ import {
   itemPresets
 } from "../settings-default";
 
-export default function useActions(setSettings, { reset, setReadContents }) {
+export default function useActions(setSettings, storage) {
+  const { reset, setReadContents, setMemberValidation } = storage;
   const [currentContent, setCurrentContent] = useState({});
   const sendPageView = contentType => {
     setCurrentContent({ ts: ts(), type: contentType || CONTENT_TYPE_DEFAULT });
   };
 
   useEffect(() => {
-    const funcs = { setSettings, sendPageView, reset, setReadContents };
+    const storageFuncs = { reset, setReadContents, setMemberValidation };
+    const funcs = { setSettings, sendPageView, ...storageFuncs };
     const actionHandler = a => handleAction(a, funcs);
     handleExistingActions(actionHandler);
     startActionListener(actionHandler);
     return () => {};
-  }, [setSettings, reset, setReadContents]);
+  }, [setSettings, reset, setReadContents, setMemberValidation]);
 
   return currentContent;
 }
 
 function handleAction(action, funcs) {
-  const { setSettings, sendPageView, reset, setReadContents } = funcs;
+  const { setSettings, sendPageView } = funcs;
+  const { reset, setReadContents, setMemberValidation } = funcs;
   if (!action) return;
   const [actionTypeRaw, actionData] = Array.from(action);
   const actionType = (actionTypeRaw || "").toLowerCase();
@@ -68,6 +71,10 @@ function handleAction(action, funcs) {
             })
           };
     });
+  } else if (actionType === "validatemember") {
+    setMemberValidation(ts());
+  } else if (actionType === "invalidatemember") {
+    setMemberValidation(undefined);
   }
 }
 
@@ -91,6 +98,6 @@ function onChange(object, callback, ignoreValue) {
   });
 }
 
-function ts() {
+export function ts() {
   return new Date().getTime();
 }
