@@ -97,9 +97,12 @@ function getContentList(contentTypes, readContents = {}, strings) {
     .map((type, i, arr) => {
       const val = readContents[type];
       const isLast = i === arr.length - 1;
+      const isSecondLast = i === arr.length - 2;
       const name = contentTypes[type];
       return `${val} ${val === 1 ? name.singular : name.plural}${
-        !isLast ? ` ${strings.and} ` : ""
+        isLast 
+          ? "" 
+          : isSecondLast ? ` ${strings.and} ` : ', '
       }`;
     })
     .join("");

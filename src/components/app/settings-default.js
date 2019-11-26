@@ -98,7 +98,8 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
 const CONTENT_TYPES_DEFAULT = {
   [CONTENT_TYPE_DEFAULT]: { singular: "Inhalt", plural: "Inhalte" },
   article: { singular: "Artikel", plural: "Artikel" },
-  gnose: { singular: "Gnose", plural: "Gnosen" }
+  gnose: { singular: "Gnose", plural: "Gnosen" },
+  special: { singular: "Special-Inhalt", plural: "Special-Inhalte" }
 };
 
 const STRINGS_DEFAULT = {
