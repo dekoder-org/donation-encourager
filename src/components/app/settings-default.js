@@ -67,7 +67,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
     contentThreshold: 0,
     boxSettings: [{ position: "bottom", expanded: true }],
     itemSelectorSettings: {
-      preselectedItemsFilter: (item, i) => i === 0,
+      preselectedItemsFilter: (item, i) => i === 0
     }
   },
   {
@@ -78,7 +78,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
       { position: "bottom", expanded: true }
     ],
     itemSelectorSettings: {
-      preselectedItemsFilter: (item, i) => i === 1,
+      preselectedItemsFilter: (item, i) => i === 1
     }
   },
   {
@@ -89,7 +89,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
       { position: "bottom", expanded: true }
     ],
     itemSelectorSettings: {
-      preselectedItemsFilter: (item, i) => i === 2,
+      preselectedItemsFilter: (item, i) => i === 2
     },
     contentLockEnabled: true
   }
@@ -145,7 +145,7 @@ export const SETTINGS_DEFAULT = {
   },
   wrapperClass: "donation-encourager__wrapper",
   storageKey: "donation-encourager-tracker",
-  crossStorageUrl: "https://www.dekoder.org/d/cross-storage-hub/cross-storage-hub.html",
+  crossStorageUrl: "",
   trackerEnabled: true,
   donationListenerEnabled: true,
   boxesEnabled: true,
@@ -158,7 +158,7 @@ export const SETTINGS_DEFAULT = {
     onCtaBtnClick: undefined,
     onUnlockBtnClick: undefined,
     onBackBtnClick: undefined
-  },
+  }
 };
 
 export const SETTINGS_DISABLE_ALL = {

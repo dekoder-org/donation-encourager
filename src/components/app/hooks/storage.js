@@ -1,5 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
-import { CrossStorageClient } from "cross-storage";
+import { useState, useMemo } from "react";
+import useLocalStorageSync, { localStorageData } from "./storage-local";
+import useCrossStorageSync from "./storage-cross";
 
 const STORAGE_DEFAULT = {
   readingTime: 0, // in seconds
@@ -9,15 +10,14 @@ const STORAGE_DEFAULT = {
 // provides localStorage synced state w/ custom getters & setters
 export default function useStorage(settings) {
   const { storageKey, contentTypes, strings, crossStorageUrl } = settings;
-  const [crossStorage, connected] = useCrossStorage(crossStorageUrl, storageKey);
-  window.crossStorage = crossStorage;
-  const [stateData, setStateData] = useState(
-    storageData(storageKey, crossStorage) || STORAGE_DEFAULT
-  );
-  const crossStorageInSync = useCrossStorageSync(setStateData, connected, crossStorage, storageKey)
-  
-  useStateToStorageSync(stateData, storageKey, crossStorage, crossStorageInSync);
-  useStorageToStateSync(setStateData, storageKey, crossStorage);
+  const initialState = crossStorageUrl
+    ? STORAGE_DEFAULT
+    : localStorageData(storageKey) || STORAGE_DEFAULT;
+  const [stateData, setStateData] = useState(initialState);
+
+  useLocalStorageSync(stateData, setStateData, settings);
+  useCrossStorageSync(stateData, setStateData, settings);
+
   const stateSetterObj = useMemo(() => stateSetters(setStateData), []);
   const stateGetterObj = stateGetters(stateData, contentTypes, strings);
   return {
@@ -25,67 +25,6 @@ export default function useStorage(settings) {
     ...stateSetterObj,
     ...stateGetterObj
   };
-}
-
-function useCrossStorage(crossStorageUrl) {
-  const [connected, setConnected] = useState(false);
-  const crossStorage = useMemo(() => {
-    return typeof crossStorageUrl === "string" && crossStorageUrl
-      ? new CrossStorageClient(crossStorageUrl)
-      : null
-  }, [crossStorageUrl]);
-  useEffect(() => {
-    if (!crossStorage) return;
-    crossStorage.onConnect()
-      .then(() => setConnected(true))
-    return () => crossStorage.close();
-  }, [crossStorage]);
-  return [crossStorage, connected];
-}
-
-function useCrossStorageSync(setStateData, connected, crossStorage, storageKey) {
-  const [crossStorageInSync, setCrossStorageInSync] = useState(false);
-  useEffect(() => { // cross sync
-    if (!crossStorage || !connected) return;
-    crossStorage.get(storageKey)
-      .then(JSON.parse)
-      .then(crossStorageData => {
-        setStateData(currStateData => {
-          let mergedReadContents = { ...crossStorageData.readContents };
-          Object.keys(currStateData.readContents).forEach(contentType => {
-            mergedReadContents[contentType] = (mergedReadContents[contentType] || 0) + (currStateData.readContents[contentType] || 0);
-          });
-          return {
-            readingTime: currStateData.readingTime + crossStorageData.readingTime,
-            readContents: mergedReadContents
-          }
-        });
-        setCrossStorageInSync(true);
-      })
-  }, [setStateData, connected, crossStorage, storageKey]);
-  return crossStorageInSync;
-}
-
-// whenever trackerData changes, change localStorage accordingly:
-function useStateToStorageSync(stateData, storageKey, crossStorage, crossStorageInSync) {
-  useEffect(() => {
-    if (crossStorage && !crossStorageInSync) return;
-    setStorageData(stateData, storageKey, crossStorage);
-  }, [stateData, storageKey, crossStorage, crossStorageInSync]);
-}
-
-// listen to localStorage changes from other windows:
-function useStorageToStateSync(setStateData, storageKey, crossStorage) {
-  useEffect(() => {
-    if (crossStorage) return;
-    const storageListener = ev => {
-      if (ev.key === storageKey) {
-        setStateData(storageData(storageKey));
-      }
-    };
-    window.addEventListener("storage", storageListener);
-    return () => window.removeEventListener("storage", storageListener);
-  }, [storageKey, setStateData, crossStorage]);
 }
 
 function stateSetters(setStateData) {
@@ -130,7 +69,7 @@ function stateSetters(setStateData) {
         ...currentState,
         memberValidation: value
       }));
-    },
+    }
   };
 }
 
@@ -149,20 +88,6 @@ function stateGetters(stateData, contentTypes, strings) {
       return getTimeString(stateData.readingTime, strings);
     }
   };
-}
-
-function setStorageData(data = {}, storageKey, crossStorage) {
-  if (crossStorage && crossStorage._connected) {
-    crossStorage.set(storageKey, JSON.stringify(data));
-  }
-  else {
-    window.localStorage.setItem(storageKey, JSON.stringify(data));
-  }
-}
-
-function storageData(storageKey, crossStorage) {
-  if (crossStorage) return false;
-  return JSON.parse(window.localStorage.getItem(storageKey));
 }
 
 function getContentList(contentTypes, readContents = {}, strings) {

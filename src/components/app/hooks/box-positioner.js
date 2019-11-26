@@ -11,12 +11,13 @@ export default function useBoxPositioner(intrusivenessProps, targets) {
   const { boxSettings, itemSelectorSettings } = intrusivenessProps;
   const boxes = useBoxWrappers(targets, boxSettings, settings);
   const boxesWithItemSelectorSettings = useMemo(
-    () => boxes.map((b, key) => ({ 
-      ...defaultItemSelectorSettings,
-      ...itemSelectorSettings, 
-      ...b, 
-      key 
-    })),
+    () =>
+      boxes.map((b, key) => ({
+        ...defaultItemSelectorSettings,
+        ...itemSelectorSettings,
+        ...b,
+        key
+      })),
     [boxes, itemSelectorSettings, defaultItemSelectorSettings]
   );
   return boxesWithItemSelectorSettings;

@@ -1,7 +1,6 @@
 import path from "path";
 import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-// import HtmlWebpackInlineSourcePlugin from "html-webpack-inline-source-plugin";
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const __dirname = path.resolve();

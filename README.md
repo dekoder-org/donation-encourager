@@ -75,6 +75,7 @@ intrusivenessLevels | `INTRUSIVENESS_LEVELS_DEFAULT` | See Intrusiveness section
 itemSelectorSettings | `{ items: ITEMS_DEFAULT, preselectedItemsFilter: function(item, i) { return i === 0; } }` | Provide an array of item objects for the ItemSelector (see section below) and an filter function to define which of them should be preselected by default.
 wrapperClass | `"donation-encourager__wrapper"` | All donation encourager boxes will be wrapped in a div-container with that class.
 storageKey | `"donation-encourager-tracker"` | Tracker data will be stored in localStorage under this key.
+crossStorageUrl | `""` | ... 
 trackerEnabled | `true` | Enables or disables the tracking of reading time and read contents. All tracking is done entirely on the user's machine. None of this data will be send to any server.
 donationListenerEnabled | `true` | Enables or disables the donation listener which listens to `"donationFinished"` messages from your Twingle widget and triggers the donation feedback (see above).
 boxesEnabled | `true` | Allow donation encourager boxes to be placed within your articles' text body (identified by the `targetSelector` above). The placement and the amount of the boxes depends from the `intrusivenessLevels` (see Intrusiveness section below).
