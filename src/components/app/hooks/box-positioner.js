@@ -7,11 +7,17 @@ export const MIN_BLOCKS_FOR_MIDDLE_POS_AND_BLUR = 4;
 // creates wrapper elements for the boxes according to intrusiveness settings and inserts them at the predefined positions into targetted article bodies
 export default function useBoxPositioner(intrusivenessProps, targets) {
   const settings = useContext(Settings);
+  const defaultItemSelectorSettings = settings.itemSelectorSettings;
   const { boxSettings, itemSelectorSettings } = intrusivenessProps;
   const boxes = useBoxWrappers(targets, boxSettings, settings);
   const boxesWithItemSelectorSettings = useMemo(
-    () => boxes.map((b, key) => ({ ...itemSelectorSettings, ...b, key })),
-    [boxes, itemSelectorSettings]
+    () => boxes.map((b, key) => ({ 
+      ...defaultItemSelectorSettings,
+      ...itemSelectorSettings, 
+      ...b, 
+      key 
+    })),
+    [boxes, itemSelectorSettings, defaultItemSelectorSettings]
   );
   return boxesWithItemSelectorSettings;
 }

@@ -23,7 +23,7 @@ Find the latest build [here](https://unpkg.com/donation-encourager).
     function donEnc() {donEncLayer.push(arguments)};
     donEnc("init", {
       targetSelector: ".ph-article-text",
-      ctaTargetUrl: function(amount) {return "https://www.dekoder.org/de/spenden?tw_amount=" + amount},
+      ctaTargetUrl: function(amount) { return "https://www.dekoder.org/de/spenden?tw_amount=" + amount; },
     });
     donEnc("pageview");
   </script>
@@ -70,8 +70,9 @@ targetSelector | `".entry-content"` | CSS-selector that indicates where to place
 excludeSelector | `"hr, h6, aside"` | Don't take those elements into account for the box positioner.
 contentTypes | `CONTENT_TYPES_DEFAULT` | Defines the content types to track and how to spell them in the box body text. See content types section below.
 twingleWidgetUrl | `""` | If you use Twingle, indicate your Twingle widget URL to render the donation widget directly in the donation encourager box. How to find your widget URL: Log into to your TwingleManager, go to Project settings of your desired project, copy the "URL of the donation page", replace `/page` with `/widget` at the end of that URL. The Twingle widget URL should have the following format: `https://spenden.twingle.de/[YOUR-COMPANY-NAME]/[PROJECT-NAME]/[WIDGET-ID]/widget`.
-ctaTargetUrl | `function(amount) {return "https://www.dekoder.org/de/spenden?tw_amount=" + amount;}` | Alternatively: Provide an URL of your custom donation site. When a user pushes the Donate-button your custom donation site will be opened in a new tab. `ctaTargetUrl` can be a string or also a function with the selected total amount as an argument.
+ctaTargetUrl | `function(amount) { return "https://www.dekoder.org/de/spenden?tw_amount=" + amount; }` | Alternatively: Provide an URL of your custom donation site. When a user pushes the Donate-button your custom donation site will be opened in a new tab. `ctaTargetUrl` can be a string or also a function with the selected total amount as an argument.
 intrusivenessLevels | `INTRUSIVENESS_LEVELS_DEFAULT` | See Intrusiveness section below.
+itemSelectorSettings | `{ items: ITEMS_DEFAULT, preselectedItemsFilter: function(item, i) { return i === 0; } }` | Provide an array of item objects for the ItemSelector (see section below) and an filter function to define which of them should be preselected by default.
 wrapperClass | `"donation-encourager__wrapper"` | All donation encourager boxes will be wrapped in a div-container with that class.
 storageKey | `"donation-encourager-tracker"` | Tracker data will be stored in localStorage under this key.
 trackerEnabled | `true` | Enables or disables the tracking of reading time and read contents. All tracking is done entirely on the user's machine. None of this data will be send to any server.
@@ -103,11 +104,10 @@ The donation encourager allows you to define multiple levels of intrusiveness. T
 const INTRUSIVENESS_LEVELS_DEFAULT = [
   {
     // level 1
-    contentThreshold: 1,
+    contentThreshold: 0,
     boxSettings: [{ position: "bottom", expanded: true }],
     itemSelectorSettings: {
-      items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[0]]
+      preselectedItemsFilter: (item, i) => i === 0,
     }
   },
   {
@@ -118,8 +118,7 @@ const INTRUSIVENESS_LEVELS_DEFAULT = [
       { position: "bottom", expanded: true }
     ],
     itemSelectorSettings: {
-      items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[1]]
+      preselectedItemsFilter: (item, i) => i === 1,
     }
   },
   {
@@ -130,8 +129,7 @@ const INTRUSIVENESS_LEVELS_DEFAULT = [
       { position: "bottom", expanded: true }
     ],
     itemSelectorSettings: {
-      items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[2]]
+      preselectedItemsFilter: (item, i) => i === 2,
     },
     contentLockEnabled: true
   }
@@ -144,7 +142,7 @@ property | example | description
 --- | --- | ---
 contentThreshold | `5` | Defines the threshold of read contents for this level settings to become active.
 boxSettings | `[{ position: "bottom", expanded: true }]` | An array of box objects. Each box object must indicate the boxes position within the article's body text (it can one of `"top"`, `"middle"`, or `"bottom"` or a number indicating the exact block number; `0` means the first block) and whether the box should be initially expanded or not.
-itemSelectorSettings | `{ items: ITEMS_DEFAULT, preselectedItems: [ITEMS_DEFAULT[1]] }` | Provide an array of item objects for the ItemSelector (see section below) and an array of one or more preselected items.
+itemSelectorSettings | `{ preselectedItems: [ITEMS_DEFAULT[1]] }` | Optionally overwrite your default `itemSelectorSettings` from the `settings` object (partly or all).
 contentLockEnabled | `true`| If enabled, all content blocks after the first donation encourager box will get locked. The user has to click the unlock button first to continue reading.
 
 ## ItemSelector items

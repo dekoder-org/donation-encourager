@@ -67,8 +67,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
     contentThreshold: 0,
     boxSettings: [{ position: "bottom", expanded: true }],
     itemSelectorSettings: {
-      items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[0]]
+      preselectedItemsFilter: (item, i) => i === 0,
     }
   },
   {
@@ -79,8 +78,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
       { position: "bottom", expanded: true }
     ],
     itemSelectorSettings: {
-      items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[1]]
+      preselectedItemsFilter: (item, i) => i === 1,
     }
   },
   {
@@ -91,8 +89,7 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
       { position: "bottom", expanded: true }
     ],
     itemSelectorSettings: {
-      items: ITEMS_DEFAULT,
-      preselectedItems: [ITEMS_DEFAULT[2]]
+      preselectedItemsFilter: (item, i) => i === 2,
     },
     contentLockEnabled: true
   }
@@ -142,6 +139,10 @@ export const SETTINGS_DEFAULT = {
   ctaTargetUrl: amountVal =>
     `https://www.dekoder.org/de/spenden?tw_amount=${amountVal}`,
   intrusivenessLevels: INTRUSIVENESS_LEVELS_DEFAULT,
+  itemSelectorSettings: {
+    items: ITEMS_DEFAULT,
+    preselectedItemsFilter: (item, i) => i === 0
+  },
   wrapperClass: "donation-encourager__wrapper",
   storageKey: "donation-encourager-tracker",
   trackerEnabled: true,

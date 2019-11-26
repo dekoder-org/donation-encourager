@@ -4,7 +4,8 @@ import { Settings } from "../app/contexts";
 
 const STRIKEOUT_CLASS = "donation-encourager__strike-out";
 
-export default function useItemSelector({ items, preselectedItems }) {
+export default function useItemSelector({ items, preselectedItemsFilter }) {
+  const preselectedItems = items.filter(preselectedItemsFilter);
   const [selectedItems, setSelectedItems] = useState(preselectedItems);
   const undiscountedVal = sumUp(selectedItems);
   const discountedVal = useDiscount(undiscountedVal, selectedItems);

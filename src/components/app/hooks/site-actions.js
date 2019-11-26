@@ -54,23 +54,15 @@ function handleAction(action, funcs) {
   } else if (actionType === "setreadcontents") {
     setReadContents(actionData);
   } else if (actionType === "setitempreset") {
-    setSettings(s => {
-      const presetItems = itemPresets[actionData];
-      return !presetItems
-        ? s
-        : {
-            ...s,
-            intrusivenessLevels: s.intrusivenessLevels.map((il, i) => {
-              return {
-                ...il,
-                itemSelectorSettings: {
-                  items: presetItems,
-                  preselectedItems: [presetItems[i]]
-                }
-              };
-            })
-          };
-    });
+    const presetItems = itemPresets[actionData];
+    if (!presetItems) return;
+    setSettings(s => ({
+      ...s,
+      itemSelectorSettings: {
+        ...s.itemSelectorSettings,
+        items: presetItems
+      }
+    }));
   } else if (actionType === "validatemember") {
     setMemberValidation(ts());
   } else if (actionType === "invalidatemember") {
