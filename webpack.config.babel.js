@@ -1,12 +1,12 @@
 import path from "path";
 import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+// import HtmlWebpackInlineSourcePlugin from "html-webpack-inline-source-plugin";
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const __dirname = path.resolve();
 
 const sharedSettings = {
-  entry: path.join(__dirname, "src/index.js"),
   stats: {
     all: false,
     modules: true,
@@ -21,6 +21,7 @@ const sharedSettings = {
 
 const defaultConfig = {
   ...sharedSettings,
+  entry: path.join(__dirname, "src/index.js"),
   output: {
     path: path.join(__dirname, "dist"),
     filename: "donation-encourager.js"
@@ -61,4 +62,25 @@ const defaultConfig = {
   ],
 };
 
-export default [defaultConfig];
+const crossStorageConfig = {
+  ...sharedSettings,
+  entry: path.join(__dirname, "src/cross-storage-hub/cross-storage-hub.js"),
+  output: {
+    path: path.join(__dirname, "dist/cross-storage-hub"),
+    filename: "cross-storage-hub.js",
+    libraryTarget: "window",
+    library: "CrossStorageHub"
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "cross storage hub",
+      inject: 'head',
+      template: path.join(__dirname, "src/cross-storage-hub/cross-storage-hub.html"),
+      filename: "cross-storage-hub.html",
+      // inlineSource: '.(js|css)$'
+    }),
+    // new HtmlWebpackInlineSourcePlugin()
+  ]
+}
+
+export default [defaultConfig, crossStorageConfig];

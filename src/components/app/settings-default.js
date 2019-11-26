@@ -145,6 +145,7 @@ export const SETTINGS_DEFAULT = {
   },
   wrapperClass: "donation-encourager__wrapper",
   storageKey: "donation-encourager-tracker",
+  crossStorageUrl: "https://www.dekoder.org/d/cross-storage-hub/cross-storage-hub.html",
   trackerEnabled: true,
   donationListenerEnabled: true,
   boxesEnabled: true,
@@ -157,7 +158,7 @@ export const SETTINGS_DEFAULT = {
     onCtaBtnClick: undefined,
     onUnlockBtnClick: undefined,
     onBackBtnClick: undefined
-  }
+  },
 };
 
 export const SETTINGS_DISABLE_ALL = {
