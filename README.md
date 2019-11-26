@@ -159,6 +159,7 @@ const ITEMS_DEFAULT = [
   { value: 16, icon: "🎫" },
 ];
 ```
+
 ## Strings
 
 The texts for the donation encourager boxes can be defined as static strings or, in case of `lead`, `body`, `ctaBtn` and `footer`, as functions that use some tracker data and the selected amount from the ItemSelector as arguments. See the defaults for details: 
