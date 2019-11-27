@@ -8,12 +8,11 @@ export default function useCrossStorageSync(stateData, setStateData, settings) {
 
   // start CrossStorageClient
   const crossStorage = useMemo(() => {
+    if (typeof window === "undefined") return;
     return typeof crossStorageUrl === "string" && crossStorageUrl
       ? new CrossStorageClient(crossStorageUrl)
       : null;
   }, [crossStorageUrl]);
-
-  window.crossStorage = crossStorage;
 
   // connect client
   useEffect(() => {
