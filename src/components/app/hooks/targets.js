@@ -15,6 +15,7 @@ export default function useTargets(currentContent) {
 
 function useSelector(targetSelector, updateTrigger, currentContent) {
   return useMemo(() => {
+    if (typeof document === "undefined") return [];
     [].push(updateTrigger);
     [].push(currentContent);
     return Array.from(document.querySelectorAll(targetSelector));
