@@ -24,6 +24,7 @@ export default function useCrossStorageSync(stateData, setStateData, settings) {
   // crossStorage -> state (only once after connection)
   useEffect(() => {
     if (!crossStorage || !connected) return;
+    window.crossStorage = crossStorage;
     crossStorage
       .get(storageKey)
       .then(JSON.parse)
@@ -40,15 +41,17 @@ export default function useCrossStorageSync(stateData, setStateData, settings) {
   }, [stateData, storageKey, crossStorage, inSync]);
 }
 
-function mergeStates(tmpState, crossStorageData) {
-  let mergedReadContents = { ...crossStorageData.readContents };
+function mergeStates(tmpState = {}, crossStorageData) {
+  const csData = crossStorageData || {};
+  const csReadContents = csData.readContents || {};
+  let mergedReadContents = { ...csReadContents };
   Object.keys(tmpState.readContents).forEach(contentType => {
     mergedReadContents[contentType] =
       (mergedReadContents[contentType] || 0) +
       (tmpState.readContents[contentType] || 0);
   });
   return {
-    readingTime: tmpState.readingTime + crossStorageData.readingTime,
+    readingTime: (tmpState.readingTime || 0) + (csData.readingTime || 0),
     readContents: mergedReadContents
   };
 }
