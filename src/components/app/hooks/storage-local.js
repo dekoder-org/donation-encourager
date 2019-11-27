@@ -23,6 +23,7 @@ export default function useLocalStorageSync(stateData, setStateData, settings) {
 }
 
 export function localStorageData(storageKey) {
+  if (typeof window === "undefined") return;
   return JSON.parse(window.localStorage.getItem(storageKey));
 }
 
