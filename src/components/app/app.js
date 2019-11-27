@@ -22,9 +22,9 @@ function App({ currentContent }) {
   useTimeTracker();
   const [isFeedbackShown, hideFeedback] = useDonationListener();
   const intrusivenessProps = useIntrusiveness();
-  const targets = useTargets();
+  const targets = useTargets(currentContent);
   const boxes = useBoxPositioner(intrusivenessProps, targets);
-  const contentLockProps = useContentLock(intrusivenessProps, targets);
+  const contentLockProps = useContentLock(intrusivenessProps, targets, boxes);
   const [contentLockActive] = contentLockProps;
   return (
     <>

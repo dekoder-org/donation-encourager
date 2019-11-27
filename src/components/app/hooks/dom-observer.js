@@ -15,19 +15,21 @@ export default function useDomObserver() {
     });
     function mutationHandler(mutations) {
       const shallUpdate = mutations
-        .filter(m => m.addedNodes.length)
+        // .filter(m => m.addedNodes.length)
+        // .filter(m => m.target.matches(targetSelector))
         .reduce((acc, m) => {
           return (
             Array.from(m.addedNodes)
               .filter(n => n.nodeType === 1)
               .reduce((acc2, n) => {
-                return n.querySelector(targetSelector) || acc2;
+                // return n.querySelector(targetSelector) || acc2;
+                return n.matches(targetSelector) || acc2;
               }, false) || acc
           );
         }, false);
       if (shallUpdate) {
         forceUpdate();
-        // console.log(shallUpdate);
+        // console.log("force update");
       }
     }
     return () => observer.disconnect();
