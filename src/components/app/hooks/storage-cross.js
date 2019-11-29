@@ -17,18 +17,21 @@ export default function useCrossStorageSync(stateData, setStateData, settings) {
   // connect client
   useEffect(() => {
     if (!crossStorage) return;
-    crossStorage.onConnect().then(() => setConnected(true));
+    crossStorage.onConnect()
+      .then(() => setConnected(true));
     return () => crossStorage.close();
-  }, [crossStorage]);
+  }, [crossStorage, storageKey]);
 
   // crossStorage -> state (only once after connection)
   useEffect(() => {
     if (!crossStorage || !connected) return;
-    window.crossStorage = crossStorage;
+    // window.crossStorage = crossStorage;
     crossStorage
       .get(storageKey)
-      .then(JSON.parse)
+      .then(r => {console.log(r); return r;})
+      .then(r => JSON.parse(r))
       .then(crossStorageData => {
+        if (!crossStorageData || typeof crossStorageData !== "object") return;
         setStateData(tmpState => mergeStates(tmpState, crossStorageData));
         setInSync(true);
       });
