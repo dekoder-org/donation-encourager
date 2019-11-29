@@ -28,8 +28,7 @@ export default function useCrossStorageSync(stateData, setStateData, settings) {
     // window.crossStorage = crossStorage;
     crossStorage
       .get(storageKey)
-      .then(r => {console.log(r); return r;})
-      .then(r => JSON.parse(r))
+      .then(JSON.parse)
       .then(crossStorageData => {
         if (!crossStorageData || typeof crossStorageData !== "object") return;
         setStateData(tmpState => mergeStates(tmpState, crossStorageData));
