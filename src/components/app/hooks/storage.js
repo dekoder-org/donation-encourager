@@ -76,10 +76,10 @@ function stateSetters(setStateData) {
 function stateGetters(stateData, contentTypes, strings) {
   return {
     get totalContents() {
-      return Object.values(stateData.readContents || {}).reduce(
-        (acc, curr) => acc + curr,
-        0
-      );
+      const obj = stateData.readContents || {};
+      return Object.keys(obj)
+        .map(k => obj[k])
+        .reduce((acc, curr) => acc + curr, 0);
     },
     get readContentsString() {
       return getContentList(contentTypes, stateData.readContents, strings);

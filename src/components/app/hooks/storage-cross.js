@@ -17,8 +17,7 @@ export default function useCrossStorageSync(stateData, setStateData, settings) {
   // connect client
   useEffect(() => {
     if (!crossStorage) return;
-    crossStorage.onConnect()
-      .then(() => setConnected(true));
+    crossStorage.onConnect().then(() => setConnected(true));
     return () => crossStorage.close();
   }, [crossStorage, storageKey]);
 
