@@ -31,16 +31,16 @@
     "url": "https://github.com/dekoder-org/donation-encourager/issues"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-transform-react-jsx": "^7.7.4",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-transform-react-jsx": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/polyfill": "^7.7.0",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/register": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.7.7",
     "babel-loader": "^8.0.6",
-    "css-loader": "^3.3.2",
-    "eslint": "^6.7.2",
+    "css-loader": "^3.4.1",
+    "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "html-webpack-inline-source-plugin": "0.0.10",
@@ -48,11 +48,11 @@
     "node-sass": "^4.13.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.1",
-    "webpack": "^4.41.2",
+    "style-loader": "^1.1.2",
+    "webpack": "^4.41.5",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
@@ -60,7 +60,7 @@
     "@fortawesome/react-fontawesome": "^0.1.8",
     "cross-storage": "^1.0.0",
     "mobile-drag-drop": "^2.3.0-rc.2",
-    "preact": "^10.1.0",
+    "preact": "^10.2.1",
     "react-intersection-observer": "^8.25.2",
     "react-odometerjs": "^2.1.1",
     "react-portal": "^4.2.0"
