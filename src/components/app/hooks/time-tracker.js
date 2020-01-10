@@ -2,9 +2,9 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { Settings, Storage } from "../contexts";
 
 // all times in seconds
-const UPDATE_INTERVAL = 1; // update storage every x seconds
+const UPDATE_INTERVAL = 5; // update storage every x seconds
 const IDLE_THRESHOLD = 15; // stop tracking x seconds of inacticity
-const _IDLE_COUNT_TICK_INTERVAL = 1;
+const _IDLE_COUNT_TICK_INTERVAL = 5;
 const _THROTTLE_DELAY = 1;
 
 export default function useTimeTracker() {
