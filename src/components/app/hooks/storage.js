@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import useLocalStorageSync, { localStorageData } from "./storage-local";
 import useCrossStorageSync from "./storage-cross";
 
@@ -8,14 +8,20 @@ const STORAGE_DEFAULT = {
 };
 
 // provides localStorage synced state w/ custom getters & setters
-export default function useStorage(settings) {
+export default function useStorage(settings, pageFocussed) {
   const { storageKey, contentTypes, strings, crossStorageUrl } = settings;
   const initialState = crossStorageUrl
     ? STORAGE_DEFAULT
     : localStorageData(storageKey) || STORAGE_DEFAULT;
   const [stateData, setStateData] = useState(initialState);
 
-  useLocalStorageSync(stateData, setStateData, settings);
+  useEffect(() => { // on page focus: check for changes
+    if (crossStorageUrl) return;
+    if (!pageFocussed) return;
+    setStateData(sd => localStorageData(storageKey) || sd);
+  }, [pageFocussed, crossStorageUrl, storageKey]);
+
+  useLocalStorageSync(stateData, setStateData, settings, pageFocussed);
   useCrossStorageSync(stateData, setStateData, settings);
 
   const stateSetterObj = useMemo(() => stateSetters(setStateData), []);

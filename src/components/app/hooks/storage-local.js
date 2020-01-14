@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function useLocalStorageSync(stateData, setStateData, settings) {
+const useLocalStorageSync = (stateData, setStateData, settings, pageFocussed) => {
   const { crossStorageUrl, storageKey } = settings;
 
   // (1) state -> localStorage
@@ -12,6 +12,7 @@ export default function useLocalStorageSync(stateData, setStateData, settings) {
   // (2) localStorage -> state
   useEffect(() => {
     if (crossStorageUrl) return;
+    if (!pageFocussed) return;
     const storageListener = ev => {
       if (ev.key === storageKey) {
         setStateData(localStorageData(storageKey));
@@ -19,8 +20,10 @@ export default function useLocalStorageSync(stateData, setStateData, settings) {
     };
     window.addEventListener("storage", storageListener);
     return () => window.removeEventListener("storage", storageListener);
-  }, [storageKey, setStateData, crossStorageUrl]);
+  }, [storageKey, setStateData, crossStorageUrl, pageFocussed]);
 }
+
+export default useLocalStorageSync;
 
 export function localStorageData(storageKey) {
   if (typeof window === "undefined") return;

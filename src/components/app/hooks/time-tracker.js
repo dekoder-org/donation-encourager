@@ -7,34 +7,14 @@ const IDLE_THRESHOLD = 15; // stop tracking x seconds of inacticity
 const _IDLE_COUNT_TICK_INTERVAL = 5;
 const _THROTTLE_DELAY = 1;
 
-export default function useTimeTracker() {
+export default function useTimeTracker(pageFocussed) {
   const { trackerEnabled } = useContext(Settings);
   const { addReadingTime } = useContext(Storage);
-  const pageFocussed = usePageFocus(trackerEnabled);
   const isIdle = useIdleTimer(trackerEnabled && pageFocussed);
   useInterval(
     () => addReadingTime(UPDATE_INTERVAL),
     trackerEnabled && !isIdle && pageFocussed ? UPDATE_INTERVAL * 1000 : null
   );
-}
-
-function usePageFocus(enabled) {
-  const [pageFocussed, setPageFocussed] = useState(true);
-  useEffect(() => {
-    if (!enabled) return;
-    const userLeft = () => setPageFocussed(false);
-    const userReturned = () => setPageFocussed(true);
-    const onVisibChange = () => (document.hidden ? userLeft() : userReturned());
-    const pageFocusEvents = [
-      [document, "visibilitychange", onVisibChange],
-      [window, "blur", userLeft],
-      [window, "focus", userReturned]
-    ];
-    handleListeners("add", pageFocusEvents);
-    return () => handleListeners("remove", pageFocusEvents);
-  }, [enabled]);
-
-  return pageFocussed;
 }
 
 function useIdleTimer(active) {
@@ -84,7 +64,7 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-function handleListeners(addOrRemove, events) {
+export function handleListeners(addOrRemove, events) {
   events.forEach(array => {
     const [target, eventName, callback] = array;
     addOrRemove === "add"

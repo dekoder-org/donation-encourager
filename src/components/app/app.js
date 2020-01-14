@@ -16,10 +16,11 @@ import useContentLock from "./hooks/content-lock";
 
 import Box from "../box";
 import DonationFeedback from "../donation-feedback";
+import usePageFocus from "./hooks/page-focus";
 
-function App({ currentContent }) {
+function App({ currentContent, pageFocussed }) {
   useContentTracker(currentContent);
-  useTimeTracker();
+  useTimeTracker(pageFocussed);
   const [isFeedbackShown, hideFeedback] = useDonationListener();
   const intrusivenessProps = useIntrusiveness();
   const targets = useTargets(currentContent);
@@ -42,12 +43,13 @@ function App({ currentContent }) {
 
 function AppController() {
   const [settings, setSettings] = useState(SETTINGS_DEFAULT_DISABLED);
-  const storage = useStorage(settings);
+  const pageFocussed = usePageFocus(settings.trackerEnabled);
+  const storage = useStorage(settings, pageFocussed);
   const currentContent = useSiteActions(setSettings, storage);
   return (
     <Settings.Provider value={settings}>
       <Storage.Provider value={storage}>
-        <App currentContent={currentContent} />
+        <App currentContent={currentContent} pageFocussed={pageFocussed} />
       </Storage.Provider>
     </Settings.Provider>
   );
