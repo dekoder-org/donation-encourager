@@ -76,6 +76,7 @@
 
 .donation-encourager__cta {
   margin-top: 2em;
+  margin-bottom: 2em;
   display: flex; 
   justify-content: center;
 }
@@ -90,11 +91,13 @@
   transition: box-shadow $ease $speed-fast;
   transition: $ease $speed-fast;
   margin: 0 5px;
+  border: none;
 
   &:hover,
   &:focus {
     box-shadow: 0 2px 8px $color--black-2;
     text-decoration: none;
+    color: $color--white;
   }
 
   &.inactive {
