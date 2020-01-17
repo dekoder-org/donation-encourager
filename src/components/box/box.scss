@@ -63,15 +63,17 @@
 
 .donation-encourager__reset-btn {
   // Reset button default style:
-  display: inline;
-  padding: 0;
-  margin: 0;
-  text-decoration: underline;
-  -webkit-appearance: none;
-  border: 0;
-  cursor: pointer;
-  color: inherit;
-  background: transparent;
+  display: inline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-decoration: underline !important;
+  -webkit-appearance: none !important;
+  border: 0 !important;
+  cursor: pointer !important;
+  color: inherit !important;
+  background: transparent !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
 }
 
 .donation-encourager__cta {
