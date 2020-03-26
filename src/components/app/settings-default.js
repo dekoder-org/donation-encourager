@@ -158,7 +158,8 @@ export const SETTINGS_DEFAULT = {
     onResetBtnClick: undefined,
     onCtaBtnClick: undefined,
     onUnlockBtnClick: undefined,
-    onBackBtnClick: undefined
+    onBackBtnClick: undefined,
+    onDonationFinished: undefined
   }
 };
 
