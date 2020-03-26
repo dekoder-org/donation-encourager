@@ -44,7 +44,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "html-webpack-inline-source-plugin": "0.0.10",
-    "html-webpack-plugin": "^4.0.1",
+    "html-webpack-plugin": "^4.0.2",
     "node-sass": "^4.13.1",
     "prettier": "^2.0.2",
     "sass-loader": "^8.0.2",
