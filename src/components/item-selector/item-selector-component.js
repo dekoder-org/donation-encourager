@@ -11,15 +11,15 @@ const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
   const [moving, setMoving] = useState(false);
 
   const addToList = (item, pos = "end") => {
-    let newSelectedItems = selectedItems.filter(i => i.uid !== item.uid);
+    let newSelectedItems = selectedItems.filter((i) => i.uid !== item.uid);
     const newItem = { ...item, uid: new Date().getTime() };
     const targetPos = pos === "end" ? newSelectedItems.length : pos;
     newSelectedItems.splice(targetPos, 0, newItem);
     setSelectedItems(newSelectedItems);
   };
 
-  const removeFromList = uid => {
-    setSelectedItems([...selectedItems.filter(i => i.uid !== uid)]);
+  const removeFromList = (uid) => {
+    setSelectedItems([...selectedItems.filter((i) => i.uid !== uid)]);
   };
 
   return (
@@ -45,7 +45,7 @@ const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
         })}
       </div>
       <DropTarget
-        onDropLeft={dragItem => addToList(dragItem, 0)}
+        onDropLeft={(dragItem) => addToList(dragItem, 0)}
         onDropRight={addToList} // adds item to the end
       >
         <div
@@ -56,8 +56,8 @@ const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
           {selectedItems.map((item, i) => (
             <DropTarget
               key={i}
-              onDropLeft={dragItem => addToList(dragItem, i)}
-              onDropRight={dragItem => addToList(dragItem, i + 1)}
+              onDropLeft={(dragItem) => addToList(dragItem, i)}
+              onDropRight={(dragItem) => addToList(dragItem, i + 1)}
             >
               <Draggable dragData={item}>
                 <div

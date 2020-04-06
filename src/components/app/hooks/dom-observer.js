@@ -3,7 +3,7 @@ import { Settings } from "../contexts";
 
 export default function useDomObserver() {
   const { domObserverEnabled, targetSelector } = useContext(Settings);
-  const [updateTrigger, forceUpdate] = useReducer(x => x + 1, 0);
+  const [updateTrigger, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(() => {
     if (!domObserverEnabled) return;
     const observer = new MutationObserver(mutationHandler);
@@ -11,7 +11,7 @@ export default function useDomObserver() {
       // attributes: true,
       // attributeFilter: ["class"],
       childList: true,
-      subtree: true
+      subtree: true,
     });
     function mutationHandler(mutations) {
       const shallUpdate = mutations
@@ -20,7 +20,7 @@ export default function useDomObserver() {
         .reduce((acc, m) => {
           return (
             Array.from(m.addedNodes)
-              .filter(n => n.nodeType === 1)
+              .filter((n) => n.nodeType === 1)
               .reduce((acc2, n) => {
                 // return n.querySelector(targetSelector) || acc2;
                 return n.matches(targetSelector) || acc2;

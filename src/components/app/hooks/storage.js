@@ -4,7 +4,7 @@ import useCrossStorageSync from "./storage-cross";
 
 const STORAGE_DEFAULT = {
   readingTime: 0, // in seconds
-  readContents: {} // fields = content types
+  readContents: {}, // fields = content types
 };
 
 // provides localStorage synced state w/ custom getters & setters
@@ -15,10 +15,11 @@ export default function useStorage(settings, pageFocussed) {
     : localStorageData(storageKey) || STORAGE_DEFAULT;
   const [stateData, setStateData] = useState(initialState);
 
-  useEffect(() => { // on page focus: check for changes
+  useEffect(() => {
+    // on page focus: check for changes
     if (crossStorageUrl) return;
     if (!pageFocussed) return;
-    setStateData(sd => localStorageData(storageKey) || sd);
+    setStateData((sd) => localStorageData(storageKey) || sd);
   }, [pageFocussed, crossStorageUrl, storageKey]);
 
   useLocalStorageSync(stateData, setStateData, settings, pageFocussed);
@@ -29,53 +30,53 @@ export default function useStorage(settings, pageFocussed) {
   return {
     ...stateData,
     ...stateSetterObj,
-    ...stateGetterObj
+    ...stateGetterObj,
   };
 }
 
 function stateSetters(setStateData) {
   return {
     reset: () => setStateData(STORAGE_DEFAULT),
-    addReadingTime: seconds => {
-      setStateData(currentState => {
+    addReadingTime: (seconds) => {
+      setStateData((currentState) => {
         return {
           ...currentState,
-          readingTime: currentState.readingTime + seconds
+          readingTime: currentState.readingTime + seconds,
         };
       });
     },
     addReadContent: (contentType, plusCount = 1) => {
       // console.log(`+${plusCount} CONTENTS (${contentType})`);
-      setStateData(currentState => {
+      setStateData((currentState) => {
         const prevReadContents = currentState.readContents || {};
         const prevVal = prevReadContents[contentType] || 0;
         return {
           ...currentState,
           readContents: {
             ...prevReadContents,
-            [contentType]: prevVal + plusCount
-          }
+            [contentType]: prevVal + plusCount,
+          },
         };
       });
     },
-    setReadContents: readContents => {
-      setStateData(currentState => {
+    setReadContents: (readContents) => {
+      setStateData((currentState) => {
         // const prevReadContents = currentState.readContents || {};
         return {
           ...currentState,
           readContents: {
             // ...prevReadContents,
-            ...readContents
-          }
+            ...readContents,
+          },
         };
       });
     },
-    setMemberValidation: value => {
-      setStateData(currentState => ({
+    setMemberValidation: (value) => {
+      setStateData((currentState) => ({
         ...currentState,
-        memberValidation: value
+        memberValidation: value,
       }));
-    }
+    },
   };
 }
 
@@ -84,7 +85,7 @@ function stateGetters(stateData, contentTypes, strings) {
     get totalContents() {
       const obj = stateData.readContents || {};
       return Object.keys(obj)
-        .map(k => obj[k])
+        .map((k) => obj[k])
         .reduce((acc, curr) => acc + curr, 0);
     },
     get readContentsString() {
@@ -92,14 +93,14 @@ function stateGetters(stateData, contentTypes, strings) {
     },
     get readingTimeString() {
       return getTimeString(stateData.readingTime, strings);
-    }
+    },
   };
 }
 
 function getContentList(contentTypes, readContents = {}, strings) {
   return Object.keys(contentTypes)
-    .filter(type => Object.prototype.hasOwnProperty.call(readContents, type))
-    .filter(type => readContents[type])
+    .filter((type) => Object.prototype.hasOwnProperty.call(readContents, type))
+    .filter((type) => readContents[type])
     .map((type, i, arr) => {
       const val = readContents[type];
       const isLast = i === arr.length - 1;

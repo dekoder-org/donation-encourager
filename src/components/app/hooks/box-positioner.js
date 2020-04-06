@@ -16,7 +16,7 @@ export default function useBoxPositioner(intrusivenessProps, targets) {
         ...defaultItemSelectorSettings,
         ...itemSelectorSettings,
         ...b,
-        key
+        key,
       })),
     [boxes, itemSelectorSettings, defaultItemSelectorSettings]
   );
@@ -29,15 +29,15 @@ function useBoxWrappers(targetElements, boxSettings, settings) {
     if (!boxesEnabled) return [];
     return targetElements.reduce((acc, targetEl) => {
       const boxesWithinTargetEl = (boxSettings || [])
-        .map(b => ({ ...b, targetEl, wrapperEl: newWrapper(wrapperClass) }))
-        .map(b => addBoxWrapper(b, wrapperClass, excludeSelector))
-        .filter(b => b.posNum)
+        .map((b) => ({ ...b, targetEl, wrapperEl: newWrapper(wrapperClass) }))
+        .map((b) => addBoxWrapper(b, wrapperClass, excludeSelector))
+        .filter((b) => b.posNum)
         .map((b, i) => ({ ...b, isFirst: i === 0 }));
       return [...acc, ...boxesWithinTargetEl];
     }, []);
   }, [targetElements, boxSettings, settings]);
   useEffect(() => {
-    return () => boxesWithWrappers.forEach(b => b.wrapperEl.remove());
+    return () => boxesWithWrappers.forEach((b) => b.wrapperEl.remove());
   }, [boxesWithWrappers]);
   return boxesWithWrappers;
 }
@@ -82,8 +82,8 @@ export function getChildArray(parentEl, filterClass, excludeSelector) {
     ? Array.from(parentEl.querySelectorAll(excludeSelector))
     : [];
   return Array.from(parentEl.children)
-    .filter(el => (filterClass ? !el.classList.contains(filterClass) : el))
-    .filter(el => !excludeEls.includes(el));
+    .filter((el) => (filterClass ? !el.classList.contains(filterClass) : el))
+    .filter((el) => !excludeEls.includes(el));
 }
 
 const MAX_FLOAT_CHECKER_ITERATIONS = 3;

@@ -31,14 +31,14 @@ function useIdleTimer(active) {
       [document, "mousemove", wakeUp],
       [document, "keyup", wakeUp],
       [document, "touchstart", wakeUp],
-      [window, "wheel", wakeUp]
+      [window, "wheel", wakeUp],
     ];
     handleListeners("add", wakeUpEvents);
     return () => handleListeners("remove", wakeUpEvents);
   }, [active]);
 
   useInterval(
-    () => setIdleCount(curr => curr - _IDLE_COUNT_TICK_INTERVAL),
+    () => setIdleCount((curr) => curr - _IDLE_COUNT_TICK_INTERVAL),
     !isIdle && active ? _IDLE_COUNT_TICK_INTERVAL * 1000 : null
   );
 
@@ -65,7 +65,7 @@ function useInterval(callback, delay) {
 }
 
 export function handleListeners(addOrRemove, events) {
-  events.forEach(array => {
+  events.forEach((array) => {
     const [target, eventName, callback] = array;
     addOrRemove === "add"
       ? target.addEventListener(eventName, callback)

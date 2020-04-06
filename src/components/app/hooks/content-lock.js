@@ -24,9 +24,9 @@ export default function useContentLock({ contentLockEnabled }, targets, boxes) {
 
 function useClass(elements, active, className) {
   useEffect(() => {
-    elements.forEach(el => (active ? el.classList.add(className) : ""));
+    elements.forEach((el) => (active ? el.classList.add(className) : ""));
     return () => {
-      elements.forEach(el => el.classList.remove(className));
+      elements.forEach((el) => el.classList.remove(className));
     };
   }, [elements, active, className]);
 }
@@ -34,7 +34,7 @@ function useClass(elements, active, className) {
 function blurElGetter(acc, allChildren, firstBoxIndex, wrapperClass) {
   const childrenAfterFirstBox = allChildren
     .slice(firstBoxIndex)
-    .filter(el => !el.classList.contains(wrapperClass));
+    .filter((el) => !el.classList.contains(wrapperClass));
   return [...acc, ...childrenAfterFirstBox];
 }
 
@@ -43,7 +43,7 @@ function useChildReducer(targetElements, wrapperClass, reducer, trigger) {
     [].push(trigger);
     return targetElements.reduce((acc, targetElement) => {
       const allChildren = getChildArray(targetElement);
-      const firstBox = allChildren.find(c =>
+      const firstBox = allChildren.find((c) =>
         c.classList.contains(wrapperClass)
       );
       const firstBoxIndex = allChildren.indexOf(firstBox);

@@ -11,7 +11,7 @@ export default function usePageFocus(trackerEnabled) {
     const pageFocusEvents = [
       [document, "visibilitychange", onVisibChange],
       [window, "blur", userLeft],
-      [window, "focus", userReturned]
+      [window, "focus", userReturned],
     ];
     handleListeners("add", pageFocusEvents);
     return () => handleListeners("remove", pageFocusEvents);

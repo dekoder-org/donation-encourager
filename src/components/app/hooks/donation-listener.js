@@ -6,11 +6,12 @@ export default function useDonationListener() {
   const [isFeedbackShown, setIsFeedbackShown] = useState(false);
   useEffect(() => {
     if (!donationListenerEnabled) return;
-    const handlePostMessage = ev => {
+    const handlePostMessage = (ev) => {
       if (ev.data && ev.data.type === "donationFinished") {
         // console.log("Donation registered ...");
         setIsFeedbackShown(true);
-        if (typeof hooks.onDonationFinished === "function") hooks.onDonationFinished()
+        if (typeof hooks.onDonationFinished === "function")
+          hooks.onDonationFinished();
       }
     };
     window.addEventListener("message", handlePostMessage, false);

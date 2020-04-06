@@ -28,9 +28,9 @@ export default function useCrossStorageSync(stateData, setStateData, settings) {
     crossStorage
       .get(storageKey)
       .then(JSON.parse)
-      .then(crossStorageData => {
+      .then((crossStorageData) => {
         if (!crossStorageData || typeof crossStorageData !== "object") return;
-        setStateData(tmpState => mergeStates(tmpState, crossStorageData));
+        setStateData((tmpState) => mergeStates(tmpState, crossStorageData));
         setInSync(true);
       });
   }, [setStateData, connected, crossStorage, storageKey]);
@@ -46,13 +46,13 @@ function mergeStates(tmpState = {}, crossStorageData) {
   const csData = crossStorageData || {};
   const csReadContents = csData.readContents || {};
   let mergedReadContents = { ...csReadContents };
-  Object.keys(tmpState.readContents).forEach(contentType => {
+  Object.keys(tmpState.readContents).forEach((contentType) => {
     mergedReadContents[contentType] =
       (mergedReadContents[contentType] || 0) +
       (tmpState.readContents[contentType] || 0);
   });
   return {
     readingTime: (tmpState.readingTime || 0) + (csData.readingTime || 0),
-    readContents: mergedReadContents
+    readContents: mergedReadContents,
   };
 }

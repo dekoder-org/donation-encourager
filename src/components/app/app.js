@@ -30,8 +30,8 @@ function App({ currentContent, pageFocussed }) {
   return (
     <>
       {boxes
-        .filter(boxProps => (contentLockActive ? boxProps.isFirst : true))
-        .map(boxProps => (
+        .filter((boxProps) => (contentLockActive ? boxProps.isFirst : true))
+        .map((boxProps) => (
           <Portal node={boxProps.wrapperEl} key={boxProps.key}>
             <Box {...{ boxProps, contentLockProps, isFeedbackShown }} />
           </Portal>

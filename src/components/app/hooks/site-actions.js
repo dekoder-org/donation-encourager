@@ -5,20 +5,20 @@ import {
   SETTINGS_DISABLE_ALL,
   SETTINGS_ENABLE_ALL,
   mergeInNewSettings,
-  itemPresets
+  itemPresets,
 } from "../settings-default";
 
 export default function useActions(setSettings, storage) {
   const { reset, setReadContents, setMemberValidation } = storage;
   const [currentContent, setCurrentContent] = useState({});
-  const sendPageView = contentType => {
+  const sendPageView = (contentType) => {
     setCurrentContent({ ts: ts(), type: contentType || CONTENT_TYPE_DEFAULT });
   };
 
   useEffect(() => {
     const storageFuncs = { reset, setReadContents, setMemberValidation };
     const funcs = { setSettings, sendPageView, ...storageFuncs };
-    const actionHandler = a => handleAction(a, funcs);
+    const actionHandler = (a) => handleAction(a, funcs);
     handleExistingActions(actionHandler);
     startActionListener(actionHandler);
     return () => {};
@@ -42,26 +42,26 @@ function handleAction(action, funcs) {
   } else if (actionType === "donation") {
     window.postMessage({ type: "donationFinished" });
   } else if (actionType === "disable") {
-    setSettings(s => {
+    setSettings((s) => {
       return { ...s, ...SETTINGS_DISABLE_ALL };
     });
   } else if (actionType === "enable") {
-    setSettings(s => {
+    setSettings((s) => {
       return { ...s, ...SETTINGS_ENABLE_ALL };
     });
   } else if (actionType === "updatesettings") {
-    setSettings(s => mergeInNewSettings(actionData, s));
+    setSettings((s) => mergeInNewSettings(actionData, s));
   } else if (actionType === "setreadcontents") {
     setReadContents(actionData);
   } else if (actionType === "setitempreset") {
     const presetItems = itemPresets[actionData];
     if (!presetItems) return;
-    setSettings(s => ({
+    setSettings((s) => ({
       ...s,
       itemSelectorSettings: {
         ...s.itemSelectorSettings,
-        items: presetItems
-      }
+        items: presetItems,
+      },
     }));
   } else if (actionType === "validatemember") {
     setMemberValidation(ts());
@@ -86,7 +86,7 @@ function onChange(object, callback, ignoreValue) {
       if (!ignoreValue) obj[prop] = val;
       callback(val);
       return true;
-    }
+    },
   });
 }
 

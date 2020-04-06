@@ -6,7 +6,7 @@ import "./odometer-theme-minimal.css";
 const Counter = ({ value }) => {
   const [ref, inView] = useInView({
     threshold: 0,
-    triggerOnce: true
+    triggerOnce: true,
   });
 
   return (

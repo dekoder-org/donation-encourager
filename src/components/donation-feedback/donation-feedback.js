@@ -26,7 +26,7 @@ export default function DonationFeedback({ hideFeedback }) {
             <a
               className="donation-encourager__button donation-encourager__cta-button"
               href="#"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 destroy();
               }}

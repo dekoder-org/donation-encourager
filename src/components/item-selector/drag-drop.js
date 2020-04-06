@@ -10,12 +10,12 @@ export const Draggable = ({ children, dragData, onDragStart, onDragEnd }) => {
     <div
       className={DRAGGABLE_CLASS}
       draggable
-      onDragStart={e => {
+      onDragStart={(e) => {
         if (typeof onDragStart === "function") onDragStart(e);
         e.dataTransfer.setData("text/plain", JSON.stringify(dragData));
         e.currentTarget.style.cursor = "grabbing";
       }}
-      onDragEnd={e => {
+      onDragEnd={(e) => {
         e.currentTarget.style.cursor = "";
         if (typeof onDragEnd === "function") onDragEnd(e);
       }}
@@ -26,7 +26,7 @@ export const Draggable = ({ children, dragData, onDragStart, onDragEnd }) => {
 };
 
 export const DropTarget = ({ children, onDrop, onDropLeft, onDropRight }) => {
-  const handleDrop = e => {
+  const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const data = JSON.parse(e.dataTransfer.getData("text/plain"));
@@ -40,8 +40,8 @@ export const DropTarget = ({ children, onDrop, onDropLeft, onDropRight }) => {
     <div
       className="donation-encourager__drop-target"
       // https://github.com/timruffles/mobile-drag-drop#polyfill-requires-dragenter-listener
-      onDragEnter={e => e.preventDefault()}
-      onDragOver={e => e.preventDefault()}
+      onDragEnter={(e) => e.preventDefault()}
+      onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
     >
       {children}

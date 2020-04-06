@@ -47,7 +47,7 @@ function useAmountObject(undiscountedVal, discountedVal) {
                   ${moneyStr(undiscountedRounded, locale, currency)}
                 </span>
               </span> ${moneyStr(discountedRounded, locale, currency)}`
-          : `${moneyStr(undiscountedRounded, locale, currency)}`
+          : `${moneyStr(undiscountedRounded, locale, currency)}`,
     }),
     [undiscountedRounded, discountedRounded, locale, currency]
   );
@@ -55,7 +55,7 @@ function useAmountObject(undiscountedVal, discountedVal) {
 
 export function moneyStr(amount, locale, currency) {
   const numberStr = amount.toLocaleString(locale, {
-    minimumFractionDigits: amount % 1 ? 2 : 0
+    minimumFractionDigits: amount % 1 ? 2 : 0,
   });
   return typeof currency === "function"
     ? currency(numberStr)

@@ -27,7 +27,7 @@ export default function TwingleWidget({ amount, exit, widgetUrl, backStr }) {
           overflow: "hidden",
           height: "400px",
           position: "relative",
-          zIndex: 2
+          zIndex: 2,
         }}
       />
     </div>
@@ -37,7 +37,7 @@ export default function TwingleWidget({ amount, exit, widgetUrl, backStr }) {
 // see: https://spenden.twingle.de/embed/dekoder-ggmbh/dekoder-org/tw5979cc899e735/widget
 function useTwingleResizeListener() {
   useEffect(() => {
-    const __twingleMessageListener = function(event) {
+    const __twingleMessageListener = function (event) {
       if (event.data && event.data.type && event.data.cid) {
         var __twingleWidgetIframe = document.getElementById(
           "twingleframe-" + event.data.cid
@@ -51,7 +51,7 @@ function useTwingleResizeListener() {
               __twingleWidgetIframe.contentWindow.postMessage(
                 {
                   type: "seturl",
-                  value: window.location.href
+                  value: window.location.href,
                 },
                 "*"
               );
