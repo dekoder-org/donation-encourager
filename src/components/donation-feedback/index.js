@@ -1,2 +1,2 @@
-import DonationFeedback from "./donation-feedback";
-export default DonationFeedback;
+import DonationFeedback from "./donation-feedback"
+export default DonationFeedback

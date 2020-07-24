@@ -3,9 +3,9 @@ import {
   faIceCream,
   faPizzaSlice,
   faGem,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons"
 
-export const CONTENT_TYPE_DEFAULT = "default";
+export const CONTENT_TYPE_DEFAULT = "default"
 
 const ITEMS_EMOJI1 = [
   // { value: 1.5, icon: "🥨" },
@@ -24,7 +24,7 @@ const ITEMS_EMOJI1 = [
   // { value: 50, icon: "🏆" },
   // { value: 75, icon: "💎" },
   { value: 50, icon: "💰" },
-];
+]
 
 const ITEMS_EMOJI2 = [
   // { value: 1.5, icon: "🥨" },
@@ -44,22 +44,22 @@ const ITEMS_EMOJI2 = [
   // { value: 50, icon: "🏆" },
   // { value: 75, icon: "💎" },
   // { value: 100, icon: "💰" }
-];
+]
 
 const ITEMS_BLACK = [
   { value: 2, icon: faIceCream },
   { value: 3, icon: faCoffee },
   { value: 5, icon: faPizzaSlice },
   { value: 15, icon: faGem },
-];
+]
 
 export const itemPresets = {
   black: ITEMS_BLACK,
   emoji1: ITEMS_EMOJI1,
   emoji2: ITEMS_EMOJI2,
-};
+}
 
-const ITEMS_DEFAULT = itemPresets.emoji2;
+const ITEMS_DEFAULT = itemPresets.emoji2
 
 export const INTRUSIVENESS_LEVELS_DEFAULT = [
   {
@@ -93,14 +93,14 @@ export const INTRUSIVENESS_LEVELS_DEFAULT = [
     },
     contentLockEnabled: true,
   },
-];
+]
 
 const CONTENT_TYPES_DEFAULT = {
   [CONTENT_TYPE_DEFAULT]: { singular: "Inhalt", plural: "Inhalte" },
   article: { singular: "Artikel", plural: "Artikel" },
   gnose: { singular: "Gnose", plural: "Gnosen" },
   special: { singular: "Special-Inhalt", plural: "Special-Inhalte" },
-};
+}
 
 const STRINGS_DEFAULT = {
   currency: (amount) => `${amount} €`,
@@ -130,7 +130,7 @@ const STRINGS_DEFAULT = {
   feedbackBtn: "OK",
   backBtn: "Zurück",
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`,
-};
+}
 
 export const SETTINGS_DEFAULT = {
   targetSelector: ".entry-content",
@@ -161,24 +161,24 @@ export const SETTINGS_DEFAULT = {
     onBackBtnClick: undefined,
     onDonationFinished: undefined,
   },
-};
+}
 
 export const SETTINGS_DISABLE_ALL = {
   trackerEnabled: false,
   donationListenerEnabled: false,
   boxesEnabled: false,
-};
+}
 
 export const SETTINGS_ENABLE_ALL = {
   trackerEnabled: true,
   donationListenerEnabled: true,
   boxesEnabled: true,
-};
+}
 
 export const SETTINGS_DEFAULT_DISABLED = {
   ...SETTINGS_DEFAULT,
   ...SETTINGS_DISABLE_ALL,
-};
+}
 
 export function mergeInNewSettings(
   newSettings,
@@ -199,5 +199,5 @@ export function mergeInNewSettings(
       ...oldSettings.hooks,
       ...(newSettings.hooks || {}),
     },
-  };
+  }
 }

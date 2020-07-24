@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import Counter from "../counter";
-import { Settings, Storage } from "../app/contexts";
-import { strOrFunc } from "./helpers";
+import React, { useContext } from "react"
+import Counter from "../counter"
+import { Settings, Storage } from "../app/contexts"
+import { strOrFunc } from "./helpers"
 
 export default function BoxLead({ onClick, isExpanded }) {
-  const { totalContents } = useContext(Storage);
-  const { strings } = useContext(Settings);
-  const leadStr = strOrFunc(strings.lead, [totalContents]);
+  const { totalContents } = useContext(Storage)
+  const { strings } = useContext(Settings)
+  const leadStr = strOrFunc(strings.lead, [totalContents])
   return (
     <div className="donation-encourager__lead experimental" onClick={onClick}>
       <h2 className="donation-encourager__headline">
@@ -19,7 +19,7 @@ export default function BoxLead({ onClick, isExpanded }) {
         </small>
       </p>
     </div>
-  );
+  )
 }
 
 /*

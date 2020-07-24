@@ -1,25 +1,25 @@
-import { useContext, useEffect, useRef } from "react";
-import { Settings, Storage } from "../contexts";
+import { useContext, useEffect, useRef } from "react"
+import { Settings, Storage } from "../contexts"
 
-const THRESHOLD_TIME = 3000; // minimum ms between two updates to be counted
+const THRESHOLD_TIME = 3000 // minimum ms between two updates to be counted
 
 export default function useContentTracker(currentContent) {
-  const { trackerEnabled } = useContext(Settings);
-  const { addReadContent } = useContext(Storage);
-  const previousContent = usePrevious(currentContent, trackerEnabled) || {};
-  const prevTs = previousContent.ts || 0;
+  const { trackerEnabled } = useContext(Settings)
+  const { addReadContent } = useContext(Storage)
+  const previousContent = usePrevious(currentContent, trackerEnabled) || {}
+  const prevTs = previousContent.ts || 0
   useEffect(() => {
-    if (!trackerEnabled) return;
+    if (!trackerEnabled) return
     if (currentContent.ts - prevTs >= THRESHOLD_TIME) {
-      addReadContent(currentContent.type);
+      addReadContent(currentContent.type)
     }
-  }, [currentContent, trackerEnabled, addReadContent, prevTs]);
+  }, [currentContent, trackerEnabled, addReadContent, prevTs])
 }
 
 function usePrevious(value, enabled = true) {
-  const ref = useRef();
+  const ref = useRef()
   useEffect(() => {
-    if (enabled) ref.current = value;
-  }, [value, enabled]);
-  return ref.current;
+    if (enabled) ref.current = value
+  }, [value, enabled])
+  return ref.current
 }

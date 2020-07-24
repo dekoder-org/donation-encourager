@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { useHookedFunc } from "../box/helpers";
+import React, { useEffect } from "react"
+import { useHookedFunc } from "../box/helpers"
 
 export default function TwingleWidget({ amount, exit, widgetUrl, backStr }) {
-  const widgetId = "_rl60hvpcu"; // random string
-  useTwingleResizeListener();
-  const onBackBtnClick = useHookedFunc("onBackBtnClick", exit);
+  const widgetId = "_rl60hvpcu" // random string
+  useTwingleResizeListener()
+  const onBackBtnClick = useHookedFunc("onBackBtnClick", exit)
   return (
     <div className="donation-encourager__twingle-wrapper">
       <p className="donation-encourager__meta">
@@ -31,7 +31,7 @@ export default function TwingleWidget({ amount, exit, widgetUrl, backStr }) {
         }}
       />
     </div>
-  );
+  )
 }
 
 // see: https://spenden.twingle.de/embed/dekoder-ggmbh/dekoder-org/tw5979cc899e735/widget
@@ -41,12 +41,12 @@ function useTwingleResizeListener() {
       if (event.data && event.data.type && event.data.cid) {
         var __twingleWidgetIframe = document.getElementById(
           "twingleframe-" + event.data.cid
-        );
+        )
         if (__twingleWidgetIframe) {
           switch (event.data.type) {
             case "size":
-              __twingleWidgetIframe.style.height = event.data.value + "px";
-              break;
+              __twingleWidgetIframe.style.height = event.data.value + "px"
+              break
             case "geturl":
               __twingleWidgetIframe.contentWindow.postMessage(
                 {
@@ -54,26 +54,25 @@ function useTwingleResizeListener() {
                   value: window.location.href,
                 },
                 "*"
-              );
-              break;
+              )
+              break
             case "scrollToTop":
               if (typeof __twingleWidgetIframe.scrollIntoView !== "undefined") {
-                __twingleWidgetIframe.scrollIntoView(true);
+                __twingleWidgetIframe.scrollIntoView(true)
                 if (window.scrollTo) {
                   // in some cases we need some offset, the iframe will tell us
-                  var offset = event.data.value ? event.data.value : 0;
+                  var offset = event.data.value ? event.data.value : 0
                   // scroll 80px more to avoid sticky headers
-                  offset -= 80;
-                  window.scrollTo(0, window.scrollY + offset);
+                  offset -= 80
+                  window.scrollTo(0, window.scrollY + offset)
                 }
               }
-              break;
+              break
           }
         }
       }
-    };
-    window.addEventListener("message", __twingleMessageListener, false);
-    return () =>
-      window.removeEventListener("message", __twingleMessageListener);
-  }, []);
+    }
+    window.addEventListener("message", __twingleMessageListener, false)
+    return () => window.removeEventListener("message", __twingleMessageListener)
+  }, [])
 }

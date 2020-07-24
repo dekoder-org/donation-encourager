@@ -1,2 +1,2 @@
-import Counter from "./counter";
-export default Counter;
+import Counter from "./counter"
+export default Counter

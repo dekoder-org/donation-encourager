@@ -1,3 +1,3 @@
-import { createContext } from "react";
+import { createContext } from "react"
 
-export const Amount = createContext(0);
+export const Amount = createContext(0)

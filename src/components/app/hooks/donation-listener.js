@@ -1,21 +1,21 @@
-import { useState, useContext, useEffect } from "react";
-import { Settings } from "../contexts";
+import { useState, useContext, useEffect } from "react"
+import { Settings } from "../contexts"
 
 export default function useDonationListener() {
-  const { donationListenerEnabled, hooks } = useContext(Settings);
-  const [isFeedbackShown, setIsFeedbackShown] = useState(false);
+  const { donationListenerEnabled, hooks } = useContext(Settings)
+  const [isFeedbackShown, setIsFeedbackShown] = useState(false)
   useEffect(() => {
-    if (!donationListenerEnabled) return;
+    if (!donationListenerEnabled) return
     const handlePostMessage = (ev) => {
       if (ev.data && ev.data.type === "donationFinished") {
         // console.log("Donation registered ...");
-        setIsFeedbackShown(true);
+        setIsFeedbackShown(true)
         if (typeof hooks.onDonationFinished === "function")
-          hooks.onDonationFinished();
+          hooks.onDonationFinished()
       }
-    };
-    window.addEventListener("message", handlePostMessage, false);
-    return () => window.removeEventListener("message", handlePostMessage);
-  }, [donationListenerEnabled, hooks]);
-  return [isFeedbackShown, () => setIsFeedbackShown(false)];
+    }
+    window.addEventListener("message", handlePostMessage, false)
+    return () => window.removeEventListener("message", handlePostMessage)
+  }, [donationListenerEnabled, hooks])
+  return [isFeedbackShown, () => setIsFeedbackShown(false)]
 }

@@ -1,2 +1,2 @@
-import AppController from "./app";
-export default AppController;
+import AppController from "./app"
+export default AppController

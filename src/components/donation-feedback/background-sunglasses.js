@@ -1,5 +1,5 @@
-import React from "react";
-import "./background-sunglasses.scss";
+import React from "react"
+import "./background-sunglasses.scss"
 
 const BackgroundSunglasses = ({ children, onClick }) => (
   <div className="background-sunglasses" onClick={onClick}>
@@ -10,6 +10,6 @@ const BackgroundSunglasses = ({ children, onClick }) => (
       {children}
     </div>
   </div>
-);
+)
 
-export default BackgroundSunglasses;
+export default BackgroundSunglasses

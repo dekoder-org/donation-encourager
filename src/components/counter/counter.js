@@ -1,13 +1,13 @@
-import React from "react";
-import Odometer from "./odometer-ssr-safe";
-import { useInView } from "react-intersection-observer";
-import "./odometer-theme-minimal.css";
+import React from "react"
+import Odometer from "./odometer-ssr-safe"
+import { useInView } from "react-intersection-observer"
+import "./odometer-theme-minimal.css"
 
 const Counter = ({ value }) => {
   const [ref, inView] = useInView({
     threshold: 0,
     triggerOnce: true,
-  });
+  })
 
   return (
     <div ref={ref}>
@@ -18,7 +18,7 @@ const Counter = ({ value }) => {
         theme="minimal"
       />
     </div>
-  );
-};
+  )
+}
 
-export default Counter;
+export default Counter

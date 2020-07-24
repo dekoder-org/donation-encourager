@@ -1,2 +1,2 @@
-import useTwingle from "./twingle-hook";
-export default useTwingle;
+import useTwingle from "./twingle-hook"
+export default useTwingle

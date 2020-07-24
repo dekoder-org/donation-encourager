@@ -1,16 +1,16 @@
-import React, { useEffect, useContext, useState } from "react";
-import { Settings } from "../app/contexts";
-import TwingleWidget from "./twingle-widget";
+import React, { useEffect, useContext, useState } from "react"
+import { Settings } from "../app/contexts"
+import TwingleWidget from "./twingle-widget"
 
 export default function useTwingle(amount, isFeedbackShown) {
-  const { twingleWidgetUrl, strings } = useContext(Settings);
-  const [widgetExpanded, setWidgetExpanded] = useState(false);
+  const { twingleWidgetUrl, strings } = useContext(Settings)
+  const [widgetExpanded, setWidgetExpanded] = useState(false)
   const onCtaBtnClick = twingleWidgetUrl
     ? (e) => {
-        e.preventDefault();
-        setWidgetExpanded(true);
+        e.preventDefault()
+        setWidgetExpanded(true)
       }
-    : null;
+    : null
   const twingleWidget = twingleWidgetUrl && widgetExpanded && (
     <TwingleWidget
       amount={amount.val}
@@ -18,7 +18,7 @@ export default function useTwingle(amount, isFeedbackShown) {
       widgetUrl={twingleWidgetUrl}
       backStr={strings.backBtn}
     />
-  );
-  useEffect(() => setWidgetExpanded(false), [isFeedbackShown]);
-  return [twingleWidget, onCtaBtnClick];
+  )
+  useEffect(() => setWidgetExpanded(false), [isFeedbackShown])
+  return [twingleWidget, onCtaBtnClick]
 }

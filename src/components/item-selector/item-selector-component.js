@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import { Draggable, DropTarget } from "./drag-drop";
-import "./item-selector.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react"
+import { Draggable, DropTarget } from "./drag-drop"
+import "./item-selector.scss"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
-  const dragListItems = items;
+  const dragListItems = items
   // allow each item only once:
   // const dragListItems = items.filter(s => !selectedItems.map(si => si.icon).includes(s.icon))
 
-  const [moving, setMoving] = useState(false);
+  const [moving, setMoving] = useState(false)
 
   const addToList = (item, pos = "end") => {
-    let newSelectedItems = selectedItems.filter((i) => i.uid !== item.uid);
-    const newItem = { ...item, uid: new Date().getTime() };
-    const targetPos = pos === "end" ? newSelectedItems.length : pos;
-    newSelectedItems.splice(targetPos, 0, newItem);
-    setSelectedItems(newSelectedItems);
-  };
+    let newSelectedItems = selectedItems.filter((i) => i.uid !== item.uid)
+    const newItem = { ...item, uid: new Date().getTime() }
+    const targetPos = pos === "end" ? newSelectedItems.length : pos
+    newSelectedItems.splice(targetPos, 0, newItem)
+    setSelectedItems(newSelectedItems)
+  }
 
   const removeFromList = (uid) => {
-    setSelectedItems([...selectedItems.filter((i) => i.uid !== uid)]);
-  };
+    setSelectedItems([...selectedItems.filter((i) => i.uid !== uid)])
+  }
 
   return (
     <div className="donation-encourager__item-selector">
       <div className="donation-encourager__drag-list">
         {dragListItems.map((item, i) => {
-          item = { ...item, uid: i };
+          item = { ...item, uid: i }
           return (
             <Draggable
               key={i}
@@ -41,7 +41,7 @@ const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
                 {renderIcon(item.icon)}
               </div>
             </Draggable>
-          );
+          )
         })}
       </div>
       <DropTarget
@@ -72,11 +72,11 @@ const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
         </div>
       </DropTarget>
     </div>
-  );
-};
+  )
+}
 
-export default ItemSelector;
+export default ItemSelector
 
 function renderIcon(icon) {
-  return typeof icon === "object" ? <FontAwesomeIcon icon={icon} /> : icon;
+  return typeof icon === "object" ? <FontAwesomeIcon icon={icon} /> : icon
 }

@@ -1,8 +1,8 @@
-import AppController from "./components/app";
+import AppController from "./components/app"
 
-export default AppController;
+export default AppController
 
 export function donEnc() {
-  window.donEncLayer = window.donEncLayer || [];
-  window.donEncLayer.push(arguments);
+  window.donEncLayer = window.donEncLayer || []
+  window.donEncLayer.push(arguments)
 }
