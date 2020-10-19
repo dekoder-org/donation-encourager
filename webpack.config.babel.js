@@ -9,7 +9,6 @@ const sharedSettings = {
   stats: {
     all: false,
     modules: true,
-    maxModules: 0,
     errors: true,
     warnings: true,
     colors: true,
