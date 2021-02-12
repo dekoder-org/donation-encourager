@@ -119,9 +119,9 @@ const STRINGS_DEFAULT = {
             : "sind sie"
         } dir wert? Vielleicht <strong>${amountStr}</strong>?`
       : "",
-  monthly: `Jeden Monat?`,
-  ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} danken`,
-  unlockBtn: "Einfach weiterlesen",
+  monthly: `Monatlich spenden und Klubmitglied werden?`,
+  ctaBtn: (timeStr, contentsStr, amountStr, storage, isMonthly) => `Mit ${amountStr} danken, ${isMonthly ? "jeden Monat!" : "einmalig"}`,
+  unlockBtn: "Erstmal weiterlesen",
   footer: (timeStr) =>
     `* Lesezeit insgesamt auf dekoder: ${timeStr}. Diese Daten werden nur in deinem Browser gespeichert und nicht auf unsere Server übertragen!`,
   resetBtn: "Zähler zurücksetzen",
@@ -131,6 +131,8 @@ const STRINGS_DEFAULT = {
   feedbackBtn: "OK",
   backBtn: "Zurück",
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`,
+  paypalSingleName: "einmalige Spende",
+  paypalMonthlyName: "Klubmitgliedschaft (monatlich)"
 }
 
 export const SETTINGS_DEFAULT = {

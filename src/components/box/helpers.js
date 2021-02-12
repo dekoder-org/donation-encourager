@@ -12,6 +12,7 @@ export function useStrOrStateFunc(input) {
     readContentsString,
     amount.str,
     storage,
+    amount.isMonthly
   ])
 }
 

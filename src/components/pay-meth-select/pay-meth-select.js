@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react"
 import { Settings } from "../app/contexts"
 import { Amount } from "../box/contexts"
-import BackButton from "../twingle-widget/back-button"
+// import BackButton from "../twingle-widget/back-button"
 
-const PaypalMonthly = ({ amountStr }) => (
+const PaypalMonthly = ({ amountStr, name }) => (
   <>
     <input type="hidden" name="cmd" value="_xclick-subscriptions" />
     <input type="hidden" name="currency_code" value="EUR" />
@@ -11,18 +11,21 @@ const PaypalMonthly = ({ amountStr }) => (
     <input type="hidden" name="p3" value="1" />
     <input type="hidden" name="t3" value="M" />
     <input type="hidden" name="src" value="1" />
+    <input type="hidden" name="item_name" value={name} />
   </>
 )
 
-const PaypalSingle = ({ amountStr }) => (
+const PaypalSingle = ({ amountStr, name }) => (
   <>
     <input type="hidden" name="cmd" value="_donations" />
     <input type="hidden" name="amount" value={amountStr} />
+    <input type="hidden" name="item_name" value={name} />
   </>
 )
 
 const PayMethSelector = ({ isMonthly, exit, startTwingle, paypalId }) => {
   const amount = useContext(Amount)
+  const { strings } = useContext(Settings)
   const amountStr = `${amount.val}.00`
 
   function onOtherClick() {
@@ -31,44 +34,41 @@ const PayMethSelector = ({ isMonthly, exit, startTwingle, paypalId }) => {
   }
 
   return (
-    <>
-      <BackButton onClick={exit} />
-      <div style={{ padding: "8em 0", display: "flex" }}>
-        <form
-          action="https://www.paypal.com/cgi-bin/webscr"
-          method="post"
-          // target="_top"
-          target="_blank"
-          style={{
-            width: "100%",
-            marginRight: "10px",
-          }}
-        >
-          <input type="hidden" name="business" value={paypalId} />
+    <div class="donation-encourager__cta" >
+      <form
+        action="https://www.paypal.com/cgi-bin/webscr"
+        method="post"
+        // target="_top"
+        target="_blank"
+        style={{
+          // width: "100%",
+          // marginRight: "10px",
+        }}
+      >
+        <input type="hidden" name="business" value={paypalId} />
 
-          {isMonthly ? (
-            <PaypalMonthly amountStr={amountStr} />
-          ) : (
-            <PaypalSingle amountStr={amountStr} />
-          )}
+        {isMonthly ? (
+          <PaypalMonthly amountStr={amountStr} name={strings.paypalMonthlyName} />
+        ) : (
+          <PaypalSingle amountStr={amountStr} name={strings.paypalSingleName} />
+        )}
 
-          <input type="hidden" name="return" value={location.href} />
-          <button
-            class="donation-encourager__button donation-encourager__cta-button"
-            style={{ width: "100%" }}
-          >
-            PayPal
-          </button>
-        </form>
+        <input type="hidden" name="return" value={location.href} />
         <button
-          onClick={onOtherClick}
-          class="donation-encourager__button donation-encourager__unlock-button"
-          style={{ width: "100%" }}
+          class="donation-encourager__button donation-encourager__cta-button"
+          // style={{ width: "100%" }}
         >
-          andere Zahlungswege
+          PayPal
         </button>
-      </div>
-    </>
+      </form>
+      <button
+        onClick={onOtherClick}
+        class="donation-encourager__button donation-encourager__unlock-button"
+        // style={{ width: "100%" }}
+      >
+        andere Zahlungswege
+      </button>
+    </div>
   )
 }
 

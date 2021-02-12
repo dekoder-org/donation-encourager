@@ -17,15 +17,27 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded)
   const [itemSelector, amount] = useItemSelector(boxProps)
   const [isMonthly, setIsMonthly] = useState(false)
-  const [twingleWidget, startTwingle] = useTwingle(amount, isFeedbackShown, isMonthly)
-  const [payMethSelect, onCtaBtnClick] = usePayMethSelect({ isFeedbackShown, isMonthly, startTwingle })
+  const [twingleWidget, startTwingle] = useTwingle(
+    amount,
+    isFeedbackShown,
+    isMonthly
+  )
+  const [payMethSelect, onCtaBtnClick] = usePayMethSelect({
+    isFeedbackShown,
+    isMonthly,
+    startTwingle,
+  })
   const [contentLockActive, unlockContent] = contentLockProps
   const stateClasses = contentLockActive ? " content-lock-active" : ""
+  const patchedAmount = {
+    ...amount,
+    isMonthly,
+  }
   return (
-    <Amount.Provider value={amount}>
+    <Amount.Provider value={patchedAmount}>
       <div className={`donation-encourager__gradient${stateClasses}`} />
       <aside className={`donation-encourager${stateClasses}`}>
-        {payMethSelect || twingleWidget || (
+        {twingleWidget || (
           <>
             <BoxLead
               onClick={() => setIsExpanded(!isExpanded)}
@@ -36,7 +48,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
               {itemSelector}
               <MonthlyCheckbox checked={isMonthly} onClick={setIsMonthly} />
               <p className="donation-encourager__cta">
-                <BoxCtaButton onClick={onCtaBtnClick} />
+                <BoxCtaButton onClick={onCtaBtnClick} isInactive={!!payMethSelect} />
                 {contentLockActive && (
                   <UnlockButton
                     onClick={() => {
@@ -46,6 +58,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
                   />
                 )}
               </p>
+              {payMethSelect}
               <BoxFooter />
               <BoxCredit />
             </CollapseMe>

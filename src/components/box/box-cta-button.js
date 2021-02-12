@@ -3,7 +3,7 @@ import { Settings } from "../app/contexts"
 import { Amount } from "./contexts"
 import { strOrFunc, useStrOrStateFunc, useHookedFunc } from "./helpers"
 
-export default function BoxCtaButton({ onClick }) {
+export default function BoxCtaButton({ onClick, isInactive = false }) {
   const { ctaTargetUrl, strings } = useContext(Settings)
   const amount = useContext(Amount)
   const targetUrl = strOrFunc(ctaTargetUrl, [amount.val])
@@ -12,7 +12,7 @@ export default function BoxCtaButton({ onClick }) {
   return (
     <a
       className={`donation-encourager__button donation-encourager__cta-button${
-        !amount.val ? " inactive" : ""
+        !amount.val || isInactive ? " inactive" : " active"
       }`}
       href={onClick ? "#" : targetUrl}
       target="_blank"
