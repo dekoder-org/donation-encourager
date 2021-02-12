@@ -48,11 +48,6 @@ const defaultConfig = {
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
-    /* new HtmlWebpackPlugin({
-      title: "Custom template",
-      inject: "head", // false
-      template: path.join(__dirname, "dev-page/index.html"),
-    }), */
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),
