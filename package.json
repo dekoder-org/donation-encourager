@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack serve --progress --hot --inline --mode development",
+    "start": "NODE_ENV=development webpack serve --progress --hot --inline --mode development",
     "format": "prettier --write \"src/**/*.js\"",
     "transpile": "babel src -d dist --copy-files",
     "babel-watch": "babel src --watch -d dist --copy-files --verbose",

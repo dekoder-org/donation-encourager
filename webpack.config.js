@@ -1,9 +1,7 @@
-import path from "path"
-import webpack from "webpack"
-import HtmlWebpackPlugin from "html-webpack-plugin"
-// import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
-
-const __dirname = path.resolve()
+const path = require("path")
+const webpack = require("webpack")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")s
 
 const sharedSettings = {
   stats: {
@@ -24,6 +22,7 @@ const defaultConfig = {
     path: path.join(__dirname, "dist"),
     filename: "donation-encourager.js",
   },
+  target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
   resolve: {
     alias: {
       react: "preact/compat",
@@ -43,13 +42,17 @@ const defaultConfig = {
       },
     ],
   },
+  devServer: {
+    hot: true,
+    contentBase: "./dev-page"
+  },
   plugins: [
     // new BundleAnalyzerPlugin(),
-    new HtmlWebpackPlugin({
+    /* new HtmlWebpackPlugin({
       title: "Custom template",
-      inject: false,
-      template: path.join(__dirname, "src/index.html"),
-    }),
+      inject: "head", // false
+      template: path.join(__dirname, "dev-page/index.html"),
+    }), */
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),
@@ -80,4 +83,4 @@ const crossStorageConfig = {
   ],
 }
 
-export default [defaultConfig, crossStorageConfig]
+module.exports = [defaultConfig, crossStorageConfig]
