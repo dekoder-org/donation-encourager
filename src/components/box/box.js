@@ -46,9 +46,16 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
             <CollapseMe isExpanded={isExpanded}>
               <BoxBody />
               {itemSelector}
-              <MonthlyCheckbox checked={isMonthly} onClick={setIsMonthly} />
+              <MonthlyCheckbox
+                checked={isMonthly}
+                onClick={setIsMonthly}
+                id={boxProps.key}
+              />
               <p className="donation-encourager__cta">
-                <BoxCtaButton onClick={onCtaBtnClick} isInactive={!!payMethSelect} />
+                <BoxCtaButton
+                  onClick={onCtaBtnClick}
+                  isInactive={!!payMethSelect}
+                />
                 {contentLockActive && (
                   <UnlockButton
                     onClick={() => {
