@@ -1,9 +1,9 @@
-import path from "path";
-import webpack from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import path from "path"
+import webpack from "webpack"
+import HtmlWebpackPlugin from "html-webpack-plugin"
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-const __dirname = path.resolve();
+const __dirname = path.resolve()
 
 const sharedSettings = {
   stats: {
@@ -12,9 +12,9 @@ const sharedSettings = {
     errors: true,
     warnings: true,
     colors: true,
-    timings: true
+    timings: true,
   },
-  devtool: "source-map"
+  devtool: "source-map",
 }
 
 const defaultConfig = {
@@ -22,43 +22,39 @@ const defaultConfig = {
   entry: path.join(__dirname, "src/index.js"),
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "donation-encourager.js"
+    filename: "donation-encourager.js",
   },
   resolve: {
     alias: {
       react: "preact/compat",
-      "react-dom": "preact/compat"
-    }
+      "react-dom": "preact/compat",
+    },
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ["babel-loader"],
       },
       {
         test: /\.(sc|c)ss$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader"
-        ]
-      }
-    ]
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+    ],
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       title: "Custom template",
       inject: false,
-      template: path.join(__dirname, "src/index.html")
+      template: path.join(__dirname, "src/index.html"),
     }),
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1
-    })
+      maxChunks: 1,
+    }),
   ],
-};
+}
 
 const crossStorageConfig = {
   ...sharedSettings,
@@ -67,18 +63,21 @@ const crossStorageConfig = {
     path: path.join(__dirname, "dist/cross-storage-hub"),
     filename: "cross-storage-hub.js",
     libraryTarget: "window",
-    library: "CrossStorageHub"
+    library: "CrossStorageHub",
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: "cross storage hub",
-      inject: 'head',
-      template: path.join(__dirname, "src/cross-storage-hub/cross-storage-hub.html"),
+      inject: "head",
+      template: path.join(
+        __dirname,
+        "src/cross-storage-hub/cross-storage-hub.html"
+      ),
       filename: "cross-storage-hub.html",
       // inlineSource: '.(js|css)$'
     }),
     // new HtmlWebpackInlineSourcePlugin()
-  ]
+  ],
 }
 
-export default [defaultConfig, crossStorageConfig];
+export default [defaultConfig, crossStorageConfig]
