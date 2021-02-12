@@ -10,6 +10,7 @@ import BoxCredit from "./box-credit"
 import UnlockButton from "./unlock-button"
 import "./box.scss"
 import "./box-dekoder.scss"
+import MonthlyCheckbox from "./monthly-checkbox"
 
 const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded)
@@ -30,6 +31,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
             <CollapseMe isExpanded={isExpanded}>
               <BoxBody />
               {itemSelector}
+              <MonthlyCheckbox />
               <p className="donation-encourager__cta">
                 <BoxCtaButton onClick={onCtaBtnClick} />
                 {contentLockActive && (
