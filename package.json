@@ -12,7 +12,7 @@
     "transpile": "babel src -d dist --copy-files",
     "babel-watch": "babel src --watch -d dist --copy-files --verbose",
     "prepare": "npm run build && npm run transpile",
-    "get-dev-page": "curl https://www.dekoder.org/de/article/nawalny-verhandlung-chimki-vergiftung > ./dev-page/index.html && sed -i '' -e 's|https://donation-encourager.netlify.com|.|' ./dev-page/index.html"
+    "get-dev-page": "curl -X PURGE https://www.dekoder.org/de/article/nawalny-verhandlung-chimki-vergiftung && curl https://www.dekoder.org/de/article/nawalny-verhandlung-chimki-vergiftung > ./dev-page/index.html && sed -i '' -e 's|https://donation-encourager.netlify.com|.|' ./dev-page/index.html"
   },
   "repository": {
     "type": "git",

@@ -119,6 +119,7 @@ const STRINGS_DEFAULT = {
             : "sind sie"
         } dir wert? Vielleicht <strong>${amountStr}</strong>?`
       : "",
+  monthly: `Jeden Monat?`,
   ctaBtn: (timeStr, contentsString, amountStr) => `Mit ${amountStr} danken`,
   unlockBtn: "Einfach weiterlesen",
   footer: (timeStr) =>
@@ -137,6 +138,7 @@ export const SETTINGS_DEFAULT = {
   excludeSelector: "hr, h6, aside",
   contentTypes: CONTENT_TYPES_DEFAULT,
   twingleWidgetUrl: "",
+  paypalId: "",
   ctaTargetUrl: (amountVal) =>
     `https://www.dekoder.org/de/spenden?tw_amount=${amountVal}`,
   intrusivenessLevels: INTRUSIVENESS_LEVELS_DEFAULT,

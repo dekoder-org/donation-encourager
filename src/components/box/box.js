@@ -10,19 +10,22 @@ import BoxCredit from "./box-credit"
 import UnlockButton from "./unlock-button"
 import "./box.scss"
 import "./box-dekoder.scss"
-import MonthlyCheckbox from "./monthly-checkbox"
+import MonthlyCheckbox from "./box-monthly-check"
+import usePayMethSelect from "../pay-meth-select"
 
 const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded)
   const [itemSelector, amount] = useItemSelector(boxProps)
-  const [twingleWidget, onCtaBtnClick] = useTwingle(amount, isFeedbackShown)
+  const [isMonthly, setIsMonthly] = useState(false)
+  const [twingleWidget, startTwingle] = useTwingle(amount, isFeedbackShown, isMonthly)
+  const [payMethSelect, onCtaBtnClick] = usePayMethSelect({ isFeedbackShown, isMonthly, startTwingle })
   const [contentLockActive, unlockContent] = contentLockProps
   const stateClasses = contentLockActive ? " content-lock-active" : ""
   return (
     <Amount.Provider value={amount}>
       <div className={`donation-encourager__gradient${stateClasses}`} />
       <aside className={`donation-encourager${stateClasses}`}>
-        {twingleWidget || (
+        {payMethSelect || twingleWidget || (
           <>
             <BoxLead
               onClick={() => setIsExpanded(!isExpanded)}
@@ -31,7 +34,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
             <CollapseMe isExpanded={isExpanded}>
               <BoxBody />
               {itemSelector}
-              <MonthlyCheckbox />
+              <MonthlyCheckbox checked={isMonthly} onClick={setIsMonthly} />
               <p className="donation-encourager__cta">
                 <BoxCtaButton onClick={onCtaBtnClick} />
                 {contentLockActive && (

@@ -1,26 +1,24 @@
 import React, { useEffect } from "react"
-import { useHookedFunc } from "../box/helpers"
+import BackButton from "./back-button"
 
-export default function TwingleWidget({ amount, exit, widgetUrl, backStr }) {
+export default function TwingleWidget({
+  amount,
+  exit,
+  widgetUrl,
+  isMonthly,
+}) {
   const widgetId = "_rl60hvpcu" // random string
   useTwingleResizeListener()
-  const onBackBtnClick = useHookedFunc("onBackBtnClick", exit)
+  const url = `${widgetUrl}/${widgetId}?tw_amount=${amount}${
+    isMonthly ? "&tw_rhythm=monthly" : ""
+  }`
   return (
     <div className="donation-encourager__twingle-wrapper">
-      <p className="donation-encourager__meta">
-        <small>
-          <button
-            className="donation-encourager__reset-btn"
-            onClick={onBackBtnClick}
-          >
-            {backStr}
-          </button>
-        </small>
-      </p>
+      <BackButton onClick={exit} />
       <iframe
         scrolling="no"
         id={`twingleframe-${widgetId}`}
-        src={`${widgetUrl}/${widgetId}?tw_amount=${amount}`}
+        src={url}
         style={{
           width: "100%",
           border: "none",
