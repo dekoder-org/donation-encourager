@@ -28,7 +28,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
       <aside className={`donation-encourager ${stateClasses}`}>
         {twingleWidget || (
           <>
-            <BoxLead onClick={toggleExpand} isExpanded={isExpanded} />
+            <BoxLead onClick={toggleExpanded} isExpanded={isExpanded} />
             <CollapseMe isExpanded={isExpanded}>
               <BoxBody />
               {itemSelector}
