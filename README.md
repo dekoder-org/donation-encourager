@@ -192,6 +192,7 @@ const STRINGS_DEFAULT = {
   feedbackBtn: "OK",
   backBtn: "Zurück",
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`,
+  otherPaymentMethods: "andere Zahlungswege",
   paypalSingleName: "einmalige Spende",
   paypalMonthlyName: "Klubmitgliedschaft (monatlich)"
 };

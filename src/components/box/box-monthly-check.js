@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useState, useContext } from "react"
 import { Settings } from "../app/contexts"
 import "./box-monthly-check.scss"
 
@@ -23,4 +23,16 @@ const MonthlyCheckbox = ({ id, checked = false, onClick }) => {
   )
 }
 
-export default MonthlyCheckbox
+function useMonthlyCheckbox(id) {
+  const [isMonthly, setIsMonthly] = useState(false)
+  const comp = (
+    <MonthlyCheckbox
+      id={id}
+      checked={isMonthly}
+      onClick={() => setIsMonthly((m) => !m)}
+    />
+  )
+  return [comp, isMonthly]
+}
+
+export default useMonthlyCheckbox

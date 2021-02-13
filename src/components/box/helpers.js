@@ -12,7 +12,7 @@ export function useStrOrStateFunc(input) {
     readContentsString,
     amount.str,
     storage,
-    amount.isMonthly
+    amount.isMonthly,
   ])
 }
 
@@ -22,7 +22,8 @@ export function strOrFunc(input, argumentArr = []) {
 
 export function useHookedFunc(hookName, defaultFunc, extraArgs) {
   const { hooks } = useContext(Settings)
-  return typeof hooks[hookName] === "function"
+  return typeof hooks[hookName] === "function" &&
+    typeof defaultFunc === "function"
     ? (ev) => {
         const customHookReturn = hooks[hookName](defaultFunc, extraArgs)
         if (customHookReturn !== false) defaultFunc(ev)

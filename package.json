@@ -12,7 +12,8 @@
     "transpile": "babel src -d dist --copy-files",
     "babel-watch": "babel src --watch -d dist --copy-files --verbose",
     "prepare": "npm run build && npm run transpile",
-    "get-dev-page": "curl -X PURGE https://www.dekoder.org/de/article/nawalny-verhandlung-chimki-vergiftung && curl https://www.dekoder.org/de/article/nawalny-verhandlung-chimki-vergiftung > ./dev-page/index.html && sed -i '' -e 's|https://donation-encourager.netlify.com|.|' ./dev-page/index.html"
+    "get-dev-page": "curl -X PURGE https://www.dekoder.org/de/article/nawalny-verhandlung-chimki-vergiftung && curl https://www.dekoder.org/de/article/nawalny-verhandlung-chimki-vergiftung > ./dev-page/index.html && sed -i '' -e 's|https://donation-encourager.netlify.com|.|' ./dev-page/index.html",
+    "analyze": "NODE_ENV=analyze webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,7 @@
     "@babel/register": "^7.12.13",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.2",
-    "eslint": "^7.19.0",
+    "eslint": "^7.20.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-inline-source-plugin": "0.0.10",

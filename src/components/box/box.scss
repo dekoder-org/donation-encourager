@@ -54,10 +54,11 @@
 .donation-encourager__lead-text {
   color: $color--primary;
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: 0 !important;
 }
 
 .donation-encourager__body {
+  margin-top: 1em !important;
   margin-bottom: 1em;
 }
 
@@ -86,6 +87,9 @@
   margin-bottom: 2em;
   display: flex; 
   justify-content: center;
+  &[hidden] {
+    display: none;
+  }
 }
 
 .donation-encourager__button {

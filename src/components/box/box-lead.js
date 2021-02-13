@@ -8,7 +8,7 @@ export default function BoxLead({ onClick, isExpanded }) {
   const { strings } = useContext(Settings)
   const leadStr = strOrFunc(strings.lead, [totalContents])
   return (
-    <div className="donation-encourager__lead experimental" onClick={onClick}>
+    <div className={`donation-encourager__lead`} onClick={onClick}>
       <h2 className="donation-encourager__headline">
         <Counter value={totalContents}></Counter>
       </h2>

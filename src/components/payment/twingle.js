@@ -1,16 +1,33 @@
-import React, { useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import { Settings } from "../app/contexts"
+import { Amount } from "../box/contexts"
 import BackButton from "./back-button"
 
-export default function TwingleWidget({
-  amount,
-  exit,
-  widgetUrl,
-  isMonthly,
-}) {
+export default function useTwingle(alternativeAction, isFeedbackShown) {
+  const { twingleWidgetUrl } = useContext(Settings)
+  const [widgetExpanded, setWidgetExpanded] = useState(false)
+  const startTwingle = twingleWidgetUrl
+    ? (e) => {
+        if (e) e.preventDefault()
+        setWidgetExpanded(true)
+      }
+    : alternativeAction
+  const twingleWidget = twingleWidgetUrl && widgetExpanded && (
+    <TwingleWidget
+      exit={() => setWidgetExpanded(false)}
+      widgetUrl={twingleWidgetUrl}
+    />
+  )
+  useEffect(() => setWidgetExpanded(false), [isFeedbackShown])
+  return [twingleWidget, startTwingle]
+}
+
+function TwingleWidget({ exit, widgetUrl }) {
+  const amount = useContext(Amount)
   const widgetId = "_rl60hvpcu" // random string
   useTwingleResizeListener()
-  const url = `${widgetUrl}/${widgetId}?tw_amount=${amount}${
-    isMonthly ? "&tw_rhythm=monthly" : ""
+  const url = `${widgetUrl}/${widgetId}?tw_amount=${amount.val}${
+    amount.isMonthly ? "&tw_rhythm=monthly" : ""
   }`
   return (
     <div className="donation-encourager__twingle-wrapper">

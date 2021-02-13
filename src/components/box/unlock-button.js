@@ -15,4 +15,17 @@ const UnlockButton = ({ onClick }) => {
   )
 }
 
-export default UnlockButton
+function useUnlockButton(contentLockProps, setIsExpanded) {
+  const [contentLockActive, unlockContent] = contentLockProps
+  const comp = contentLockActive && (
+    <UnlockButton
+      onClick={() => {
+        setIsExpanded(false)
+        unlockContent()
+      }}
+    />
+  )
+  return comp
+}
+
+export default useUnlockButton

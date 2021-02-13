@@ -1,7 +1,7 @@
 const path = require("path")
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")s
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
 const sharedSettings = {
   stats: {
@@ -47,7 +47,6 @@ const defaultConfig = {
     contentBase: "./dev-page"
   },
   plugins: [
-    // new BundleAnalyzerPlugin(),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),
@@ -74,8 +73,12 @@ const crossStorageConfig = {
       filename: "cross-storage-hub.html",
       // inlineSource: '.(js|css)$'
     }),
-    // new HtmlWebpackInlineSourcePlugin()
   ],
+}
+
+if (process.env.NODE_ENV === "analyze") {
+  defaultConfig.plugins.push(new BundleAnalyzerPlugin())
+  // crossStorageConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
 module.exports = [defaultConfig, crossStorageConfig]
