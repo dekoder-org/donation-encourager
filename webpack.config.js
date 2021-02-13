@@ -44,7 +44,7 @@ const defaultConfig = {
   },
   devServer: {
     hot: true,
-    contentBase: "./dev-page"
+    contentBase: "./dev-page",
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({

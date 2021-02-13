@@ -3,17 +3,13 @@ import { Settings } from "../contexts"
 import useDomObserver from "./dom-observer"
 
 export default function useTargets(currentContent) {
-  const { targetSelector } = useContext(Settings)
   const updateTrigger = useDomObserver()
-  const targetElements = useSelector(
-    targetSelector,
-    updateTrigger,
-    currentContent
-  )
+  const targetElements = useSelector(updateTrigger, currentContent)
   return targetElements
 }
 
-function useSelector(targetSelector, updateTrigger, currentContent) {
+function useSelector(updateTrigger, currentContent) {
+  const { targetSelector } = useContext(Settings)
   return useMemo(() => {
     if (typeof document === "undefined") return []
     ;[].push(updateTrigger)
