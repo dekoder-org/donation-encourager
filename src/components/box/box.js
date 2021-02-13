@@ -29,7 +29,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
         {twingleWidget || (
           <>
             <BoxLead onClick={toggleExpand} isExpanded={isExpanded} />
-            <CollapseMe hidden={!isExpanded}>
+            <CollapseMe isExpanded={isExpanded}>
               <BoxBody />
               {itemSelector}
               {monthlyCheckbox}
