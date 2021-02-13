@@ -1,9 +1,9 @@
-import {
+/* import {
   faCoffee,
   faIceCream,
   faPizzaSlice,
   faGem,
-} from "@fortawesome/free-solid-svg-icons"
+} from "@fortawesome/free-solid-svg-icons" */
 
 export const CONTENT_TYPE_DEFAULT = "default"
 
@@ -46,15 +46,15 @@ const ITEMS_EMOJI2 = [
   // { value: 100, icon: "💰" }
 ]
 
-const ITEMS_BLACK = [
+/* const ITEMS_BLACK = [
   { value: 2, icon: faIceCream },
   { value: 3, icon: faCoffee },
   { value: 5, icon: faPizzaSlice },
   { value: 15, icon: faGem },
-]
+] */
 
 export const itemPresets = {
-  black: ITEMS_BLACK,
+  // black: ITEMS_BLACK,
   emoji1: ITEMS_EMOJI1,
   emoji2: ITEMS_EMOJI2,
 }

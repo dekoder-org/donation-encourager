@@ -57,9 +57,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-solid-svg-icons": "^5.15.2",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "cross-storage": "^1.0.0",
     "mobile-drag-drop": "^2.3.0-rc.2",
     "preact": "^10.5.12",

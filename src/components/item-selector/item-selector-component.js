@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Draggable, DropTarget } from "./drag-drop"
 import "./item-selector.scss"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
   const dragListItems = items
@@ -78,5 +78,6 @@ const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
 export default ItemSelector
 
 function renderIcon(icon) {
-  return typeof icon === "object" ? <FontAwesomeIcon icon={icon} /> : icon
+  // return typeof icon === "object" ? <FontAwesomeIcon icon={icon} /> : icon
+  return icon
 }
