@@ -15,7 +15,7 @@ import CollapseMe from "./collapse-me"
 
 const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded)
-  const toggleExpand = setIsExpanded((e) => !e)
+  const toggleExpanded = () => setIsExpanded((e) => !e) 
   const [itemSelector, amount] = useItemSelector(boxProps)
   const [monthlyCheckbox, isMonthly] = useMonthlyCheckbox(boxProps.key)
   const [paypalBtn, twingleWidget, onCtaClick] = usePay(amount, isFeedbackShown)
@@ -28,8 +28,8 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
       <aside className={`donation-encourager ${stateClasses}`}>
         {twingleWidget || (
           <>
-            <BoxLead onClick={toggleExpand} isExpanded={isExpanded} />
-            <CollapseMe hidden={!isExpanded}>
+            <BoxLead onClick={toggleExpanded} isExpanded={isExpanded} />
+            <CollapseMe isExpanded={isExpanded}>
               <BoxBody />
               {itemSelector}
               {monthlyCheckbox}
