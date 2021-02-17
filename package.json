@@ -1,6 +1,6 @@
 {
   "name": "donation-encourager",
-  "version": "1.0.26",
+  "version": "1.1.0",
   "description": "Remind your readers with a smile about donating",
   "main": "dist/index.esm.js",
   "unpkg": "dist/donation-encourager.js",
