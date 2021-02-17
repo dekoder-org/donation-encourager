@@ -8,7 +8,7 @@ const MonthlyCheckbox = ({ id, checked = false, onClick }) => {
   return (
     <p className="donation-encourager__monthly-check">
       <span>{strings.monthly}</span>
-      <span class="switch">
+      <span className="switch">
         <input
           id={inputId}
           type="checkbox"
