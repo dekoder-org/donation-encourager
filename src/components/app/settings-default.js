@@ -143,6 +143,7 @@ export const SETTINGS_DEFAULT = {
   contentTypes: CONTENT_TYPES_DEFAULT,
   twingleWidgetUrl: "",
   paypalId: "",
+  paypalReturnUrl: "",
   ctaTargetUrl: (amountVal) =>
     `https://www.dekoder.org/de/spenden?tw_amount=${amountVal}`,
   intrusivenessLevels: INTRUSIVENESS_LEVELS_DEFAULT,

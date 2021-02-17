@@ -7,6 +7,7 @@ import React, {
 } from "react"
 import { Settings } from "../app/contexts"
 import { Amount } from "../box/contexts"
+import { strOrFunc } from "../box/helpers"
 
 const usePaypal = (alternativeAction) => {
   const [active, setActive] = useState(false)
@@ -33,7 +34,7 @@ export default usePaypal
 function PaypalBtn({ alternativeAction, paypalId, exit }) {
   const ref = useRef()
   const { isMonthly, val } = useContext(Amount)
-  const { strings } = useContext(Settings)
+  const { paypalReturnUrl, strings } = useContext(Settings)
   const { paypalMonthlyName, paypalSingleName, otherPaymentMethods } = strings
   const amountStr = `${val}.00`
 
@@ -45,6 +46,8 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
     }
   }, [alternativeAction, exit])
 
+  const returnUrl = strOrFunc(paypalReturnUrl, []) || location.href
+
   return (
     <div class="donation-encourager__cta" hidden={!alternativeAction}>
       <form
@@ -55,7 +58,7 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
       >
         <input type="hidden" name="business" value={paypalId} />
 
-        {isMonthly ? (
+        {isMonthly ? (// <input type="hidden" name="cmd" value="_xclick-subscriptions" />
           <>
             <input type="hidden" name="cmd" value="_xclick-subscriptions" />
             <input type="hidden" name="currency_code" value="EUR" />
@@ -81,7 +84,7 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
           </>
         )}
 
-        <input type="hidden" name="return" value={location.href} />
+        <input type="hidden" name="return" value={returnUrl} />
         <button class="donation-encourager__button donation-encourager__cta-button">
           PayPal
         </button>
