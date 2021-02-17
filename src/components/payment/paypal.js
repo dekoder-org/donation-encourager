@@ -89,7 +89,7 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
       {!!alternativeAction && (
         <button
           onClick={alternativeAction}
-          class="donation-encourager__button donation-encourager__unlock-button"
+          class="donation-encourager__button donation-encourager__cta-button"
         >
           {otherPaymentMethods}
         </button>
