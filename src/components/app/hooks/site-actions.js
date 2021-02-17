@@ -40,7 +40,7 @@ function handleAction(action, funcs) {
   } else if (actionType === "pageview") {
     sendPageView(actionData)
   } else if (actionType === "donation") {
-    window.postMessage({ type: "donationFinished" })
+    setTimeout(() => window.postMessage({ type: "donationFinished" }), 500)
   } else if (actionType === "disable") {
     setSettings((s) => {
       return { ...s, ...SETTINGS_DISABLE_ALL }
