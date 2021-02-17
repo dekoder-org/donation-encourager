@@ -85,14 +85,14 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
         )}
 
         <input type="hidden" name="return" value={returnUrl} />
-        <button class="donation-encourager__button donation-encourager__cta-button">
+        <button className="donation-encourager__button donation-encourager__cta-button">
           PayPal
         </button>
       </form>
       {!!alternativeAction && (
         <button
           onClick={alternativeAction}
-          class="donation-encourager__button donation-encourager__cta-button"
+          className="donation-encourager__button donation-encourager__cta-button"
         >
           {otherPaymentMethods}
         </button>
