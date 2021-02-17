@@ -119,7 +119,7 @@ const STRINGS_DEFAULT = {
             : "sind sie"
         } dir wert? Vielleicht <strong>${amountStr}</strong>?`
       : "",
-  monthly: `Monatlich spenden und Klubmitglied werden?`,
+  monthly: "Monatlich spenden?",
   ctaBtn: (timeStr, contentsStr, amountStr, storage, isMonthly) =>
     `Mit ${amountStr} danken, ${isMonthly ? "jeden Monat!" : "einmalig"}`,
   unlockBtn: "Erstmal weiterlesen",
@@ -134,7 +134,7 @@ const STRINGS_DEFAULT = {
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`,
   otherPaymentMethods: "andere Zahlungswege",
   paypalSingleName: "einmalige Spende",
-  paypalMonthlyName: "Klubmitgliedschaft (monatlich)",
+  paypalMonthlyName: "monatliche Spende",
 }
 
 export const SETTINGS_DEFAULT = {

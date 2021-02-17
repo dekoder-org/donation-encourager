@@ -165,11 +165,11 @@ The texts for the donation encourager boxes can be defined as static strings or,
 
 ```js
 const STRINGS_DEFAULT = {
-  currency: amount => `${amount} €`,
+  currency: (amount) => `${amount} €`,
   and: "und",
   hours: { singular: "Stunde", plural: "Stunden" },
   minutes: { singular: "Minute", plural: "Minuten" },
-  lead: totalContents =>
+  lead: (totalContents) =>
     `${totalContents === 1 ? "Inhalt" : "Inhalte"} bisher gelesen`,
   body: (timeStr, contentsStr, amountStr, storage) =>
     storage.totalContents
@@ -181,9 +181,11 @@ const STRINGS_DEFAULT = {
             : "sind sie"
         } dir wert? Vielleicht <strong>${amountStr}</strong>?`
       : "",
-  ctaBtn: (timeStr, contentsStr, amountStr, storage, isMonthly) => `Mit ${amountStr} danken, ${isMonthly ? "jeden Monat!" : "einmalig"}`,
+  monthly: "Monatlich spenden?",
+  ctaBtn: (timeStr, contentsStr, amountStr, storage, isMonthly) =>
+    `Mit ${amountStr} danken, ${isMonthly ? "jeden Monat!" : "einmalig"}`,
   unlockBtn: "Erstmal weiterlesen",
-  footer: timeStr =>
+  footer: (timeStr) =>
     `* Lesezeit insgesamt auf dekoder: ${timeStr}. Diese Daten werden nur in deinem Browser gespeichert und nicht auf unsere Server übertragen!`,
   resetBtn: "Zähler zurücksetzen",
   feedbackTitle: "Vielen Dank für deine Spende",
@@ -194,7 +196,7 @@ const STRINGS_DEFAULT = {
   credit: `developed by <a href="https://www.dekoder.org/" target="_blank">dekoder</a>`,
   otherPaymentMethods: "andere Zahlungswege",
   paypalSingleName: "einmalige Spende",
-  paypalMonthlyName: "Klubmitgliedschaft (monatlich)"
+  paypalMonthlyName: "monatliche Spende",
 };
 ```
 
