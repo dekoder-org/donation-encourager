@@ -67,7 +67,7 @@ The `settings` object has the following properties:
 property | default value | description
 --- | --- | ---
 targetSelector | `".entry-content"` | CSS-selector that indicates where to place the donation encourager boxes (usually the articles text body).
-excludeSelector | `"hr, h6, aside"` | Don't take those elements into account for the box positioner.
+excludeSelector | `"hr, h6, aside, span, script"` | Don't take those elements into account for the box positioner.
 contentTypes | `CONTENT_TYPES_DEFAULT` | Defines the content types to track and how to spell them in the box body text. See content types section below.
 twingleWidgetUrl | `""` | If you use Twingle, indicate your Twingle widget URL to render the donation widget directly in the donation encourager box. How to find your widget URL: Log into to your TwingleManager, go to Project settings of your desired project, copy the "URL of the donation page", replace `/page` with `/widget` at the end of that URL. The Twingle widget URL should have the following format: `https://spenden.twingle.de/[YOUR-COMPANY-NAME]/[PROJECT-NAME]/[WIDGET-ID]/widget`.
 ctaTargetUrl | `function(amount) { return "https://www.dekoder.org/de/spenden?tw_amount=" + amount; }` | Alternatively: Provide an URL of your custom donation site. When a user pushes the Donate-button your custom donation site will be opened in a new tab. `ctaTargetUrl` can be a string or also a function with the selected total amount as an argument.

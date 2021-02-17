@@ -134,7 +134,7 @@ const STRINGS_DEFAULT = {
 
 export const SETTINGS_DEFAULT = {
   targetSelector: ".entry-content",
-  excludeSelector: "hr, h6, aside",
+  excludeSelector: "hr, h6, aside, span, script",
   contentTypes: CONTENT_TYPES_DEFAULT,
   twingleWidgetUrl: "",
   ctaTargetUrl: (amountVal) =>
