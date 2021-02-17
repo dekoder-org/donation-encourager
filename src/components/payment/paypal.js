@@ -49,7 +49,7 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
   const returnUrl = strOrFunc(paypalReturnUrl, []) || location.href
 
   return (
-    <div class="donation-encourager__cta" hidden={!alternativeAction}>
+    <div className="donation-encourager__cta" hidden={!alternativeAction}>
       <form
         action="https://www.paypal.com/cgi-bin/webscr"
         method="post"
