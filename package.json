@@ -5,14 +5,14 @@
   "main": "dist/index.esm.js",
   "unpkg": "dist/donation-encourager.js",
   "scripts": {
-    "dev": "webpack --mode development",
+    "dev": "npm run get-dev-page && npm run start",
     "build": "webpack --mode production",
     "start": "NODE_ENV=development webpack serve --progress --hot --mode development",
     "format": "prettier --write \"src/**/*.js\"",
     "transpile": "babel src -d dist --copy-files",
     "babel-watch": "babel src --watch -d dist --copy-files --verbose",
     "prepare": "npm run build && npm run transpile",
-    "get-dev-page": "curl -X PURGE https://www.dekoder.org/de/article/journalisten-auslaendische-agenten-medien && curl https://www.dekoder.org/de/article/journalisten-auslaendische-agenten-medien > ./dev-page/index.html && sed -i '' -e 's|https://donation-encourager.netlify.com|.|' ./dev-page/index.html",
+    "get-dev-page": "curl https://www.dekoder.org/de/article/journalisten-auslaendische-agenten-medien > ./dev-page/index.html && sed -i '' -e 's|https://donation-encourager.netlify.com|.|' ./dev-page/index.html",
     "analyze": "NODE_ENV=analyze webpack --mode production"
   },
   "repository": {
