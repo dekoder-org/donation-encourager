@@ -2,7 +2,7 @@ node_modules
 /*.log
 .cache/
 /dist
-dev-page/*
+dev-page
 
 /mysql_db.nix
 /logs
