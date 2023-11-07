@@ -63,6 +63,11 @@ const ITEMS_DEFAULT = itemPresets.emoji2
 
 export const INTRUSIVENESS_LEVELS_DEFAULT = [
   {
+    // level 0: no display for validated members
+    contentThreshold: 0,
+    boxSettings: [],
+  },
+  {
     // level 1
     contentThreshold: 0,
     boxSettings: [{ position: "bottom", expanded: true }],
