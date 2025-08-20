@@ -142,6 +142,30 @@ const STRINGS_DEFAULT = {
   paypalMonthlyName: "monatliche Spende",
 }
 
+const CLASS_NAMES_DEFAULT = {
+  wrapper: "donation-encourager__wrapper",
+  box: "donation-encourager",
+  collapseMe: "donation-encourager__collapse-me",
+  lead: "donation-encourager__lead",
+  headline: "donation-encourager__headline",
+  leadText: "donation-encourager__lead-text",
+  body: "donation-encourager__body",
+  meta: "donation-encourager__meta",
+  resetBtn: "donation-encourager__reset-btn",
+  cta: "donation-encourager__cta",
+  button: "donation-encourager__button",
+  ctaButton: "donation-encourager__cta-button",
+  unlockButton: "donation-encourager__unlock-button",
+  itemSelector: "donation-encourager__item-selector",
+  credit: "donation-encourager__credit",
+  strikeOut: "donation-encourager__strike-out",
+  monthlyCheck: "donation-encourager__monthly-check",
+  lockContent: "donation-encourager__lock-content",
+  gradient: "donation-encourager__gradient",
+  feedback: "donation-encourager__feedback",
+  feedbackOverlay: ".donation-encourager__feedback-overlay",
+}
+
 export const SETTINGS_DEFAULT = {
   targetSelector: ".entry-content",
   excludeSelector: "hr, h6, aside, span, script",
@@ -156,7 +180,6 @@ export const SETTINGS_DEFAULT = {
     items: ITEMS_DEFAULT,
     preselectedItemsFilter: (item, i) => i === 0,
   },
-  wrapperClass: "donation-encourager__wrapper",
   storageKey: "donation-encourager-tracker",
   crossStorageUrl: "",
   trackerEnabled: true,
@@ -173,6 +196,7 @@ export const SETTINGS_DEFAULT = {
     onBackBtnClick: undefined,
     onDonationFinished: undefined,
   },
+  classNames: CLASS_NAMES_DEFAULT,
 }
 
 export const SETTINGS_DISABLE_ALL = {
@@ -194,7 +218,7 @@ export const SETTINGS_DEFAULT_DISABLED = {
 
 export function mergeInNewSettings(
   newSettings,
-  oldSettings = SETTINGS_DEFAULT
+  oldSettings = SETTINGS_DEFAULT,
 ) {
   return {
     ...oldSettings,

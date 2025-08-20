@@ -10,7 +10,7 @@
     height: $item-size;
     line-height: $item-size;
     text-align: center;
-    transition: .1s ease;
+    transition: 0.1s ease;
     width: $item-size;
 
     &.selected,
@@ -46,20 +46,20 @@
     min-height: $item-size-mobile;
     border: 1px dashed gray;
     border-radius: 12px;
-  
+
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
 
     background-color: none;
-    transition: background-color .2s ease;
+    transition: background-color 0.2s ease;
 
     @media screen and (max-width: $breakpoint-mobile) {
       min-height: $item-size-mobile;
     }
 
     &.highlighted {
-      background-color: rgba(18, 159, 201, 0.1)
+      background-color: rgba(18, 159, 201, 0.1);
     }
     .donation-encourager__drop-target {
       .donation-encourager__draggable {

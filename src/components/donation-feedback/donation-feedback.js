@@ -1,14 +1,14 @@
 import React, { useContext, useCallback, useEffect } from "react"
 import { Portal } from "react-portal"
 import { Settings, Storage } from "../app/contexts"
-import BackgroundSunglasses from "./background-sunglasses"
+import FeedbackOverlay from "./feedback-overlay"
 import "./donation-feedback.scss"
 import "../box/box.scss"
 
 const FEEDBACK_DESTROY_DELAY = 15000 // in ms
 
 export default function DonationFeedback({ hideFeedback }) {
-  const { strings } = useContext(Settings)
+  const { strings, classNames } = useContext(Settings)
   const { reset } = useContext(Storage)
   const destroy = useCallback(() => {
     hideFeedback()
@@ -18,13 +18,13 @@ export default function DonationFeedback({ hideFeedback }) {
   useCallbackDelay(destroy, FEEDBACK_DESTROY_DELAY)
   return (
     <Portal node={document.body}>
-      <BackgroundSunglasses onClick={destroy}>
-        <div className="donation-encourager__feedback">
+      <FeedbackOverlay onClick={destroy}>
+        <div className={classNames.feedback}>
           <h3>{strings.feedbackTitle}</h3>
           <p>{strings.feedbackBody}</p>
-          <p className="donation-encourager__cta">
+          <p className={classNames.cta}>
             <a
-              className="donation-encourager__button donation-encourager__cta-button"
+              className={`${classNames.button} ${classNames.ctaButton}`}
               href="#"
               onClick={(e) => {
                 e.preventDefault()
@@ -35,7 +35,7 @@ export default function DonationFeedback({ hideFeedback }) {
             </a>
           </p>
         </div>
-      </BackgroundSunglasses>
+      </FeedbackOverlay>
     </Portal>
   )
 }

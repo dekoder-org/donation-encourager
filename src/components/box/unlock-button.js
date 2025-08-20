@@ -3,11 +3,11 @@ import { Settings } from "../app/contexts"
 import { useHookedFunc } from "./helpers"
 
 const UnlockButton = ({ onClick }) => {
-  const { strings } = useContext(Settings)
+  const { strings, classNames } = useContext(Settings)
   const onUnlockBtnClick = useHookedFunc("onUnlockBtnClick", onClick)
   return (
     <a
-      className="donation-encourager__button donation-encourager__unlock-button"
+      className={`${classNames.button} ${classNames.unlockButton}`}
       onClick={onUnlockBtnClick}
     >
       {strings.unlockBtn}

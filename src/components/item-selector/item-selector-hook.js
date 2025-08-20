@@ -2,8 +2,6 @@ import React, { useState, useContext, useMemo } from "react"
 import ItemSelector from "./item-selector-component"
 import { Settings } from "../app/contexts"
 
-const STRIKEOUT_CLASS = "donation-encourager__strike-out"
-
 export default function useItemSelector({ items, preselectedItemsFilter }) {
   const preselectedItems = items.filter(preselectedItemsFilter)
   const [selectedItems, setSelectedItems] = useState(preselectedItems)
@@ -32,7 +30,7 @@ function useDiscount(undiscountedVal, selectedItems) {
 }
 
 function useAmountObject(undiscountedVal, discountedVal) {
-  const { locale, strings } = useContext(Settings)
+  const { locale, strings, classNames } = useContext(Settings)
   const { currency } = strings
   const undiscountedRounded = Math.round(undiscountedVal)
   const discountedRounded = Math.round(discountedVal)
@@ -41,15 +39,15 @@ function useAmountObject(undiscountedVal, discountedVal) {
       val: discountedRounded,
       str:
         undiscountedRounded !== discountedRounded
-          ? `<span class="${STRIKEOUT_CLASS}">
-                <span class="${STRIKEOUT_CLASS}-stroke"></span>
-                <span class="${STRIKEOUT_CLASS}-text">
+          ? `<span class="${classNames.strikeOut}">
+                <span class="${classNames}-stroke"></span>
+                <span class="${classNames}-text">
                   ${moneyStr(undiscountedRounded, locale, currency)}
                 </span>
               </span> ${moneyStr(discountedRounded, locale, currency)}`
           : `${moneyStr(undiscountedRounded, locale, currency)}`,
     }),
-    [undiscountedRounded, discountedRounded, locale, currency]
+    [undiscountedRounded, discountedRounded, locale, currency, classNames],
   )
 }
 

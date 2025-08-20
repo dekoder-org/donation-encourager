@@ -3,10 +3,10 @@ import { Settings } from "../app/contexts"
 import "./box-monthly-check.scss"
 
 const MonthlyCheckbox = ({ id, checked = false, onClick }) => {
-  const { strings } = useContext(Settings)
+  const { strings, classNames } = useContext(Settings)
   const inputId = `donation-encourager__monthly-check_switch-${id}`
   return (
-    <p className="donation-encourager__monthly-check">
+    <p className={classNames.monthlyCheck}>
       <span>{strings.monthly}</span>
       <span className="switch">
         <input
@@ -15,9 +15,7 @@ const MonthlyCheckbox = ({ id, checked = false, onClick }) => {
           checked={checked}
           onChange={(e) => onClick(e.target.checked)}
         />
-        <label htmlFor={inputId} className="donation-encourager__monthly-check-label">
-          Switch
-        </label>
+        <label htmlFor={inputId}>Switch</label>
       </span>
     </p>
   )

@@ -5,14 +5,14 @@ import { strOrFunc } from "./helpers"
 
 export default function BoxLead({ onClick, isExpanded }) {
   const { totalContents } = useContext(Storage)
-  const { strings } = useContext(Settings)
+  const { strings, classNames } = useContext(Settings)
   const leadStr = strOrFunc(strings.lead, [totalContents])
   return (
-    <div className={`donation-encourager__lead`} onClick={onClick}>
-      <h2 className="donation-encourager__headline">
+    <div className={classNames.lead} onClick={onClick}>
+      <h2 className={classNames.headline}>
         <Counter value={totalContents}></Counter>
       </h2>
-      <p className="donation-encourager__lead-text">
+      <p className={classNames.leadText}>
         <small>
           {leadStr}
           {isExpanded ? " ↑" : " ↓"}
@@ -21,15 +21,3 @@ export default function BoxLead({ onClick, isExpanded }) {
     </div>
   )
 }
-
-/*
-        <button
-          className="donation-encourager__collapser"
-          onClick={onClick}
-          aria-expanded={isExpanded}
-        >
-          <small>
-            {isExpanded ? "Weniger Informationen ↑" : "Mehr Informationen ↓"}
-          </small>
-        </button>
-*/

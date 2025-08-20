@@ -3,11 +3,11 @@ import { Settings } from "../app/contexts"
 import { useStrOrStateFunc } from "./helpers"
 
 const BoxBody = () => {
-  const { strings } = useContext(Settings)
+  const { strings, classNames } = useContext(Settings)
   const bodyString = useStrOrStateFunc(strings.body)
   return (
     <p
-      className="donation-encourager__body"
+      className={classNames.body}
       dangerouslySetInnerHTML={{ __html: bodyString }}
     />
   )

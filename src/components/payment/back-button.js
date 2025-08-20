@@ -3,15 +3,12 @@ import { Settings } from "../app/contexts"
 import { useHookedFunc } from "../box/helpers"
 
 const BackButton = ({ onClick }) => {
-  const { strings } = useContext(Settings)
+  const { strings, classNames } = useContext(Settings)
   const onBackBtnClick = useHookedFunc("onBackBtnClick", onClick)
   return (
-    <p className="donation-encourager__meta">
+    <p className={classNames.meta}>
       <small>
-        <button
-          className="donation-encourager__reset-btn"
-          onClick={onBackBtnClick}
-        >
+        <button className={classNames.resetBtn} onClick={onBackBtnClick}>
           {strings.backBtn}
         </button>
       </small>

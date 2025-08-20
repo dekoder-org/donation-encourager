@@ -4,17 +4,14 @@ import { useStrOrStateFunc, useHookedFunc } from "./helpers"
 
 export default function BoxFooter() {
   const { reset } = useContext(Storage)
-  const { strings } = useContext(Settings)
+  const { strings, classNames } = useContext(Settings)
   const footerStr = useStrOrStateFunc(strings.footer)
   const onResetBtnClick = useHookedFunc("onResetBtnClick", reset)
   return (
-    <p className="donation-encourager__meta">
+    <p className={classNames.meta}>
       <small>
         {footerStr}{" "}
-        <button
-          className="donation-encourager__reset-btn"
-          onClick={onResetBtnClick}
-        >
+        <button className={classNames.resetBtn} onClick={onResetBtnClick}>
           {strings.resetBtn}
         </button>
       </small>

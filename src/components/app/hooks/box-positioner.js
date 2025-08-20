@@ -18,19 +18,23 @@ export default function useBoxPositioner(intrusivenessProps, targets) {
         ...b,
         key,
       })),
-    [boxes, itemSelectorSettings, defaultItemSelectorSettings]
+    [boxes, itemSelectorSettings, defaultItemSelectorSettings],
   )
   return boxesWithItemSelectorSettings
 }
 
 function useBoxWrappers(targetElements, boxSettings, settings) {
   const boxesWithWrappers = useMemo(() => {
-    const { boxesEnabled, wrapperClass, excludeSelector } = settings
+    const { boxesEnabled, classNames, excludeSelector } = settings
     if (!boxesEnabled) return []
     return targetElements.reduce((acc, targetEl) => {
       const boxesWithinTargetEl = (boxSettings || [])
-        .map((b) => ({ ...b, targetEl, wrapperEl: newWrapper(wrapperClass) }))
-        .map((b) => addBoxWrapper(b, wrapperClass, excludeSelector))
+        .map((b) => ({
+          ...b,
+          targetEl,
+          wrapperEl: newWrapper(classNames.wrapper),
+        }))
+        .map((b) => addBoxWrapper(b, classNames.wrapper, excludeSelector))
         .filter((b) => b.posNum)
         .map((b, i) => ({ ...b, isFirst: i === 0 }))
       return [...acc, ...boxesWithinTargetEl]

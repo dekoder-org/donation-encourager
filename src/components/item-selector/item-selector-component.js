@@ -1,9 +1,11 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
+import { Settings } from "../app/contexts"
 import { Draggable, DropTarget } from "./drag-drop"
 import "./item-selector.scss"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
+  const { classNames } = useContext(Settings)
   const dragListItems = items
   // allow each item only once:
   // const dragListItems = items.filter(s => !selectedItems.map(si => si.icon).includes(s.icon))
@@ -23,7 +25,7 @@ const ItemSelector = ({ items = [], selectedItems, setSelectedItems }) => {
   }
 
   return (
-    <div className="donation-encourager__item-selector">
+    <div className={classNames.itemSelector}>
       <div className="donation-encourager__drag-list">
         {dragListItems.map((item, i) => {
           item = { ...item, uid: i }

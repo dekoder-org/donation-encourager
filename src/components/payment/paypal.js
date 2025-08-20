@@ -34,7 +34,7 @@ export default usePaypal
 function PaypalBtn({ alternativeAction, paypalId, exit }) {
   const ref = useRef()
   const { isMonthly, val } = useContext(Amount)
-  const { paypalReturnUrl, strings } = useContext(Settings)
+  const { paypalReturnUrl, strings, classNames } = useContext(Settings)
   const { paypalMonthlyName, paypalSingleName, otherPaymentMethods } = strings
   const amountStr = `${val}.00`
 
@@ -49,7 +49,7 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
   const returnUrl = strOrFunc(paypalReturnUrl, []) || location.href
 
   return (
-    <div className="donation-encourager__cta" hidden={!alternativeAction}>
+    <div className={classNames.cta} hidden={!alternativeAction}>
       <form
         action="https://www.paypal.com/cgi-bin/webscr"
         method="post"
@@ -58,7 +58,7 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
       >
         <input type="hidden" name="business" value={paypalId} />
 
-        {isMonthly ? (// <input type="hidden" name="cmd" value="_xclick-subscriptions" />
+        {isMonthly ? ( // <input type="hidden" name="cmd" value="_xclick-subscriptions" />
           <>
             <input type="hidden" name="cmd" value="_xclick-subscriptions" />
             <input type="hidden" name="currency_code" value="EUR" />
@@ -85,14 +85,14 @@ function PaypalBtn({ alternativeAction, paypalId, exit }) {
         )}
 
         <input type="hidden" name="return" value={returnUrl} />
-        <button className="donation-encourager__button donation-encourager__cta-button">
+        <button className={`${classNames.button} ${classNames.ctaButton}`}>
           PayPal
         </button>
       </form>
       {!!alternativeAction && (
         <button
           onClick={alternativeAction}
-          className="donation-encourager__button donation-encourager__cta-button"
+          className={`${classNames.button} ${classNames.ctaButton}`}
         >
           {otherPaymentMethods}
         </button>

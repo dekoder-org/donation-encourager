@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import useItemSelector from "../item-selector"
 import { Amount } from "./contexts"
 import BoxLead from "./box-lead"
@@ -12,20 +12,22 @@ import "./box-dekoder.scss"
 import useMonthlyCheckbox from "./box-monthly-check"
 import usePay from "../payment"
 import CollapseMe from "./collapse-me"
+import { Settings } from "../app/contexts"
 
 const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
   const [isExpanded, setIsExpanded] = useState(boxProps.expanded)
-  const toggleExpanded = () => setIsExpanded((e) => !e) 
+  const toggleExpanded = () => setIsExpanded((e) => !e)
   const [itemSelector, amount] = useItemSelector(boxProps)
   const [monthlyCheckbox, isMonthly] = useMonthlyCheckbox(boxProps.key)
   const [paypalBtn, twingleWidget, onCtaClick] = usePay(amount, isFeedbackShown)
   const unlockButton = useUnlockButton(contentLockProps, setIsExpanded)
+  const { classNames } = useContext(Settings)
   let stateClasses = `${isExpanded ? "expanded" : "collapsed"}`
   stateClasses += `${contentLockProps[0] ? " content-lock-active" : ""}`
   return (
     <Amount.Provider value={{ ...amount, isMonthly }}>
-      <div className={`donation-encourager__gradient ${stateClasses}`} />
-      <aside className={`donation-encourager ${stateClasses}`}>
+      <div className={`${classNames.gradient} ${stateClasses}`} />
+      <aside className={`${classNames.box} ${stateClasses}`}>
         {twingleWidget || (
           <>
             <BoxLead onClick={toggleExpanded} isExpanded={isExpanded} />
@@ -33,7 +35,7 @@ const Box = ({ boxProps, contentLockProps, isFeedbackShown }) => {
               <BoxBody />
               {itemSelector}
               {monthlyCheckbox}
-              <p className="donation-encourager__cta">
+              <p className={classNames.cta}>
                 <BoxCtaButton onClick={onCtaClick} isInactive={!!paypalBtn} />
                 {unlockButton}
               </p>
