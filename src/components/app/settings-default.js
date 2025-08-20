@@ -235,5 +235,9 @@ export function mergeInNewSettings(
       ...oldSettings.hooks,
       ...(newSettings.hooks || {}),
     },
+    classNames: {
+      ...oldSettings.classNames,
+      ...(newSettings.classNames || {}),
+    },
   }
 }
