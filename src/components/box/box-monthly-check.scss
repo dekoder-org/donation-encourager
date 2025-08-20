@@ -1,4 +1,4 @@
-@import "../app/constants.scss";
+@use "../app/constants.scss";
 
 .donation-encourager__monthly-check {
   text-align: center;
@@ -53,7 +53,7 @@
       transition: left 0.25s ease;
     }
     input[type="checkbox"]:checked + label::before {
-      background-color: $color--primary;
+      background-color: constants.$color--primary;
     }
     input[type="checkbox"]:checked + label::after {
       left: 24px;

@@ -1,17 +1,17 @@
-@import "../app/constants.scss";
+@use "../app/constants.scss";
 
 .donation-encourager {
-  color: $color--black-1;
+  color: constants.$color--black-1;
   margin-bottom: 2rem;
   margin-top: 2rem;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   padding: 1em 2em;
-  box-shadow: 0 1px 15px $color--black-3;
+  box-shadow: 0 1px 15px constants.$color--black-3;
   clear: both;
 
-  @media screen and (max-width: $breakpoint-mobile) {
+  @media screen and (max-width: constants.$breakpoint-mobile) {
     padding: 1em;
   }
 
@@ -28,7 +28,9 @@
   display: block;
   max-height: 100vh;
   overflow-y: hidden;
-  transition: max-height $speed $ease, opacity $speed $ease;
+  transition:
+    max-height constants.$speed constants.$ease,
+    opacity constants.$speed constants.$ease;
 
   &[hidden] {
     display: block;
@@ -42,7 +44,7 @@
 }
 
 .donation-encourager__headline {
-  color: $color--primary;
+  color: constants.$color--primary;
   font-size: 500%;
   line-height: 100%;
   font-weight: bold;
@@ -52,7 +54,7 @@
 }
 
 .donation-encourager__lead-text {
-  color: $color--primary;
+  color: constants.$color--primary;
   text-align: center;
   margin-bottom: 0 !important;
 }
@@ -63,7 +65,7 @@
 }
 
 .donation-encourager__meta {
-  color: $color--black-2;
+  color: constants.$color--black-2;
   text-align: center;
 }
 
@@ -85,7 +87,7 @@
 .donation-encourager__cta {
   margin-top: 2em;
   margin-bottom: 2em;
-  display: flex; 
+  display: flex;
   justify-content: center;
   &[hidden] {
     display: none;
@@ -94,61 +96,61 @@
 
 .donation-encourager__button {
   display: inline-block;
-  box-shadow: 0 1px 4px $color--black-2;
+  box-shadow: 0 1px 4px constants.$color--black-2;
   border-radius: 10px;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   text-decoration: none;
-  color: $color--white;
-  transition: box-shadow $ease $speed-fast;
-  transition: $ease $speed-fast;
+  color: constants.$color--white;
+  transition: box-shadow constants.$ease constants.$speed-fast;
+  transition: constants.$ease constants.$speed-fast;
   margin: 0 5px;
   border: none;
   text-align: center;
 
   &:hover,
   &:focus {
-    box-shadow: 0 2px 8px $color--black-2;
+    box-shadow: 0 2px 8px constants.$color--black-2;
     text-decoration: none;
   }
 
   &.inactive {
-    background-color: $color--black-2;
+    background-color: constants.$color--black-2;
     pointer-events: none;
   }
 
-  @media screen and (max-width: $breakpoint-mobile) {
-    padding: .5em;
+  @media screen and (max-width: constants.$breakpoint-mobile) {
+    padding: 0.5em;
   }
 }
 
 .donation-encourager__cta-button {
-  background-color: $color--primary;
+  background-color: constants.$color--primary;
 }
 
 .donation-encourager__unlock-button {
   background-color: white;
-  color: $color--primary;
+  color: constants.$color--primary;
   box-shadow: none;
   cursor: pointer;
 }
 
 .donation-encourager__credit {
-  color: $color--black-2;
+  color: constants.$color--black-2;
   text-align: right;
   // font-style: italic;
 }
 
 .donation-encourager__strike-out {
   position: relative;
-  margin: 0 .3rem;
+  margin: 0 0.3rem;
   .donation-encourager__strike-out-text {
     opacity: 0.8;
   }
   .donation-encourager__strike-out-stroke {
-    content: '';
+    content: "";
     width: calc(100%);
     position: absolute;
-    left: -.1rem;
+    left: -0.1rem;
     top: 50%;
     border-bottom: 2px solid red;
     transform: skewY(-25deg);

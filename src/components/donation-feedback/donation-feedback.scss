@@ -1,4 +1,4 @@
-@import "../app/constants.scss";
+@use "../app/constants.scss";
 
 .donation-encourager__feedback {
   position: fixed;
@@ -10,7 +10,7 @@
   max-width: 100vw;
   padding: 1em 2em;
   background-color: white;
-  box-shadow: 0 1px 15px $color--black-3;
+  box-shadow: 0 1px 15px constants.$color--black-3;
   p {
     line-height: 1.4rem;
   }

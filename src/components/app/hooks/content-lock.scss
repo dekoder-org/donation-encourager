@@ -1,8 +1,8 @@
-@import "../constants.scss";
+@use "../constants.scss";
 
 @media screen {
   .donation-encourager__lock-content {
-    transition: filter $speed $ease;
+    transition: filter constants.$speed constants.$ease;
     &.content-lock-active {
       filter: blur(4px);
       opacity: .3;
@@ -20,8 +20,8 @@
       display: block;
       position: absoulte;
       left: calc(-50vw + 50%);
-      top: -$content-lock--gradient-height;
-      height: $content-lock--gradient-height;
+      top: -(constants.$content-lock--gradient-height);
+      height: constants.$content-lock--gradient-height;
       background-image: linear-gradient(
         to bottom, 
         rgba(255, 255, 255, 0), 
@@ -29,7 +29,7 @@
       );
       opacity: 0;
       position: absolute;
-      transition: opacity $speed $ease;
+      transition: opacity constants.$speed constants.$ease;
       width: 100vw;
       pointer-events: none;
     }

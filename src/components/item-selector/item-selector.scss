@@ -1,4 +1,4 @@
-@import "../app/constants.scss";
+@use "../app/constants.scss";
 
 .donation-encourager__item-selector {
   margin: 0 0 20px 0;
@@ -6,27 +6,27 @@
 
   .donation-encourager__item {
     box-sizing: border-box;
-    font-size: $item-font-size;
-    height: $item-size;
-    line-height: $item-size;
+    font-size: constants.$item-font-size;
+    height: constants.$item-size;
+    line-height: constants.$item-size;
     text-align: center;
     transition: 0.1s ease;
-    width: $item-size;
+    width: constants.$item-size;
 
     &.selected,
     &:hover {
-      font-size: $item-font-size--hover;
+      font-size: constants.$item-font-size--hover;
 
-      @media screen and (max-width: $breakpoint-mobile) {
-        font-size: $item-font-size-mobile--hover;
+      @media screen and (max-width: constants.$breakpoint-mobile) {
+        font-size: constants.$item-font-size-mobile--hover;
       }
     }
 
-    @media screen and (max-width: $breakpoint-mobile) {
-      font-size: $item-font-size-mobile;
-      height: $item-size-mobile;
-      line-height: $item-size-mobile;
-      width: $item-size-mobile;
+    @media screen and (max-width: constants.$breakpoint-mobile) {
+      font-size: constants.$item-font-size-mobile;
+      height: constants.$item-size-mobile;
+      line-height: constants.$item-size-mobile;
+      width: constants.$item-size-mobile;
     }
   }
 
@@ -35,15 +35,15 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    min-height: $item-size;
-    @media screen and (max-width: $breakpoint-mobile) {
-      min-height: $item-size-mobile;
+    min-height: constants.$item-size;
+    @media screen and (max-width: constants.$breakpoint-mobile) {
+      min-height: constants.$item-size-mobile;
     }
   }
 
   .donation-encourager__drop-target-container {
     display: flex;
-    min-height: $item-size-mobile;
+    min-height: constants.$item-size-mobile;
     border: 1px dashed gray;
     border-radius: 12px;
 
@@ -54,8 +54,8 @@
     background-color: none;
     transition: background-color 0.2s ease;
 
-    @media screen and (max-width: $breakpoint-mobile) {
-      min-height: $item-size-mobile;
+    @media screen and (max-width: constants.$breakpoint-mobile) {
+      min-height: constants.$item-size-mobile;
     }
 
     &.highlighted {
